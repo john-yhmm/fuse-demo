@@ -87,6 +87,11 @@ export const appRoutes: Route[] = [
                 {path: 'crypto', loadChildren: () => import('app/modules/admin/dashboards/crypto/crypto.routes')},
             ]},
 
+            // Master Data
+            {path: 'master-data', children: [
+                {path: 'general', loadChildren: () => import('app/modules/admin/master-data/general/general.routes')},
+            ]},
+
             // Apps
             {path: 'apps', children: [
                 {path: 'academy', loadChildren: () => import('app/modules/admin/apps/academy/academy.routes')},

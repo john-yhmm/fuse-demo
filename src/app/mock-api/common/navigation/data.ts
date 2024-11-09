@@ -40,6 +40,29 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ],
     },
     {
+        id: 'master-data',
+        title: 'Master Data',
+        subtitle: 'Master data entry',
+        type: 'group',
+        icon: 'heroicons_outline:home',
+        children: [
+            {
+                id: 'master-data.general',
+                title: 'General',
+                type: 'collapsable',
+                icon: 'heroicons_outline:circle-stack', // document-chart-bar
+                children: [
+                    {
+                        id: 'master-data.general.language',
+                        title: 'Language',
+                        type: 'basic',
+                        link: '/master-data/general/language',
+                    },
+                ],
+            },
+        ],
+    },
+    {
         id: 'apps',
         title: 'Applications',
         subtitle: 'Custom made application designs',
