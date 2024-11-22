@@ -12,7 +12,7 @@
             </div>
         }
         <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">AddressType</div>
+        <div class="text-4xl font-extrabold tracking-tight">Address Type</div>
         <!-- Actions -->
         <div class="mt-6 flex shrink-0 items-center sm:ml-4 sm:mt-0">
             <!-- Search -->
@@ -52,7 +52,7 @@
             class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto"
         >
             @if (addressTypes$ | async; as addressTypes) {
-                @if (addresstypes.length > 0) {
+                @if (addressTypes.length > 0) {
                     <div class="grid">
                         <!-- Header -->
                         <div
@@ -60,8 +60,8 @@
                             matSort
                             matSortDisableClear
                         >
-                            <div [mat-sort-header]="'name'">Code</div>
                             <div [mat-sort-header]="'name'">Name</div>
+                            <div [mat-sort-header]="'name'">rowguid</div>
                             <div class="hidden sm:block">Details</div>
                         </div>
                         <!-- Rows -->
@@ -134,7 +134,7 @@
                 }
             }
 
-            <ng-template #rowDetailsTemplate let-language>
+            <ng-template #rowDetailsTemplate let-addressType>
                 <div class="overflow-hidden shadow-lg">
                     <div class="flex border-b">
                         <!-- Selected addressType form -->

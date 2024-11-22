@@ -44,14 +44,14 @@ export class AddressTypeService {
     }
 
     /**
-     * Getter for language
+     * Getter for addressType
      */
     get addressType$(): Observable<AddressType> {
         return this._addressType.asObservable();
     }
 
     /**
-     * Getter for languages
+     * Getter for addressTypes
      */
     get addressTypes$(): Observable<AddressType[]> {
         return this._addressTypes.asObservable();
@@ -62,7 +62,7 @@ export class AddressTypeService {
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Get languages
+     * Get addressTypes
      *
      *
      * @param page
@@ -74,7 +74,7 @@ export class AddressTypeService {
     getAddressTypes(
         page: number = 0,
         size: number = 10,
-        sort: string = 'name',
+        sort: string = 'addressTypeName',
         order: 'asc' | 'desc' | '' = 'asc',
         search: string = ''
     ): Observable<{
@@ -103,20 +103,20 @@ export class AddressTypeService {
     }
 
     /**
-     * Get language by id
+     * Get addressType by id
      */
     getAddressTypeById(id: string): Observable<AddressType> {
         return this._addressTypes.pipe(
             take(1),
             map((addressTypes) => {
-                // Find the language
+                // Find the addressType
                 const addressType =
                     addressTypes.find((item) => item.id === id) || null;
 
-                // Update the language
+                // Update the addressType
                 this._addressType.next(addressType);
 
-                // Return the language
+                // Return the addressType
                 return addressType;
             }),
             switchMap((addressType) => {
@@ -132,20 +132,20 @@ export class AddressTypeService {
     }
 
     /**
-     * Create language
+     * Create addressType
      */
     createAddressType(): Observable<AddressType> {
         return this.addressTypes$.pipe(
             take(1),
             switchMap((addressTypes) =>
                 this._httpClient
-                    .post<AddressType>('api/master-data/general/address-type', {})
+                    .post<AddressType>('api/master-data/general/addressType', {})
                     .pipe(
                         map((newAddressType) => {
-                            // Update the languages with the new language
+                            // Update the addressTypes with the new addressType
                             this._addressTypes.next([newAddressType, ...addressTypes]);
 
-                            // Return the new language
+                            // Return the new addressType
                             return newAddressType;
                         })
                     )
@@ -154,7 +154,7 @@ export class AddressTypeService {
     }
 
     /**
-     * Update language
+     * Update addressType
      *
      * @param id
      * @param addressType
@@ -164,24 +164,24 @@ export class AddressTypeService {
             take(1),
             switchMap((addressTypes) =>
                 this._httpClient
-                    .patch<AddressType>('api/master-data/general/address-type', {
+                    .patch<AddressType>('api/master-data/general/addressType', {
                         id,
                         addressType,
                     })
                     .pipe(
                         map((updatedAddressType) => {
-                            // Find the index of the updated language
+                            // Find the index of the updated addressType
                             const index = addressTypes.findIndex(
                                 (item) => item.id === id
                             );
 
-                            // Update the language
+                            // Update the addressType
                             addressTypes[index] = updatedAddressType;
 
-                            // Update the languages
+                            // Update the addressTypes
                             this._addressTypes.next(addressTypes);
 
-                            // Return the updated language
+                            // Return the updated addressType
                             return updatedAddressType;
                         }),
                         switchMap((updatedAddressType) =>
@@ -189,10 +189,10 @@ export class AddressTypeService {
                                 take(1),
                                 filter((item) => item && item.id === id),
                                 tap(() => {
-                                    // Update the language if it's selected
+                                    // Update the addressType if it's selected
                                     this._addressType.next(updatedAddressType);
 
-                                    // Return the updated language
+                                    // Return the updated addressType
                                     return updatedAddressType;
                                 })
                             )
@@ -203,7 +203,7 @@ export class AddressTypeService {
     }
 
     /**
-     * Delete the language
+     * Delete the addressType
      *
      * @param id
      */
@@ -212,20 +212,20 @@ export class AddressTypeService {
             take(1),
             switchMap((addressTypes) =>
                 this._httpClient
-                    .delete('api/master-data/general/address-type', {
+                    .delete('api/master-data/general/addressType', {
                         params: { id },
                     })
                     .pipe(
                         map((isDeleted: boolean) => {
-                            // Find the index of the deleted language
+                            // Find the index of the deleted addressType
                             const index = addressTypes.findIndex(
                                 (item) => item.id === id
                             );
 
-                            // Delete the language
+                            // Delete the addressType
                             addressTypes.splice(index, 1);
 
-                            // Update the languages
+                            // Update the addressTypes
                             this._addressTypes.next(addressTypes);
 
                             // Return the deleted status

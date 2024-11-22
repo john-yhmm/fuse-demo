@@ -49,9 +49,9 @@ import {
     selector: 'address-type-list',
     templateUrl: './address-type.component.html',
     styles: [
-        /* language=SCSS */
+        /* address-type=SCSS */
         `
-            .language-grid {
+            .addressType-grid {
                 grid-template-columns: 48px auto 40px;
 
                 @screen sm {
@@ -124,12 +124,13 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
      * On init
      */
     ngOnInit(): void {
-        // Create the selected language form
+        // Create the selected address-type form
         this.selectedAddressTypeForm = this._formBuilder.group({
             id: [''],
-            languageCode: [''],
-            name: ['', [Validators.required]],
-            modifiedDate: [''],
+            addressTypeName: [''],
+            rowguid: ['', [Validators.required]],
+            lastEditedBy: [''],
+            lastEditedOn: [''],
         });
 
         // Get the pagination
@@ -143,7 +144,7 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
                 this._changeDetectorRef.markForCheck();
             });
 
-        // Get the languages
+        // Get the address-types
         this.addressTypes$ = this._addressTypeService.addressTypes$;
 
         // Subscribe to search input field value changes
@@ -195,7 +196,7 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
                     this.closeDetails();
                 });
 
-            // Get languages if sort or page changes
+            // Get address-types if sort or page changes
             merge(this._sort.sortChange, this._paginator.page)
                 .pipe(
                     switchMap(() => {
@@ -230,23 +231,23 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Toggle language details
+     * Toggle addressType details
      *
      * @param addressTypeId
      */
     toggleDetails(addressTypeId: string): void {
-        // If the language is already selected...
+        // If the addressType is already selected...
         if (this.selectedAddressType && this.selectedAddressType.id === addressTypeId) {
             // Close the details
             this.closeDetails();
             return;
         }
 
-        // Get the language by id
+        // Get the addressType by id
         this._addressTypeService
             .getAddressTypeById(addressTypeId)
             .subscribe((addressType) => {
-                // Set the selected language
+                // Set the selected addressType
                 this.selectedAddressType = addressType;
 
                 // Fill the form
@@ -265,7 +266,7 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     /**
-     * Cycle through images of selected language
+     * Cycle through images of selected addressType
      */
     cycleImages(forward: boolean = true): void {
         // Get the image count and current image index
@@ -292,14 +293,14 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     /**
-     * Create language
+     * Create addressType
      */
     createAddressType(): void {
         console.log('here');
 
-        // Create the language
+        // Create the addressType
         this._addressTypeService.createAddressType().subscribe((newAddressType) => {
-            // Go to new language
+            // Go to new addressType
             this.selectedAddressType = newAddressType;
 
             // Fill the form
@@ -311,16 +312,16 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     /**
-     * Update the selected language using the form data
+     * Update the selected addressType using the form data
      */
     updateSelectedAddressType(): void {
-        // Get the language object
+        // Get the addressType object
         const addressType = this.selectedAddressTypeForm.getRawValue();
 
         // Remove the currentImageIndex field
         delete addressType.currentImageIndex;
 
-        // Update the language on the server
+        // Update the addressType on the server
         this._addressTypeService
             .updateAddressType(addressType.id, addressType)
             .subscribe(() => {
@@ -330,7 +331,7 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     /**
-     * Delete the selected language using the form data
+     * Delete the selected addressType using the form data
      */
     deleteSelectedAddressType(): void {
         // Open the confirmation dialog
@@ -349,10 +350,10 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
         confirmation.afterClosed().subscribe((result) => {
             // If the confirm button pressed...
             if (result === 'confirmed') {
-                // Get the language object
+                // Get the addressType object
                 const addressType = this.selectedAddressTypeForm.getRawValue();
 
-                // Delete the language on the server
+                // Delete the addressType on the server
                 this._addressTypeService
                     .deleteAddressType(addressType.id)
                     .subscribe(() => {

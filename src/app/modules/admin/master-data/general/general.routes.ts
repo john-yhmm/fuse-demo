@@ -4,6 +4,9 @@ import { LanguageComponent } from './language/language.component';
 import { LanguageService } from './language/language.service';
 import { LanguageListComponent } from './language/list/language.component';
 import { AddressTypeComponent } from './address-type/address-type.component';
+import { AddressTypeListComponent } from './address-type/list/address-type.component';
+import { AddressTypeService } from './address-type/address-type.service';
+import { addressTypes } from 'app/mock-api/master-data/general/address-type/data';
 
 export default [
     {
@@ -29,11 +32,12 @@ export default [
         children: [
             {
                 path: '',
-                component: LanguageListComponent,
+                component: AddressTypeListComponent,
                 resolve: {
-                    languages: () => inject(LanguageService).getLanguages(),
+                    addressTypes: () => inject(AddressTypeService).getAddressTypes(),
                 },
             },
         ],
     },
+    
 ] as Routes;

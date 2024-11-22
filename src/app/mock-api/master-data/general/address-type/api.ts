@@ -24,10 +24,10 @@ export class GeneralAddressTypeMockApi {
      */
     registerHandlers(): void {
         // -----------------------------------------------------------------------------------------------------
-        // @ Languages - GET
+        // @ addressTypes - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/address-types', 300)
+            .onGet('api/master-data/general/addressTypes', 300)
             .reply(({ request }) => {
                 // Get available queries
                 const search = request.params.get('search');
@@ -36,10 +36,10 @@ export class GeneralAddressTypeMockApi {
                 const page = parseInt(request.params.get('page') ?? '1', 10);
                 const size = parseInt(request.params.get('size') ?? '10', 10);
 
-                // Clone the languages
+                // Clone the addressTypes
                 let addressTypes: any[] | null = cloneDeep(this._addressTypes);
 
-                // Sort the languages
+                // Sort the addressTypes
                 if (
                     sort === 'addressTypeName' ||
                     sort === 'rowguid' ||
@@ -61,7 +61,7 @@ export class GeneralAddressTypeMockApi {
 
                 // If search exists...
                 if (search) {
-                    // Filter the languages
+                    // Filter the addressTypes
                     addressTypes = addressTypes.filter(
                         (addressType) =>
                             addressType.addressTypeName &&
@@ -84,7 +84,7 @@ export class GeneralAddressTypeMockApi {
 
                 // If the requested page number is bigger than
                 // the last possible page number, return null for
-                // languages but also send the last possible page so
+                // addressTypes but also send the last possible page so
                 // the app can navigate to there
                 if (page > lastPage) {
                     addressTypes = null;
@@ -117,18 +117,18 @@ export class GeneralAddressTypeMockApi {
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Language - GET
+        // @ addressType - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/address-type')
+            .onGet('api/master-data/general/addressType')
             .reply(({ request }) => {
                 // Get the id from the params
                 const id = request.params.get('id');
 
-                // Clone the languages
+                // Clone the addressTypes
                 const addressTypes = cloneDeep(this._addressTypes);
 
-                // Find the language
+                // Find the addressType
                 const addressType = addressTypes.find((item) => item.id === id);
 
                 // Return the response
@@ -136,20 +136,21 @@ export class GeneralAddressTypeMockApi {
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Language - POST
+        // @ addressType - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPost('api/master-data/general/address-type')
+            .onPost('api/master-data/general/addressType')
             .reply(() => {
-                // Generate a new language
+                // Generate a new addressType
                 const newAddressType = {
                     id: FuseMockApiUtils.guid(),
-                    languageCode: '',
-                    name: 'A New Address Type',
-                    modifiedDate: '',
+                    addresstypeName: '',
+                    rowguid: 'A New Address Type',
+                    lastEditedBy: '',
+                    lastEditedOn: '',
                 };
 
-                // Unshift the new language
+                // Unshift the new addressType
                 this._addressTypes.unshift(newAddressType);
 
                 // Return the response
@@ -157,29 +158,29 @@ export class GeneralAddressTypeMockApi {
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Language - PATCH
+        // @ addressType - PATCH
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPatch('api/master-data/general/address-type')
+            .onPatch('api/master-data/general/addressType')
             .reply(({ request }) => {
-                // Get the id and language
+                // Get the id and addressType
                 const id = request.body.id;
                 const addressType = cloneDeep(request.body.addressType);
 
-                // Prepare the updated language
+                // Prepare the updated addressType
                 let updatedAddressType = null;
 
-                // Find the language and update it
+                // Find the addressType and update it
                 this._addressTypes.forEach((item, index, addressTypes) => {
                     if (item.id === id) {
-                        // Update the language
+                        // Update the addressType
                         addressTypes[index] = assign(
                             {},
                             addressTypes[index],
                             addressType
                         );
 
-                        // Store the updated language
+                        // Store the updated addressType
                         updatedAddressType = addressTypes[index];
                     }
                 });
@@ -189,15 +190,15 @@ export class GeneralAddressTypeMockApi {
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Language - DELETE
+        // @ addressType - DELETE
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onDelete('api/master-data/general/address-type')
+            .onDelete('api/master-data/general/addressType')
             .reply(({ request }) => {
                 // Get the id
                 const id = request.params.get('id');
 
-                // Find the language and delete it
+                // Find the addressType and delete it
                 this._addressTypes.forEach((item, index) => {
                     if (item.id === id) {
                         this._addressTypes.splice(index, 1);
