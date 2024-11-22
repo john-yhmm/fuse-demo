@@ -58,6 +58,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/language',
                     },
+                    {
+                        id: 'master-data.general.country-type',
+                        title: 'Country Type',
+                        type: 'basic',
+                        link: '/master-data/general/country-type',
+                    },
                 ],
             },
         ],
