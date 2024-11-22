@@ -60,9 +60,9 @@
                             matSort
                             matSortDisableClear
                         >
-                            <div [mat-sort-header]="'name'">Name</div>
-                            <div [mat-sort-header]="'name'">rowguid</div>
-                            <div class="hidden sm:block">Details</div>
+                            <div [mat-sort-header]="'name'" style="flex: 2">Name</div>
+                            <div [mat-sort-header]="'name'" style="flex: 3">Rowguid</div>
+                            <div class="hidden sm:block" style="flex: 1">Details</div>
                         </div>
                         <!-- Rows -->
                         @if (addressTypes$ | async; as addressTypes) {

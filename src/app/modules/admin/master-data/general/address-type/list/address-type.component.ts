@@ -49,21 +49,21 @@ import {
     selector: 'address-type-list',
     templateUrl: './address-type.component.html',
     styles: [
-        /* address-type=SCSS */
+        /* language=SCSS */
         `
             .addressType-grid {
-                grid-template-columns: 48px auto 40px;
+                grid-template-columns: 100px auto 40px;
 
                 @screen sm {
-                    grid-template-columns: 48px auto 112px 72px;
+                    grid-template-columns: 100px auto 72px;
                 }
 
                 @screen md {
-                    grid-template-columns: 48px 112px auto 112px 72px;
+                    grid-template-columns: 150px auto 72px;
                 }
 
                 @screen lg {
-                    grid-template-columns: 48px 112px auto 112px 96px 96px 72px;
+                    grid-template-columns: 150px auto 72px;
                 }
             }
         `,
