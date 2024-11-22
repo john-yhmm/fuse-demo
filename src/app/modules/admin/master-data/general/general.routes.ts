@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { LanguageComponent } from './language/language.component';
 import { LanguageService } from './language/language.service';
 import { LanguageListComponent } from './language/list/language.component';
+import { AddressTypeComponent } from './address-type/address-type.component';
 
 export default [
     {
@@ -13,6 +14,18 @@ export default [
     {
         path: 'language',
         component: LanguageComponent,
+        children: [
+            {
+                path: '',
+                component: LanguageListComponent,
+                resolve: {
+                    languages: () => inject(LanguageService).getLanguages(),
+                },
+            },
+        ],
+    },{
+        path: 'address-type',
+        component: AddressTypeComponent,
         children: [
             {
                 path: '',
