@@ -1,0 +1,1439 @@
+/* 1. Components */
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Example viewer
+/* ----------------------------------------------------------------------------------------------------- */
+.example-viewer {
+  display: flex;
+  flex-direction: column;
+  margin: 32px 0;
+  overflow: hidden;
+  @apply bg-card rounded-2xl shadow;
+}
+.example-viewer .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px;
+  min-height: 88px;
+  max-height: 88px;
+  padding: 0 40px;
+}
+.example-viewer .title h6 {
+  font-weight: 700;
+}
+.example-viewer .title .controls {
+  display: flex;
+  align-items: center;
+}
+.example-viewer .title .controls > * + * {
+  margin-left: 8px;
+}
+.example-viewer mat-tab-group .mat-tab-body-content .fuse-highlight pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+input,
+textarea {
+  background: transparent;
+  /* Placeholder color */
+  /* Autofill color fix */
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+  @apply text-hint;
+}
+input::placeholder,
+textarea::placeholder {
+  @apply text-hint;
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  @apply text-hint;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  @apply text-hint;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  @apply text-hint;
+}
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-transition: background-color 5000s !important;
+  transition: background-color 5000s !important;
+}
+.dark input:-webkit-autofill, .dark input:-webkit-autofill:hover, .dark input:-webkit-autofill:focus, .dark input:-webkit-autofill:active,
+.dark textarea:-webkit-autofill,
+.dark textarea:-webkit-autofill:hover,
+.dark textarea:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill:active {
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.87);
+}
+input [data-autocompleted],
+textarea [data-autocompleted] {
+  background-color: transparent !important;
+}
+
+/* 2. Overrides */
+/* -------------------------------------------------------------------------- */
+/*  @ Overlay
+/* -------------------------------------------------------------------------- */
+.fuse-backdrop-on-mobile {
+  @apply bg-black bg-opacity-60 sm:bg-transparent !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Font smoothing
+/* -------------------------------------------------------------------------- */
+*[class*=mat-],
+*[class*=mat-mdc-] {
+  -webkit-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: auto !important;
+}
+*[class*=mat-] *,
+*[class*=mat-mdc-] * {
+  -webkit-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: auto !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Accordion
+/* -------------------------------------------------------------------------- */
+.mat-accordion .mat-expansion-panel {
+  margin-bottom: 24px;
+  border-radius: 8px !important;
+  transition: box-shadow 225ms cubic-bezier(0.4, 0, 0.2, 1);
+  @apply shadow !important;
+}
+.mat-accordion .mat-expansion-panel:last-child {
+  margin-bottom: 0;
+}
+.mat-accordion .mat-expansion-panel.mat-expanded, .mat-accordion .mat-expansion-panel:hover {
+  @apply shadow-lg !important;
+}
+.mat-accordion .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]).cdk-keyboard-focused, .mat-accordion .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]).cdk-program-focused, .mat-accordion .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+  background: transparent !important;
+}
+.mat-accordion .mat-expansion-panel .mat-expansion-panel-header {
+  font-size: 14px;
+}
+.mat-accordion .mat-expansion-panel .mat-expansion-panel-header[aria-disabled=true] .mat-expansion-panel-header-description {
+  margin-right: 28px;
+}
+.mat-accordion .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  /* Do not override the border color of the expansion panel indicator */
+}
+.mat-accordion .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-indicator:after {
+  border-color: currentColor !important;
+}
+.mat-accordion .mat-expansion-panel .mat-expansion-panel-body {
+  @apply text-secondary !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Buttons
+/* -------------------------------------------------------------------------- */
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-icon-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  line-height: 1 !important;
+  /* Large button */
+  /* Lower the icon opacity on disabled buttons */
+}
+.mat-mdc-button.fuse-mat-button-large,
+.mat-mdc-raised-button.fuse-mat-button-large,
+.mat-mdc-outlined-button.fuse-mat-button-large,
+.mat-mdc-unelevated-button.fuse-mat-button-large,
+.mat-mdc-icon-button.fuse-mat-button-large,
+.mat-mdc-fab.fuse-mat-button-large,
+.mat-mdc-mini-fab.fuse-mat-button-large {
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+}
+.mat-mdc-button[disabled=true] .mat-icon,
+.mat-mdc-raised-button[disabled=true] .mat-icon,
+.mat-mdc-outlined-button[disabled=true] .mat-icon,
+.mat-mdc-unelevated-button[disabled=true] .mat-icon,
+.mat-mdc-icon-button[disabled=true] .mat-icon,
+.mat-mdc-fab[disabled=true] .mat-icon,
+.mat-mdc-mini-fab[disabled=true] .mat-icon {
+  opacity: 0.38 !important;
+}
+
+/* Icon buttons */
+.mat-mdc-icon-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 40px !important;
+  padding: 0 !important;
+}
+.mat-mdc-icon-button svg,
+.mat-mdc-icon-button img {
+  height: auto !important;
+}
+
+/* FAB buttons */
+.mat-mdc-fab {
+  max-height: 56px;
+  border-radius: 16px !important;
+}
+.mat-mdc-fab:not(.mdc-fab--extended) .mdc-fab__ripple {
+  border-radius: 16px !important;
+}
+
+/* Mini FAB buttons */
+.mat-mdc-mini-fab {
+  border-radius: 12px !important;
+}
+.mat-mdc-mini-fab:not(.mdc-fab--extended) .mdc-fab__ripple {
+  border-radius: 12px !important;
+}
+
+/* Rounded design */
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button {
+  padding: 0 20px !important;
+  border-radius: 9999px !important;
+}
+
+/* Fix the alignment of icons when used within buttons */
+.mat-mdc-button > .mat-icon,
+.mat-mdc-raised-button > .mat-icon,
+.mat-mdc-outlined-button > .mat-icon,
+.mat-mdc-unelevated-button > .mat-icon {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Adjust the color of mat-progress-spinner when used within buttons */
+.mat-mdc-button .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-container circle,
+.mat-mdc-raised-button .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-container circle,
+.mat-mdc-outlined-button .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-container circle,
+.mat-mdc-unelevated-button .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-container circle,
+.mat-mdc-icon-button .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-container circle,
+.mat-mdc-fab .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-container circle,
+.mat-mdc-mini-fab .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-container circle {
+  stroke: currentColor !important;
+  animation-duration: 6000ms;
+}
+
+/* Adjust the focus, ripple and icon colors of colored background buttons */
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
+  --mat-mdc-button-persistent-ripple-color: theme(
+      "colors.gray[400]"
+  ) !important;
+  --mat-mdc-button-ripple-color: rgba(0, 0, 0, 0.1) !important;
+}
+.dark .mat-mdc-raised-button,
+.dark .mat-mdc-unelevated-button,
+.dark .mat-mdc-fab,
+.dark .mat-mdc-mini-fab {
+  --mat-mdc-button-persistent-ripple-color: theme(
+      "colors.black"
+  ) !important;
+  --mat-mdc-button-ripple-color: rgba(0, 0, 0, 0.1) !important;
+}
+.mat-mdc-raised-button .mat-icon,
+.mat-mdc-unelevated-button .mat-icon,
+.mat-mdc-fab .mat-icon,
+.mat-mdc-mini-fab .mat-icon {
+  color: currentColor !important;
+}
+.mat-mdc-raised-button .mat-ripple-element,
+.mat-mdc-unelevated-button .mat-ripple-element,
+.mat-mdc-fab .mat-ripple-element,
+.mat-mdc-mini-fab .mat-ripple-element {
+  @apply bg-black/10 !important;
+}
+
+/* Color the icons of transparent background buttons */
+.mat-mdc-button:not([disabled=true]),
+.mat-mdc-icon-button:not([disabled=true]),
+.mat-mdc-outlined-button:not([disabled=true]) {
+  /* Apply primary color */
+  /* Apply accent color */
+  /* Apply warn color */
+}
+.mat-mdc-button:not([disabled=true]).mat-primary .mat-icon,
+.mat-mdc-icon-button:not([disabled=true]).mat-primary .mat-icon,
+.mat-mdc-outlined-button:not([disabled=true]).mat-primary .mat-icon {
+  @apply text-primary !important;
+}
+.mat-mdc-button:not([disabled=true]).mat-accent .mat-icon,
+.mat-mdc-icon-button:not([disabled=true]).mat-accent .mat-icon,
+.mat-mdc-outlined-button:not([disabled=true]).mat-accent .mat-icon {
+  @apply text-accent !important;
+}
+.mat-mdc-button:not([disabled=true]).mat-warn .mat-icon,
+.mat-mdc-icon-button:not([disabled=true]).mat-warn .mat-icon,
+.mat-mdc-outlined-button:not([disabled=true]).mat-warn .mat-icon {
+  @apply text-warn !important;
+}
+
+/* Adjust the border color of outlined buttons */
+.mat-mdc-outlined-button {
+  /* Not disabled */
+  /* Disabled */
+}
+.mat-mdc-outlined-button:not([disabled=true]) {
+  @apply border-gray-300 dark:border-gray-500 !important;
+}
+.mat-mdc-outlined-button[disabled=true] {
+  @apply border-gray-300/70 dark:border-gray-600 !important;
+}
+
+/* Don't wrap the button label text */
+.mdc-button .mdc-button__label {
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Button Toggle
+/* -------------------------------------------------------------------------- */
+.mat-button-toggle-group {
+  border: none !important;
+  @apply space-x-1;
+}
+.mat-button-toggle-group.mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
+  background-clip: padding-box;
+}
+.mat-button-toggle-group .mat-button-toggle {
+  border-radius: 9999px;
+  overflow: hidden;
+  border: none !important;
+  font-weight: 500;
+}
+.mat-button-toggle-group .mat-button-toggle.mat-button-toggle-checked .mat-button-toggle-label-content {
+  @apply text-default !important;
+}
+.mat-button-toggle-group .mat-button-toggle .mat-button-toggle-label-content {
+  padding: 0 20px;
+  line-height: 40px !important;
+  @apply text-secondary;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Checkbox
+/* -------------------------------------------------------------------------- */
+.mat-mdc-checkbox {
+  display: inline-flex !important;
+}
+.mat-mdc-checkbox .mdc-form-field {
+  padding-right: 12px;
+}
+
+.mdc-checkbox__native-control {
+  opacity: 0 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Chip
+/* -------------------------------------------------------------------------- */
+.mat-mdc-chip {
+  font-weight: 500 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Dialog
+/* -------------------------------------------------------------------------- */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 16px !important;
+  padding: 24px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Drawer
+/* -------------------------------------------------------------------------- */
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Form fields
+/* -------------------------------------------------------------------------- */
+/* "fill" appearance */
+.mat-mdc-form-field.mat-form-field-appearance-fill {
+  /* Disabled */
+  /* Invalid */
+  /* Hover */
+  /* Focused */
+  /* Focused and valid fields */
+  /* Remove the default arrow for native select */
+  /* Default style tweaks and enhancements */
+  /* Subscript tweaks */
+  /* Adds better alignment for textarea inputs */
+  /* Rounded */
+  /* Dense */
+  /* Emphasized affix */
+  /* Bolder border width */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-form-field-disabled {
+  opacity: 0.7 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-form-field-invalid {
+  /* Border color */
+  /* Select */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-form-field-invalid .mat-mdc-text-field-wrapper {
+  @apply border-warn dark:border-warn !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-form-field-invalid .mat-mdc-select {
+  /* Placeholder color */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-form-field-invalid .mat-mdc-select .mat-mdc-select-placeholder {
+  @apply text-warn !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill:hover .mat-mdc-form-field-focus-overlay {
+  opacity: 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-focused .mat-mdc-form-field-focus-overlay {
+  opacity: 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-focused:not(.mat-form-field-invalid) {
+  /* Border color */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-focused:not(.mat-form-field-invalid) .mat-mdc-text-field-wrapper {
+  @apply border-primary dark:border-primary !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-infix select {
+  top: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-right: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2364748B' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right -7px center;
+  background-size: 24px;
+}
+.dark .mat-mdc-form-field.mat-form-field-appearance-fill.mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-infix select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2397a6ba' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-infix:after {
+  display: none;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper {
+  padding: 0;
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+  @apply border-gray-300 bg-white shadow-sm dark:border-gray-500 dark:bg-black dark:bg-opacity-5 !important;
+  /* Adjust the top spacing and overflow when mat-label present */
+  /* Form field */
+  /* Remove the underline */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper:not(.mdc-text-field--no-label) {
+  margin-top: 24px;
+  overflow: visible;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-focus-overlay {
+  border-radius: 6px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border-radius: 6px;
+  padding: 0 16px;
+  /* Infix */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix {
+  padding: 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-icon {
+  margin-right: 12px;
+  padding: 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-mdc-icon-button {
+  margin: 0 4px 0 -10px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-mdc-select {
+  margin-right: 10px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-datepicker-toggle,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-datepicker-toggle {
+  margin-left: -8px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  padding: 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-icon {
+  margin-left: 12px;
+  padding: 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-mdc-icon-button {
+  margin: 0 -10px 0 4px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-mdc-select {
+  margin-left: 10px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-datepicker-toggle,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-datepicker-toggle {
+  margin-right: -8px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @apply text-hint !important;
+  /* Datepicker default icon size */
+  /* Make mat-select usable as prefix and suffix */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-icon-button {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-icon-button:not([disabled]),
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-icon-button:not([disabled]),
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-icon-button:not([disabled]),
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-icon-button:not([disabled]),
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select-value {
+  @apply text-hint;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-datepicker-toggle-default-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-datepicker-toggle-default-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-datepicker-toggle-default-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-datepicker-toggle-default-icon {
+  @apply icon-size-6;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select {
+  display: flex;
+  align-items: center;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-value {
+  @apply text-primary !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select:focus .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow {
+  border-top-color: var(--fuse-primary) !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select .mat-mdc-select-trigger,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select .mat-mdc-select-trigger,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select .mat-mdc-select-trigger,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select .mat-mdc-select-trigger {
+  display: flex;
+  align-items: center;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value {
+  display: flex;
+  max-width: none;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value mat-mdc-select-trigger .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value mat-mdc-select-trigger .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value mat-mdc-select-trigger .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value mat-mdc-select-trigger .mat-icon {
+  margin: 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper {
+  display: flex;
+  align-items: center;
+  transform: none;
+  margin-left: 4px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow {
+  min-height: 0;
+  @apply text-gray-500 dark:text-gray-400 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
+  position: static;
+  display: flex;
+  align-items: center;
+  width: 88px;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  /* Floating label - disable floating action */
+  /* Textarea */
+  /* Chips */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix .mat-mdc-floating-label {
+  top: -25px !important;
+  left: 0 !important;
+  width: 100% !important;
+  transform: none !important;
+  pointer-events: auto;
+  font-weight: 500;
+  @apply text-default !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix textarea.mat-mdc-input-element {
+  margin: 12px 0;
+  padding: 0 6px 0 0;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix .mat-mdc-chip-set {
+  width: 100%;
+  margin: 0 -8px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-text-field-wrapper .mdc-line-ripple {
+  display: none;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-form-field-subscript-wrapper {
+  font-size: 12px;
+  font-weight: 500;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-error-wrapper {
+  padding: 0;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-hint {
+  @apply text-hint !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  align-self: flex-start;
+  padding-top: 14px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded {
+  /* Emphasized affix */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded .mat-mdc-text-field-wrapper {
+  border-radius: 24px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix {
+  border-radius: 24px 0 0 24px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-icon {
+  margin-right: 12px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-mdc-icon-button {
+  margin: 0 2px 0 -10px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-mdc-select {
+  margin-right: 8px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-datepicker-toggle,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-datepicker-toggle {
+  margin-right: 4px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle),
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle) {
+  margin-right: 12px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  border-radius: 0 24px 24px 0;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-icon {
+  margin-left: 12px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-mdc-icon-button {
+  margin: 0 -10px 0 2px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-mdc-select {
+  margin-left: 12px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-datepicker-toggle,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-datepicker-toggle {
+  margin-left: 4px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle),
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle) {
+  margin-left: 12px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense {
+  /* Adds better alignment for textarea inputs */
+  /* Rounded */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix .mat-mdc-icon-button {
+  width: 32px !important;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-mdc-icon-button {
+  margin-left: -6px;
+  margin-right: 12px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-mdc-icon-button {
+  margin-left: 12px;
+  margin-right: -6px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
+  min-height: 40px;
+  /* Textarea */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix textarea.mat-mdc-input-element {
+  margin: 8px 0;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  padding-top: 10px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense.fuse-mat-rounded {
+  /* Emphasized affix */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense.fuse-mat-rounded .mat-mdc-text-field-wrapper {
+  border-radius: 20px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix {
+  border-radius: 20px 0 0 20px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-dense.fuse-mat-rounded.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  border-radius: 0 20px 20px 0 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix {
+  /* with Textarea */
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix {
+  align-self: stretch !important;
+  margin: 0 16px 0 -16px !important;
+  padding-left: 16px !important;
+  border-radius: 6px 0 0 6px;
+  border-right-width: 1px;
+  border-style: solid;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-icon {
+  margin-right: 16px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-mdc-icon-button {
+  margin: 0 6px 0 -10px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-mdc-select {
+  margin-right: 12px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > .mat-datepicker-toggle,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > .mat-datepicker-toggle {
+  margin-right: 8px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle),
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle) {
+  margin-right: 16px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  align-self: stretch !important;
+  margin: 0 -16px 0 16px !important;
+  padding-right: 16px !important;
+  border-radius: 0 6px 6px 0;
+  border-left-width: 1px;
+  border-style: solid;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-icon,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-icon {
+  margin-left: 16px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-mdc-icon-button,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-mdc-icon-button {
+  margin: 0 -10px 0 6px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-mdc-select,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-mdc-select {
+  margin: 0 -4px 0 16px !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > .mat-datepicker-toggle,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > .mat-datepicker-toggle {
+  margin-left: 8px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle),
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix > *:not(.mat-icon):not(.mat-mdc-icon-button):not(.mat-mdc-select):not(.mat-datepicker-toggle) {
+  margin-left: 16px;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  @apply bg-default border-gray-300 dark:border-gray-500 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-prefix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-icon-suffix,
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-emphasized-affix:has(textarea.mat-mdc-input-element) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-text-suffix {
+  align-items: flex-start;
+}
+.mat-mdc-form-field.mat-form-field-appearance-fill.fuse-mat-bold .mat-mdc-text-field-wrapper {
+  border-width: 2px !important;
+}
+
+/* "outline" appearance */
+.mat-mdc-form-field.mat-form-field-appearance-outline {
+  /* Invalid */
+  /* Focused */
+  /* Remove the extra border on the right side of the notch */
+  /* Tailwind's global border setter causes this issue */
+}
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-form-field-invalid .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-form-field-invalid .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-form-field-invalid .mdc-notched-outline__trailing {
+  border-color: var(--fuse-warn) !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid) {
+  /* Primary */
+  /* Accent */
+}
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid).mat-primary .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid).mat-primary .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid).mat-primary .mdc-notched-outline__trailing {
+  border-color: var(--fuse-primary) !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid).mat-accent .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid).mat-accent .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid).mat-accent .mdc-notched-outline__trailing {
+  border-color: var(--fuse-accent) !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mdc-notched-outline .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mdc-notched-outline .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mdc-notched-outline .mdc-notched-outline__trailing {
+  @apply border-slate-300 dark:border-slate-500 !important;
+}
+.mat-mdc-form-field.mat-form-field-appearance-outline .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mdc-notched-outline .mdc-notched-outline__notch {
+  border-right-style: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Datepicker
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*  @ Icon
+/* -------------------------------------------------------------------------- */
+.mat-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  min-height: 24px;
+  font-size: 24px;
+  line-height: 24px;
+  -webkit-appearance: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Inputs
+/* -------------------------------------------------------------------------- */
+.mat-mdc-input-element::-moz-placeholder {
+  -moz-transition: none !important;
+  transition: none !important;
+  @apply text-hint !important;
+}
+.mat-mdc-input-element::placeholder {
+  transition: none !important;
+  @apply text-hint !important;
+}
+.mat-mdc-input-element::-moz-placeholder {
+  -moz-transition: none !important;
+  transition: none !important;
+  @apply text-hint !important;
+}
+.mat-mdc-input-element::-webkit-input-placeholder {
+  -webkit-transition: none !important;
+  transition: none !important;
+  @apply text-hint !important;
+}
+.mat-mdc-input-element:-ms-input-placeholder {
+  -ms-transition: none !important;
+  transition: none !important;
+  @apply text-hint !important;
+}
+
+/* Invalid */
+.mat-form-field-invalid .mat-mdc-input-element {
+  /* Placeholder color */
+}
+.mat-form-field-invalid .mat-mdc-input-element::-moz-placeholder {
+  @apply text-warn !important;
+}
+.mat-form-field-invalid .mat-mdc-input-element::placeholder {
+  @apply text-warn !important;
+}
+.mat-form-field-invalid .mat-mdc-input-element::-moz-placeholder {
+  @apply text-warn !important;
+}
+.mat-form-field-invalid .mat-mdc-input-element::-webkit-input-placeholder {
+  @apply text-warn !important;
+}
+.mat-form-field-invalid .mat-mdc-input-element:-ms-input-placeholder {
+  @apply text-warn !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Menu
+/* -------------------------------------------------------------------------- */
+.mat-mdc-menu-panel {
+  min-width: 144px !important;
+}
+.mat-mdc-menu-panel .mat-mdc-menu-content {
+  /* Divider within mat-menu */
+}
+.mat-mdc-menu-panel .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+.mat-mdc-menu-panel .mat-mdc-menu-content .mat-mdc-menu-item .mat-icon-no-color {
+  --tw-text-opacity: 1;
+  color: rgba(var(--fuse-mat-icon-rgb), var(--tw-text-opacity));
+}
+.mat-mdc-menu-panel .mat-mdc-menu-content mat-divider {
+  margin: 8px 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Paginator
+/* -------------------------------------------------------------------------- */
+.mat-mdc-paginator .mat-mdc-paginator-container {
+  padding: 8px 16px;
+  justify-content: space-between;
+  /* Page size select */
+  /* Range actions */
+}
+@screen sm {
+  .mat-mdc-paginator .mat-mdc-paginator-container {
+    justify-content: normal;
+  }
+}
+.mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-page-size {
+  align-items: center;
+  min-height: 40px;
+  margin: 8px;
+}
+.mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-page-size .mat-mdc-paginator-page-size-label {
+  display: none;
+  margin-right: 12px;
+}
+@screen sm {
+  .mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-page-size .mat-mdc-paginator-page-size-label {
+    display: block;
+  }
+}
+.mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-page-size .mat-mdc-paginator-page-size-select {
+  margin: 0;
+}
+.mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-page-size .mat-mdc-paginator-page-size-select .mat-mdc-text-field-wrapper {
+  padding: 0 10px;
+}
+.mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-page-size .mat-mdc-paginator-page-size-select .mat-mdc-text-field-wrapper .mat-form-field-flex {
+  min-height: 32px;
+}
+.mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-range-actions {
+  margin: 8px 0;
+}
+.mat-mdc-paginator .mat-mdc-paginator-container .mat-mdc-paginator-range-actions .mat-mdc-paginator-range-label {
+  margin-right: 16px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Select
+/* -------------------------------------------------------------------------- */
+.mat-mdc-select {
+  display: inline-flex !important;
+}
+.mat-mdc-select .mat-mdc-select-placeholder {
+  transition: none !important;
+  @apply text-hint !important;
+}
+.mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value {
+  position: relative;
+  display: flex;
+  max-width: none;
+}
+.mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value .mat-mdc-select-value-text {
+  display: inline-flex;
+}
+.mat-mdc-select .mat-mdc-select-trigger .mat-mdc-select-value .mat-mdc-select-value-text > * {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.mat-mdc-select .mat-mdc-select-arrow-wrapper {
+  transform: translateY(0) !important;
+}
+.mat-mdc-select .mat-mdc-select-arrow-wrapper .mat-mdc-select-arrow {
+  margin: 0 0 0 8px;
+  @apply text-secondary !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Slide Toggle
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*  @ Snack bar
+/* -------------------------------------------------------------------------- */
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+  color: #ffffff !important;
+}
+.dark .mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+  color: #000000 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Stepper
+/* -------------------------------------------------------------------------- */
+.mat-step-icon {
+  /* Do not override the mat-icon color */
+}
+.mat-step-icon .mat-icon {
+  color: currentColor !important;
+}
+
+.mat-step-label,
+.mat-step-label-selected {
+  font-weight: 500 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Table
+/* -------------------------------------------------------------------------- */
+.mat-mdc-table .mdc-data-table__row:not(.mdc-data-table__row--selected):hover {
+  background: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Tabs
+/* -------------------------------------------------------------------------- */
+.mat-mdc-tab-group {
+  /* No header */
+}
+.mat-mdc-tab-group.fuse-mat-no-header .mat-mdc-tab-header {
+  height: 0 !important;
+  max-height: 0 !important;
+  border: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+.mat-mdc-tab-group:not(.mat-background-primary):not(.mat-background-accent) .mat-mdc-tab-header .mat-mdc-tab-label-container {
+  box-shadow: inset 0 -1px var(--fuse-border);
+}
+.mat-mdc-tab-group .mat-mdc-tab-header .mat-mdc-tab-label-container {
+  margin: 0 24px;
+}
+.mat-mdc-tab-group .mat-mdc-tab-body-content {
+  padding: 24px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Textarea
+/* -------------------------------------------------------------------------- */
+textarea.mat-mdc-input-element {
+  box-sizing: content-box !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Toolbar
+/* -------------------------------------------------------------------------- */
+.mat-toolbar {
+  /* Apply primary contrast color */
+  /* Apply accent contrast color */
+  /* Apply warn contrast color */
+}
+.mat-toolbar.mat-primary .mat-icon {
+  @apply text-on-primary !important;
+}
+.mat-toolbar.mat-primary .text-secondary {
+  @apply text-on-primary text-opacity-60 !important;
+}
+.mat-toolbar.mat-primary .text-hint {
+  @apply text-on-primary text-opacity-38 !important;
+}
+.mat-toolbar.mat-primary .text-disabled {
+  @apply text-on-primary text-opacity-38 !important;
+}
+.mat-toolbar.mat-primary .divider {
+  @apply text-on-primary text-opacity-12 !important;
+}
+.mat-toolbar.mat-accent .mat-icon {
+  @apply text-on-accent !important;
+}
+.mat-toolbar.mat-accent .text-secondary {
+  @apply text-on-accent text-opacity-60 !important;
+}
+.mat-toolbar.mat-accent .text-hint {
+  @apply text-on-accent text-opacity-38 !important;
+}
+.mat-toolbar.mat-accent .text-disabled {
+  @apply text-on-accent text-opacity-38 !important;
+}
+.mat-toolbar.mat-accent .divider {
+  @apply text-on-accent text-opacity-12 !important;
+}
+.mat-toolbar.mat-warn .mat-icon {
+  @apply text-on-warn !important;
+}
+.mat-toolbar.mat-warn .text-secondary {
+  @apply text-on-warn text-opacity-60 !important;
+}
+.mat-toolbar.mat-warn .text-hint {
+  @apply text-on-warn text-opacity-38 !important;
+}
+.mat-toolbar.mat-warn .text-disabled {
+  @apply text-on-warn text-opacity-38 !important;
+}
+.mat-toolbar.mat-warn .divider {
+  @apply text-on-warn text-opacity-12 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  @ Tooltip
+/* -------------------------------------------------------------------------- */
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  background-color: var(--fuse-text-default) !important;
+  color: white;
+}
+.dark .mat-mdc-tooltip .mdc-tooltip__surface {
+  background-color: var(--fuse-text-secondary) !important;
+  color: var(--fuse-bg-default) !important;
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Highlight.js overrides
+/* ----------------------------------------------------------------------------------------------------- */
+code[class*=language-] .hljs-comment,
+code[class*=language-] .hljs-quote,
+pre[class*=language-] .hljs-comment,
+pre[class*=language-] .hljs-quote {
+  color: #8b9fc1;
+  font-style: italic;
+}
+code[class*=language-] .hljs-doctag,
+code[class*=language-] .hljs-keyword,
+code[class*=language-] .hljs-formula,
+pre[class*=language-] .hljs-doctag,
+pre[class*=language-] .hljs-keyword,
+pre[class*=language-] .hljs-formula {
+  color: #22d3ee;
+}
+code[class*=language-] .hljs-name,
+pre[class*=language-] .hljs-name {
+  color: #e879f9;
+}
+code[class*=language-] .hljs-tag,
+pre[class*=language-] .hljs-tag {
+  color: #bae6fd;
+}
+code[class*=language-] .hljs-section,
+code[class*=language-] .hljs-selector-tag,
+code[class*=language-] .hljs-deletion,
+code[class*=language-] .hljs-subst,
+pre[class*=language-] .hljs-section,
+pre[class*=language-] .hljs-selector-tag,
+pre[class*=language-] .hljs-deletion,
+pre[class*=language-] .hljs-subst {
+  color: #f87f71;
+}
+code[class*=language-] .hljs-literal,
+pre[class*=language-] .hljs-literal {
+  color: #36beff;
+}
+code[class*=language-] .hljs-string,
+code[class*=language-] .hljs-regexp,
+code[class*=language-] .hljs-addition,
+code[class*=language-] .hljs-attribute,
+code[class*=language-] .hljs-meta-string,
+pre[class*=language-] .hljs-string,
+pre[class*=language-] .hljs-regexp,
+pre[class*=language-] .hljs-addition,
+pre[class*=language-] .hljs-attribute,
+pre[class*=language-] .hljs-meta-string {
+  color: #bef264;
+}
+code[class*=language-] .hljs-built_in,
+code[class*=language-] .hljs-class .hljs-title,
+pre[class*=language-] .hljs-built_in,
+pre[class*=language-] .hljs-class .hljs-title {
+  color: #ffd374;
+}
+code[class*=language-] .hljs-attr,
+code[class*=language-] .hljs-variable,
+code[class*=language-] .hljs-template-variable,
+code[class*=language-] .hljs-type,
+code[class*=language-] .hljs-selector-class,
+code[class*=language-] .hljs-selector-attr,
+code[class*=language-] .hljs-selector-pseudo,
+code[class*=language-] .hljs-number,
+pre[class*=language-] .hljs-attr,
+pre[class*=language-] .hljs-variable,
+pre[class*=language-] .hljs-template-variable,
+pre[class*=language-] .hljs-type,
+pre[class*=language-] .hljs-selector-class,
+pre[class*=language-] .hljs-selector-attr,
+pre[class*=language-] .hljs-selector-pseudo,
+pre[class*=language-] .hljs-number {
+  color: #22d3ee;
+}
+code[class*=language-] .hljs-symbol,
+code[class*=language-] .hljs-bullet,
+code[class*=language-] .hljs-link,
+code[class*=language-] .hljs-meta,
+code[class*=language-] .hljs-selector-id,
+code[class*=language-] .hljs-title,
+pre[class*=language-] .hljs-symbol,
+pre[class*=language-] .hljs-bullet,
+pre[class*=language-] .hljs-link,
+pre[class*=language-] .hljs-meta,
+pre[class*=language-] .hljs-selector-id,
+pre[class*=language-] .hljs-title {
+  color: #e879f9;
+}
+code[class*=language-] .hljs-emphasis,
+pre[class*=language-] .hljs-emphasis {
+  font-style: italic;
+}
+code[class*=language-] .hljs-strong,
+pre[class*=language-] .hljs-strong {
+  font-weight: 700;
+}
+code[class*=language-] .hljs-link,
+pre[class*=language-] .hljs-link {
+  text-decoration: underline;
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Perfect scrollbar overrides
+/* ----------------------------------------------------------------------------------------------------- */
+.ps {
+  position: relative;
+}
+.ps:hover > .ps__rail-x,
+.ps:hover > .ps__rail-y, .ps.ps--focus > .ps__rail-x,
+.ps.ps--focus > .ps__rail-y, .ps.ps--scrolling-x > .ps__rail-x,
+.ps.ps--scrolling-x > .ps__rail-y, .ps.ps--scrolling-y > .ps__rail-x,
+.ps.ps--scrolling-y > .ps__rail-y {
+  opacity: 1;
+}
+.ps > .ps__rail-x,
+.ps > .ps__rail-y {
+  z-index: 99999;
+}
+.ps > .ps__rail-x {
+  height: 14px;
+  background: transparent !important;
+  transition: none !important;
+}
+.ps > .ps__rail-x:hover, .ps > .ps__rail-x:focus, .ps > .ps__rail-x.ps--clicking {
+  opacity: 1;
+}
+.ps > .ps__rail-x:hover .ps__thumb-x, .ps > .ps__rail-x:focus .ps__thumb-x, .ps > .ps__rail-x.ps--clicking .ps__thumb-x {
+  height: 10px;
+}
+.ps > .ps__rail-x .ps__thumb-x {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  height: 6px;
+  transition: height 225ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.ps > .ps__rail-y {
+  width: 14px;
+  background: transparent !important;
+  transition: none !important;
+  left: auto !important;
+}
+.ps > .ps__rail-y:hover, .ps > .ps__rail-y:focus, .ps > .ps__rail-y.ps--clicking {
+  opacity: 1;
+}
+.ps > .ps__rail-y:hover .ps__thumb-y, .ps > .ps__rail-y:focus .ps__thumb-y, .ps > .ps__rail-y.ps--clicking .ps__thumb-y {
+  width: 10px;
+}
+.ps > .ps__rail-y .ps__thumb-y {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  width: 6px;
+  transition: width 225ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Quill editor overrides
+/* ----------------------------------------------------------------------------------------------------- */
+.ql-toolbar {
+  border-radius: 6px 6px 0 0;
+  padding: 0 !important;
+  @apply bg-gray-100;
+  @apply border-gray-300 border-opacity-100 !important;
+}
+.dark .ql-toolbar {
+  background-color: rgba(0, 0, 0, 0.05);
+  @apply border-gray-500 !important;
+}
+.ql-toolbar .ql-formats {
+  margin: 11px 8px !important;
+}
+.ql-toolbar .ql-picker.ql-expanded .ql-picker-label {
+  @apply border-gray-300;
+}
+.dark .ql-toolbar .ql-picker.ql-expanded .ql-picker-label {
+  @apply border-gray-500;
+}
+.ql-toolbar .ql-picker.ql-expanded .ql-picker-options {
+  z-index: 10 !important;
+  @apply bg-card border-gray-300;
+}
+.dark .ql-toolbar .ql-picker.ql-expanded .ql-picker-options {
+  @apply border-gray-500;
+}
+.ql-toolbar .ql-picker .ql-picker-label {
+  @apply text-default;
+}
+.ql-toolbar .ql-picker .ql-picker-options .ql-picker-item {
+  @apply text-default;
+}
+.ql-toolbar .ql-stroke,
+.ql-toolbar .ql-stroke-mitter {
+  stroke: var(--fuse-icon);
+}
+.ql-toolbar .ql-fill {
+  fill: var(--fuse-icon);
+}
+.ql-toolbar button:hover,
+.ql-toolbar button:focus,
+.ql-toolbar button.ql-active,
+.ql-toolbar .ql-picker-label:hover,
+.ql-toolbar .ql-picker-label.ql-active,
+.ql-toolbar .ql-picker-item:hover,
+.ql-toolbar .ql-picker-item.ql-selected {
+  @apply text-primary !important;
+}
+.ql-toolbar button:hover .ql-stroke,
+.ql-toolbar button:hover .ql-stroke-mitter,
+.ql-toolbar button:focus .ql-stroke,
+.ql-toolbar button:focus .ql-stroke-mitter,
+.ql-toolbar button.ql-active .ql-stroke,
+.ql-toolbar button.ql-active .ql-stroke-mitter,
+.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-toolbar .ql-picker-label:hover .ql-stroke-mitter,
+.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-toolbar .ql-picker-label.ql-active .ql-stroke-mitter,
+.ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-toolbar .ql-picker-item:hover .ql-stroke-mitter,
+.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-mitter {
+  stroke: var(--fuse-primary) !important;
+}
+.ql-toolbar button:hover .ql-fill,
+.ql-toolbar button:focus .ql-fill,
+.ql-toolbar button.ql-active .ql-fill,
+.ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-toolbar .ql-picker-item.ql-selected .ql-fill {
+  fill: var(--fuse-primary) !important;
+}
+
+.ql-container {
+  overflow: auto;
+  min-height: 160px;
+  max-height: 400px;
+  border-radius: 0 0 6px 6px;
+  @apply border-gray-300 border-opacity-100 shadow-sm !important;
+}
+.dark .ql-container {
+  @apply border-gray-500 !important;
+}
+.ql-container .ql-editor {
+  @apply bg-card;
+}
+.ql-container .ql-editor.ql-blank::before {
+  @apply text-hint;
+}
+.ql-container .ql-tooltip {
+  @apply rounded-md border-gray-300 bg-gray-100 px-3 py-1 shadow-sm;
+}
+.dark .ql-container .ql-tooltip {
+  @apply border-gray-700 bg-gray-700 shadow-lg !important;
+}
+.ql-container .ql-tooltip:before {
+  @apply text-secondary;
+}
+.ql-container .ql-tooltip .ql-action,
+.ql-container .ql-tooltip .ql-remove {
+  @apply border-gray-300 text-primary;
+}
+.dark .ql-container .ql-tooltip .ql-action,
+.dark .ql-container .ql-tooltip .ql-remove {
+  @apply border-gray-300 text-primary-400;
+}
+.ql-container .ql-tooltip .ql-action:after {
+  @apply border-r border-r-gray-300 !important;
+}
+.dark .ql-container .ql-tooltip .ql-action:after {
+  @apply border-r-gray-500 !important;
+}
+.ql-container .ql-tooltip input {
+  @apply text-default rounded-sm border-gray-300 bg-white !important;
+}
+.dark .ql-container .ql-tooltip input {
+  @apply border-gray-500 bg-gray-700 !important;
+}/*# sourceMappingURL=main.css.map */

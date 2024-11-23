@@ -22,6 +22,7 @@ import { ProjectMockApi } from 'app/mock-api/dashboards/project/api';
 import { ActivitiesMockApi } from 'app/mock-api/pages/activities/api';
 import { IconsMockApi } from 'app/mock-api/ui/icons/api';
 import { GeneralLanguageMockApi } from './master-data/general/language/api';
+import { GeneralCardTypeMockApi } from './master-data/general/card-type/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -48,4 +49,5 @@ export const mockApiServices = [
     TasksMockApi,
     UserMockApi,
     GeneralLanguageMockApi,
+    GeneralCardTypeMockApi,
 ];

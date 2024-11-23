@@ -1,0 +1,46 @@
+quick-chat {
+  z-index: 399;
+}
+quick-chat > div {
+  overflow: hidden;
+}
+quick-chat.quick-chat-opened > div {
+  overflow: visible;
+}
+quick-chat:not(.quick-chat-opened) > div {
+  overflow: visible;
+  animation: addOverflowHidden 1ms linear 400ms;
+  animation-fill-mode: forwards;
+}
+
+/* Adjustments depending on the selected layout */
+.quick-chat-header {
+  height: 64px;
+}
+enterprise-layout .quick-chat-header, modern-layout .quick-chat-header {
+  height: 80px !important;
+}
+
+/* Overlay */
+.quick-chat-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 299;
+  opacity: 1;
+  background-color: transparent;
+}
+
+@keyframes addOverflowHidden {
+  0% {
+    overflow: visible;
+  }
+  99% {
+    overflow: visible;
+  }
+  100% {
+    overflow: hidden;
+  }
+}/*# sourceMappingURL=quick-chat.component.css.map */

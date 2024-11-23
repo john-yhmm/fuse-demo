@@ -3,6 +3,10 @@ import { Routes } from '@angular/router';
 import { LanguageComponent } from './language/language.component';
 import { LanguageService } from './language/language.service';
 import { LanguageListComponent } from './language/list/language.component';
+import { CardTypeComponent } from './card-type/card-type.component';
+import { CardTypeListComponent } from './card-type/list/card-type.component';
+import { CardTypeService } from './card-type/card-type.service';
+import { cardTypes } from 'app/mock-api/master-data/general/card-type/data';
 
 export default [
     {
@@ -22,5 +26,18 @@ export default [
                 },
             },
         ],
+    },{
+        path: 'card-type',
+        component: CardTypeComponent,
+        children: [
+            {
+                path: '',
+                component: CardTypeListComponent,
+                resolve: {
+                    cardTypes: () => inject(CardTypeService).getCardTypes(),
+                },
+            },
+        ],
     },
+
 ] as Routes;

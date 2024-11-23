@@ -1,0 +1,102 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Highlight.js overrides
+/* ----------------------------------------------------------------------------------------------------- */
+code[class*=language-] .hljs-comment,
+code[class*=language-] .hljs-quote,
+pre[class*=language-] .hljs-comment,
+pre[class*=language-] .hljs-quote {
+  color: #8b9fc1;
+  font-style: italic;
+}
+code[class*=language-] .hljs-doctag,
+code[class*=language-] .hljs-keyword,
+code[class*=language-] .hljs-formula,
+pre[class*=language-] .hljs-doctag,
+pre[class*=language-] .hljs-keyword,
+pre[class*=language-] .hljs-formula {
+  color: #22d3ee;
+}
+code[class*=language-] .hljs-name,
+pre[class*=language-] .hljs-name {
+  color: #e879f9;
+}
+code[class*=language-] .hljs-tag,
+pre[class*=language-] .hljs-tag {
+  color: #bae6fd;
+}
+code[class*=language-] .hljs-section,
+code[class*=language-] .hljs-selector-tag,
+code[class*=language-] .hljs-deletion,
+code[class*=language-] .hljs-subst,
+pre[class*=language-] .hljs-section,
+pre[class*=language-] .hljs-selector-tag,
+pre[class*=language-] .hljs-deletion,
+pre[class*=language-] .hljs-subst {
+  color: #f87f71;
+}
+code[class*=language-] .hljs-literal,
+pre[class*=language-] .hljs-literal {
+  color: #36beff;
+}
+code[class*=language-] .hljs-string,
+code[class*=language-] .hljs-regexp,
+code[class*=language-] .hljs-addition,
+code[class*=language-] .hljs-attribute,
+code[class*=language-] .hljs-meta-string,
+pre[class*=language-] .hljs-string,
+pre[class*=language-] .hljs-regexp,
+pre[class*=language-] .hljs-addition,
+pre[class*=language-] .hljs-attribute,
+pre[class*=language-] .hljs-meta-string {
+  color: #bef264;
+}
+code[class*=language-] .hljs-built_in,
+code[class*=language-] .hljs-class .hljs-title,
+pre[class*=language-] .hljs-built_in,
+pre[class*=language-] .hljs-class .hljs-title {
+  color: #ffd374;
+}
+code[class*=language-] .hljs-attr,
+code[class*=language-] .hljs-variable,
+code[class*=language-] .hljs-template-variable,
+code[class*=language-] .hljs-type,
+code[class*=language-] .hljs-selector-class,
+code[class*=language-] .hljs-selector-attr,
+code[class*=language-] .hljs-selector-pseudo,
+code[class*=language-] .hljs-number,
+pre[class*=language-] .hljs-attr,
+pre[class*=language-] .hljs-variable,
+pre[class*=language-] .hljs-template-variable,
+pre[class*=language-] .hljs-type,
+pre[class*=language-] .hljs-selector-class,
+pre[class*=language-] .hljs-selector-attr,
+pre[class*=language-] .hljs-selector-pseudo,
+pre[class*=language-] .hljs-number {
+  color: #22d3ee;
+}
+code[class*=language-] .hljs-symbol,
+code[class*=language-] .hljs-bullet,
+code[class*=language-] .hljs-link,
+code[class*=language-] .hljs-meta,
+code[class*=language-] .hljs-selector-id,
+code[class*=language-] .hljs-title,
+pre[class*=language-] .hljs-symbol,
+pre[class*=language-] .hljs-bullet,
+pre[class*=language-] .hljs-link,
+pre[class*=language-] .hljs-meta,
+pre[class*=language-] .hljs-selector-id,
+pre[class*=language-] .hljs-title {
+  color: #e879f9;
+}
+code[class*=language-] .hljs-emphasis,
+pre[class*=language-] .hljs-emphasis {
+  font-style: italic;
+}
+code[class*=language-] .hljs-strong,
+pre[class*=language-] .hljs-strong {
+  font-weight: 700;
+}
+code[class*=language-] .hljs-link,
+pre[class*=language-] .hljs-link {
+  text-decoration: underline;
+}/*# sourceMappingURL=highlightjs.css.map */

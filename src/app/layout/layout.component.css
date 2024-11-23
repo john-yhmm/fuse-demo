@@ -1,0 +1,21 @@
+layout {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  /* Base styles for individual layouts */
+  /* Base styles for components that load as a route */
+}
+layout > * {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+}
+layout router-outlet + * {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+}/*# sourceMappingURL=layout.component.css.map */
