@@ -286,18 +286,34 @@ export class CountryTypeListComponent implements OnInit, AfterViewInit, OnDestro
     updateSelectedCountryType(): void {
         // Get the country-type object
         const countryType = this.selectedCountryTypeForm.getRawValue();
-
-        // Remove the currentImageIndex field
+    
+        // Ensure the ID is included
+        const id = this.selectedCountryType?.id; // Extract ID from the selected object
+    
+        if (!id) {
+            console.error('Update failed: No ID found for the selected country type.');
+            return;
+        }
+    
+        // Remove unnecessary fields
         delete countryType.currentImageIndex;
-
+    
+        console.log('Updating country type:', { id, ...countryType });
+    
         // Update the country-type on the server
-        this._countryTypeService
-            .updateCountryType(countryType.id, countryType) // Updated to CountryTypeService methods
-            .subscribe(() => {
+        this._countryTypeService.updateCountryType(id, countryType).subscribe({
+            next: (response) => {
+                console.log('Update successful:', response);
                 // Show a success message
                 this.showFlashMessage('success');
-            });
+            },
+            error: (err) => {
+                console.error('Update failed:', err);
+                this.showFlashMessage('error');
+            },
+        });
     }
+    
 
     /**
      * Delete the selected country-type using the form data

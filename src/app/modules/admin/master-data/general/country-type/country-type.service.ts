@@ -159,47 +159,28 @@ export class CountryTypeService {
      * @param countryType
      */
     updateCountryType(id: string, countryType: CountryType): Observable<CountryType> {
-        return this.countryTypes$.pipe(
-            take(1),
-            switchMap((countryTypes) =>
-                this._httpClient
-                    .patch<CountryType>('api/master-data/general/country-type', {
-                        id,
-                        countryType,
-                    })
-                    .pipe(
-                        map((updatedCountryType) => {
-                            // Find the index of the updated country type
-                            const index = countryTypes.findIndex(
-                                (item) => item.id === id
-                            );
-
-                            // Update the country type
-                            countryTypes[index] = updatedCountryType;
-
-                            // Update the country types
-                            this._countryTypes.next(countryTypes);
-
-                            // Return the updated country type
-                            return updatedCountryType;
-                        }),
-                        switchMap((updatedCountryType) =>
-                            this.countryType$.pipe(
-                                take(1),
-                                filter((item) => item && item.id === id),
-                                tap(() => {
-                                    // Update the country type if it's selected
-                                    this._countryType.next(updatedCountryType);
-
-                                    // Return the updated country type
-                                    return updatedCountryType;
-                                })
-                            )
-                        )
-                    )
-            )
+        console.log('Sending PATCH request:', { id, countryType });
+      
+        return this._httpClient.patch<CountryType>(
+          'api/master-data/general/country-type', 
+          { id, countryType }
+        ).pipe(
+          tap((updatedCountryType) => {
+            console.log('PATCH response received:', updatedCountryType);
+      
+            // Update the _countryTypes BehaviorSubject with the updated country type
+            const currentCountryTypes = this._countryTypes.getValue(); // Get the current country types
+            const index = currentCountryTypes.findIndex((ct) => ct.id === id); // Find the index of the updated country type
+      
+            if (index !== -1) {
+              currentCountryTypes[index] = updatedCountryType; // Update the country type in the list
+              this._countryTypes.next(currentCountryTypes); // Emit the updated list
+            }
+          })
         );
-    }
+      }
+      
+    
 
     /**
      * Delete the country type
