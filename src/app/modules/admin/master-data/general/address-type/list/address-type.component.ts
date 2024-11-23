@@ -52,18 +52,18 @@ import {
         /* language=SCSS */
         `
             .addressType-grid {
-                grid-template-columns: 100px auto 40px;
+                grid-template-columns: 100px auto;
 
                 @screen sm {
-                    grid-template-columns: 100px auto 72px;
+                    grid-template-columns: 100px auto;
                 }
 
                 @screen md {
-                    grid-template-columns: 150px auto 72px;
+                    grid-template-columns: 150px auto;
                 }
 
                 @screen lg {
-                    grid-template-columns: 150px auto 72px;
+                    grid-template-columns: 150px auto;
                 }
             }
         `,

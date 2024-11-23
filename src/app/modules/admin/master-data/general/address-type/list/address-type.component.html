@@ -60,9 +60,8 @@
                             matSort
                             matSortDisableClear
                         >
-                            <div [mat-sort-header]="'name'" style="flex: 2">Name</div>
-                            <div [mat-sort-header]="'name'" style="flex: 3">Rowguid</div>
-                            <div class="hidden sm:block" style="flex: 1">Details</div>
+                            <div [mat-sort-header]="'name'">Name</div>
+                            <div class="hidden sm:block">Details</div>
                         </div>
                         <!-- Rows -->
                         @if (addressTypes$ | async; as addressTypes) {
@@ -76,11 +75,6 @@
                                     <!-- Address Type Name -->
                                     <div class="truncate">
                                         {{ addressType.addressTypeName }}
-                                    </div>
-
-                                    <!-- Rowguid -->
-                                    <div class="truncate">
-                                        {{ addressType.rowguid }}
                                     </div>
 
                                     <!-- Details button -->
@@ -158,14 +152,6 @@
                                                 [formControlName]="
                                                     'addressTypeName'
                                                 "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Rowguid -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Rowguid</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'rowguid'"
                                             />
                                         </mat-form-field>
                                         <!-- Last Edited By -->
