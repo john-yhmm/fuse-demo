@@ -144,8 +144,8 @@ export class GeneralAddressTypeMockApi {
                 // Generate a new addressType
                 const newAddressType = {
                     id: FuseMockApiUtils.guid(),
-                    addresstypeName: '',
-                    rowguid: 'A New Address Type',
+                    addressTypeName: 'A New Address Type',
+                    rowguid: '',
                     lastEditedBy: '',
                     lastEditedOn: '',
                 };
