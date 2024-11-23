@@ -27,7 +27,7 @@ export class GeneralAddressTypeMockApi {
         // @ addressTypes - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/addressTypes', 300)
+            .onGet('api/master-data/general/address-types', 300)
             .reply(({ request }) => {
                 // Get available queries
                 const search = request.params.get('search');
@@ -120,7 +120,7 @@ export class GeneralAddressTypeMockApi {
         // @ addressType - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/addressType')
+            .onGet('api/master-data/general/address-type')
             .reply(({ request }) => {
                 // Get the id from the params
                 const id = request.params.get('id');
@@ -139,7 +139,7 @@ export class GeneralAddressTypeMockApi {
         // @ addressType - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPost('api/master-data/general/addressType')
+            .onPost('api/master-data/general/address-type')
             .reply(() => {
                 // Generate a new addressType
                 const newAddressType = {
@@ -161,7 +161,7 @@ export class GeneralAddressTypeMockApi {
         // @ addressType - PATCH
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPatch('api/master-data/general/addressType')
+            .onPatch('api/master-data/general/address-type')
             .reply(({ request }) => {
                 // Get the id and addressType
                 const id = request.body.id;
@@ -193,7 +193,7 @@ export class GeneralAddressTypeMockApi {
         // @ addressType - DELETE
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onDelete('api/master-data/general/addressType')
+            .onDelete('api/master-data/general/address-type')
             .reply(({ request }) => {
                 // Get the id
                 const id = request.params.get('id');

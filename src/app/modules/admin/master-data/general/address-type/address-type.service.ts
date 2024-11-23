@@ -85,7 +85,7 @@ export class AddressTypeService {
             .get<{
                 pagination: AddressTypePagination;
                 addressTypes: AddressType[];
-            }>('api/master-data/general/addressTypes', {
+            }>('api/master-data/general/address-types', {
                 params: {
                     page: '' + page,
                     size: '' + size,
@@ -139,7 +139,7 @@ export class AddressTypeService {
             take(1),
             switchMap((addressTypes) =>
                 this._httpClient
-                    .post<AddressType>('api/master-data/general/addressType', {})
+                    .post<AddressType>('api/master-data/general/address-type', {})
                     .pipe(
                         map((newAddressType) => {
                             // Update the addressTypes with the new addressType
@@ -164,7 +164,7 @@ export class AddressTypeService {
             take(1),
             switchMap((addressTypes) =>
                 this._httpClient
-                    .patch<AddressType>('api/master-data/general/addressType', {
+                    .patch<AddressType>('api/master-data/general/address-type', {
                         id,
                         addressType,
                     })
@@ -212,7 +212,7 @@ export class AddressTypeService {
             take(1),
             switchMap((addressTypes) =>
                 this._httpClient
-                    .delete('api/master-data/general/addressType', {
+                    .delete('api/master-data/general/address-type', {
                         params: { id },
                     })
                     .pipe(

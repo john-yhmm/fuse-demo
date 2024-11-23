@@ -58,6 +58,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/language',
                     },
+                    {
+                        id: 'master-data.general.address-type',
+                        title: 'Address Type',
+                        type: 'basic',
+                        link: '/master-data/general/address-type',
+                    },
                 ],
             },
         ],
