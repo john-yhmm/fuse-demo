@@ -23,6 +23,7 @@ import { ActivitiesMockApi } from 'app/mock-api/pages/activities/api';
 import { IconsMockApi } from 'app/mock-api/ui/icons/api';
 import { GeneralLanguageMockApi } from './master-data/general/language/api';
 import { GeneralAddressTypeMockApi } from './master-data/general/address-type/api';
+import { GeneralCountryTypeMockApi } from './master-data/general/country-type/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -49,5 +50,6 @@ export const mockApiServices = [
     TasksMockApi,
     UserMockApi,
     GeneralLanguageMockApi,
-    GeneralAddressTypeMockApi
+    GeneralAddressTypeMockApi,
+    GeneralCountryTypeMockApi,
 ];

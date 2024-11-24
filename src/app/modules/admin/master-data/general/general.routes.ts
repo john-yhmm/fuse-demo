@@ -6,7 +6,9 @@ import { LanguageListComponent } from './language/list/language.component';
 import { AddressTypeComponent } from './address-type/address-type.component';
 import { AddressTypeListComponent } from './address-type/list/address-type.component';
 import { AddressTypeService } from './address-type/address-type.service';
-import { addressTypes } from 'app/mock-api/master-data/general/address-type/data';
+import { CountryTypeComponent } from './country-type/country-type.component';
+import { CountryTypeService } from './country-type/country-type.service';
+import { CountryTypeListComponent } from './country-type/list/country-type.component';
 
 export default [
     {
@@ -39,5 +41,17 @@ export default [
             },
         ],
     },
-    
+    {
+        path: 'country-type',
+        component: CountryTypeComponent,
+        children: [
+            {
+                path: '',
+                component: CountryTypeListComponent,
+                resolve: {
+                    countryTypes: () => inject(CountryTypeService).getCountryTypes(),
+                },
+            },
+        ],
+    },
 ] as Routes;
