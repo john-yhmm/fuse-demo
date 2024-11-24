@@ -134,24 +134,21 @@ export class CountryTypeService {
      * Create country type
      */
     createCountryType(): Observable<CountryType> {
-        return this.countryTypes$.pipe(
-            take(1),
-            switchMap((countryTypes) =>
-                this._httpClient
-                    .post<CountryType>('api/master-data/general/country-type', {})
-                    .pipe(
-                        map((newCountryType) => {
-                            // Update the country types with the new country type
-                            this._countryTypes.next([newCountryType, ...countryTypes]);
-
-                            // Return the new country type
-                            return newCountryType;
-                        })
-                    )
-            )
-        );
+        return this._httpClient
+            .post<CountryType>('api/master-data/general/country-type', {})
+            .pipe(
+                tap((newCountryType) => {
+                    // Ensure newCountryType.id is defined
+                    if (!newCountryType.id) {
+                        console.error('Newly created country type lacks an ID');
+                        return;
+                    }
+                    const currentCountryTypes = this._countryTypes.getValue();
+                    this._countryTypes.next([newCountryType, ...currentCountryTypes]);
+                })
+            );
     }
-
+    
     /**
      * Update country type
      *
@@ -180,14 +177,13 @@ export class CountryTypeService {
         );
       }
       
-    
-
     /**
      * Delete the country type
      *
      * @param id
      */
     deleteCountryType(id: string): Observable<boolean> {
+        console.log('Attempting to delete country type with ID:', id);
         return this.countryTypes$.pipe(
             take(1),
             switchMap((countryTypes) =>

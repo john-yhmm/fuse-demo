@@ -297,9 +297,8 @@ export class CountryTypeListComponent implements OnInit, AfterViewInit, OnDestro
     
         // Remove unnecessary fields
         delete countryType.currentImageIndex;
-    
         console.log('Updating country type:', { id, ...countryType });
-    
+
         // Update the country-type on the server
         this._countryTypeService.updateCountryType(id, countryType).subscribe({
             next: (response) => {
@@ -314,7 +313,6 @@ export class CountryTypeListComponent implements OnInit, AfterViewInit, OnDestro
         });
     }
     
-
     /**
      * Delete the selected country-type using the form data
      */
@@ -322,33 +320,45 @@ export class CountryTypeListComponent implements OnInit, AfterViewInit, OnDestro
         // Open the confirmation dialog
         const confirmation = this._fuseConfirmationService.open({
             title: 'Delete country-type',
-            message:
-                'Are you sure you want to remove this country-type? This action cannot be undone!',
+            message: 'Are you sure you want to remove this country-type? This action cannot be undone!',
             actions: {
                 confirm: {
                     label: 'Delete',
                 },
             },
         });
-
+    
         // Subscribe to the confirmation dialog closed action
         confirmation.afterClosed().subscribe((result) => {
             // If the confirm button pressed...
             if (result === 'confirmed') {
-                // Get the country-type object
-                const countryType = this.selectedCountryTypeForm.getRawValue();
-
+                // Use the selectedCountryType's ID directly
+                const id = this.selectedCountryType?.id;
+    
+                if (!id) {
+                    console.error('Delete failed: No ID found for the selected country type.');
+                    return;
+                }
+    
+                console.log('Attempting to delete country type with ID:', id);
+    
                 // Delete the country-type on the server
-                this._countryTypeService
-                    .deleteCountryType(countryType.id)
-                    .subscribe(() => {
+                this._countryTypeService.deleteCountryType(id).subscribe({
+                    next: () => {
                         // Close the details
                         this.closeDetails();
-                    });
+    
+                        // Optionally reload or refresh the list
+                        this._countryTypeService.getCountryTypes().subscribe();
+                    },
+                    error: (err) => {
+                        console.error('Delete failed:', err);
+                    },
+                });
             }
         });
     }
-
+    
     /**
      * Show flash message
      */
@@ -374,7 +384,7 @@ export class CountryTypeListComponent implements OnInit, AfterViewInit, OnDestro
      * @param index
      * @param item
      */
-    trackByFn(index: number, item: any): any {
-        return item.id || index;
+    trackByFn(index: number, item: CountryType): string {
+        return item.id || index.toString(); // Use index as fallback if id is undefined
     }
 }
