@@ -24,6 +24,7 @@ import { IconsMockApi } from 'app/mock-api/ui/icons/api';
 import { GeneralLanguageMockApi } from './master-data/general/language/api';
 import { GeneralAddressTypeMockApi } from './master-data/general/address-type/api';
 import { GeneralCountryTypeMockApi } from './master-data/general/country-type/api';
+import { GeneralDeliveryMethodMockApi } from './master-data/general/delivery-method/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -52,4 +53,5 @@ export const mockApiServices = [
     GeneralLanguageMockApi,
     GeneralAddressTypeMockApi,
     GeneralCountryTypeMockApi,
+    GeneralDeliveryMethodMockApi,
 ];

@@ -70,6 +70,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/country-type',
                     },
+                    {
+                        id: 'master-data.general.delivery-method',
+                        title: 'Delivery Method',
+                        type: 'basic',
+                        link: '/master-data/general/delivery-method',
+                    },
                 ],
             },
         ],

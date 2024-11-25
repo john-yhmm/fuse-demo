@@ -1,5 +1,7 @@
 import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
+
+
 import { LanguageComponent } from './language/language.component';
 import { LanguageService } from './language/language.service';
 import { LanguageListComponent } from './language/list/language.component';
@@ -9,6 +11,10 @@ import { AddressTypeService } from './address-type/address-type.service';
 import { CountryTypeComponent } from './country-type/country-type.component';
 import { CountryTypeService } from './country-type/country-type.service';
 import { CountryTypeListComponent } from './country-type/list/country-type.component';
+import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
+import { DeliveryMethodService } from './delivery-method/delivery-method.service';
+import { DeliveryMethodListComponent } from './delivery-method/list/delivery-method.component';
+
 
 export default [
     {
@@ -50,6 +56,19 @@ export default [
                 component: CountryTypeListComponent,
                 resolve: {
                     countryTypes: () => inject(CountryTypeService).getCountryTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'delivery-method',
+        component: DeliveryMethodComponent,
+        children: [
+            {
+                path: '',
+                component: DeliveryMethodListComponent,
+                resolve: {
+                    deliveryMethods: () => inject(DeliveryMethodService).getDeliveryMethods(),
                 },
             },
         ],
