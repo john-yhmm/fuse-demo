@@ -1,12 +1,12 @@
-export interface AddressType {
+export interface PaymentMethod {
     id: string;
-    addressTypeName: string;
-    rowguid: string;
+    paymentMethodName: string;
     lastEditedBy: string;
-    lastEditedOn: string;
+    validFrom: string;
+    validTo: string;
 }
 
-export interface AddressTypePagination {
+export interface PaymentMethodPagination {
     length: number;
     size: number;
     page: number;

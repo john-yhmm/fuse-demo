@@ -70,6 +70,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/country-type',
                     },
+                    {
+                        id: 'master-data.general.payment-method',
+                        title: 'Payment Method',
+                        type: 'basic',
+                        link: '/master-data/general/payment-method',
+                    },
                 ],
             },
         ],
