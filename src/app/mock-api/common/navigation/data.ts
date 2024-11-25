@@ -58,6 +58,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/language',
                     },
+                    {
+                        id: 'master-data.general.phNoType',
+                        title: 'Phone Number Type',
+                        type: 'basic',
+                        link: '/master-data/general/phno-type',
+                    },
                 ],
             },
         ],
