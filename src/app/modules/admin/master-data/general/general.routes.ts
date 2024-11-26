@@ -18,6 +18,9 @@ import { DeliveryMethodListComponent } from './delivery-method/list/delivery-met
 import { PhnoTypeComponent } from './phno-type/phno-type.component'
 import { PhnoTypeService } from './phno-type/phno-type.service';
 import { PhnoTypeListComponent } from './phno-type/list/phno-type.component'
+import { CardTypeComponent } from './card-type/card-type.component';
+import { CardTypeService } from './card-type/card-type.service';
+import { CardTypeListComponent } from './card-type/list/card-type.component';
 
 export default [
     {
@@ -102,4 +105,18 @@ export default [
             },
         ],
     },
+    {
+        path: 'card-type',
+        component: CardTypeComponent,
+        children: [
+            {
+                path: '',
+                component: CardTypeListComponent,
+                resolve: {
+                    cardTypes: () => inject(CardTypeService).getCardTypes(),
+                },
+            },
+        ],
+    },
+
 ] as Routes;

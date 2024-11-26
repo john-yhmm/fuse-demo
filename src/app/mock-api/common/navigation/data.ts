@@ -88,6 +88,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/phno-type',
                     },
+                    {
+                        id: 'master-data.general.card-type',
+                        title: 'Card Type',
+                        type: 'basic',
+                        link: '/master-data/general/card-type',
+                    },
                 ],
             },
         ],
