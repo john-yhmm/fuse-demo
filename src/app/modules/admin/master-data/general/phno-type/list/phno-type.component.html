@@ -58,7 +58,7 @@
                     <div class="grid">
                         <!-- Header -->
                         <div
-                            class="phNoType-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                            class="phone-number-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
                             matSort
                             matSortDisableClear
                         >
@@ -72,7 +72,7 @@
                                 track trackByFn($index, phnoType)
                             ) {
                                 <div
-                                    class="phNoType-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
+                                    class="phone-number-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
                                 >
 
                                     <!-- Name -->
@@ -112,6 +112,16 @@
                             }
                         }
                     </div>
+
+                    <mat-paginator
+                        class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
+                        [ngClass]="{ 'pointer-events-none': isLoading }"
+                        [length]="pagination.length"
+                        [pageIndex]="pagination.page"
+                        [pageSize]="pagination.size"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [showFirstLastButtons]="true"
+                    ></mat-paginator>
 
                    
                 } @else {
