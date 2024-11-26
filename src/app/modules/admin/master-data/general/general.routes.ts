@@ -15,6 +15,9 @@ import { PaymentMethodService } from './payment-method/payment-method.service';
 import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
 import { DeliveryMethodService } from './delivery-method/delivery-method.service';
 import { DeliveryMethodListComponent } from './delivery-method/list/delivery-method.component';
+import { PhnoTypeComponent } from './phno-type/phno-type.component'
+import { PhnoTypeService } from './phno-type/phno-type.service';
+import { PhnoTypeListComponent } from './phno-type/list/phno-type.component'
 
 export default [
     {
@@ -28,7 +31,7 @@ export default [
         children: [
             {
                 path: '',
-                component: LanguageListComponent,
+                component: LanguageListComponent, 
                 resolve: {
                     languages: () => inject(LanguageService).getLanguages(),
                 },
@@ -82,6 +85,19 @@ export default [
                 component: DeliveryMethodListComponent,
                 resolve: {
                     deliveryMethods: () => inject(DeliveryMethodService).getDeliveryMethods(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'phno-type',
+        component: PhnoTypeComponent,
+        children: [
+            {
+                path: '',
+                component: PhnoTypeListComponent,
+                resolve: {
+                    countryTypes: () => inject(PhnoTypeService).getPhnoTypes(),
                 },
             },
         ],
