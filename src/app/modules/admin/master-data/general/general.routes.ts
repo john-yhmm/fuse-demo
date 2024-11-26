@@ -12,6 +12,9 @@ import { CountryTypeListComponent } from './country-type/list/country-type.compo
 import { PaymentMethodComponent } from './payment-method/payment-method.component';
 import { PaymentMethodListComponent } from './payment-method/list/payment-method.component';
 import { PaymentMethodService } from './payment-method/payment-method.service';
+import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
+import { DeliveryMethodService } from './delivery-method/delivery-method.service';
+import { DeliveryMethodListComponent } from './delivery-method/list/delivery-method.component';
 
 export default [
     {
@@ -66,6 +69,19 @@ export default [
                 component: PaymentMethodListComponent,
                 resolve: {
                     paymentMethods: () => inject(PaymentMethodService).getPaymentMethods(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'delivery-method',
+        component: DeliveryMethodComponent,
+        children: [
+            {
+                path: '',
+                component: DeliveryMethodListComponent,
+                resolve: {
+                    deliveryMethods: () => inject(DeliveryMethodService).getDeliveryMethods(),
                 },
             },
         ],
