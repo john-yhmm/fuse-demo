@@ -9,6 +9,9 @@ import { AddressTypeService } from './address-type/address-type.service';
 import { CountryTypeComponent } from './country-type/country-type.component';
 import { CountryTypeService } from './country-type/country-type.service';
 import { CountryTypeListComponent } from './country-type/list/country-type.component';
+import { PaymentMethodComponent } from './payment-method/payment-method.component';
+import { PaymentMethodListComponent } from './payment-method/list/payment-method.component';
+import { PaymentMethodService } from './payment-method/payment-method.service';
 
 export default [
     {
@@ -50,6 +53,19 @@ export default [
                 component: CountryTypeListComponent,
                 resolve: {
                     countryTypes: () => inject(CountryTypeService).getCountryTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'payment-method',
+        component: PaymentMethodComponent,
+        children: [
+            {
+                path: '',
+                component: PaymentMethodListComponent,
+                resolve: {
+                    paymentMethods: () => inject(PaymentMethodService).getPaymentMethods(),
                 },
             },
         ],

@@ -30,11 +30,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { AddressTypeService } from 'app/modules/admin/master-data/general/address-type/address-type.service';
+import { PaymentMethodService } from 'app/modules/admin/master-data/general/payment-method/payment-method.service';
 import {
-    AddressType,
-    AddressTypePagination,
-} from 'app/modules/admin/master-data/general/address-type/address-type.types';
+    PaymentMethod,
+    PaymentMethodPagination,
+} from 'app/modules/admin/master-data/general/payment-method/payment-method.types';
 import {
     Observable,
     Subject,
@@ -46,12 +46,12 @@ import {
 } from 'rxjs';
 
 @Component({
-    selector: 'address-type-list',
-    templateUrl: './address-type.component.html',
+    selector: 'payment-method-list',
+    templateUrl: './payment-method.component.html',
     styles: [
         /* language=SCSS */
         `
-            .addressType-grid {
+            .paymentMethod-grid {
                 grid-template-columns: 100px auto;
 
                 @screen sm {
@@ -92,18 +92,18 @@ import {
         AsyncPipe,
     ],
 })
-export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PaymentMethodListComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
-    addressTypes$: Observable<AddressType[]>;
+    paymentMethods$: Observable<PaymentMethod[]>;
 
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
-    pagination: AddressTypePagination;
+    pagination: PaymentMethodPagination;
     searchInputControl: UntypedFormControl = new UntypedFormControl();
-    selectedAddressType: AddressType | null = null;
-    selectedAddressTypeForm: UntypedFormGroup;
+    selectedPaymentMethod: PaymentMethod | null = null;
+    selectedPaymentMethodForm: UntypedFormGroup;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -113,7 +113,7 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: UntypedFormBuilder,
-        private _addressTypeService: AddressTypeService
+        private _paymentMethodService: PaymentMethodService
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -124,19 +124,19 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
      * On init
      */
     ngOnInit(): void {
-        // Create the selected address-type form
-        this.selectedAddressTypeForm = this._formBuilder.group({
+        // Create the selected payment-method form
+        this.selectedPaymentMethodForm = this._formBuilder.group({
             id: [''],
-            addressTypeName: ['', [Validators.required]],
-            rowguid: [''],
+            paymentMethodName: ['', [Validators.required]],
             lastEditedBy: [''],
-            lastEditedOn: [''],
+            validFrom: [''],
+            validTo: [''],
         });
 
         // Get the pagination
-        this._addressTypeService.pagination$
+        this._paymentMethodService.pagination$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((pagination: AddressTypePagination) => {
+            .subscribe((pagination: PaymentMethodPagination) => {
                 // Update the pagination
                 this.pagination = pagination;
 
@@ -144,8 +144,8 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
                 this._changeDetectorRef.markForCheck();
             });
 
-        // Get the address-types
-        this.addressTypes$ = this._addressTypeService.addressTypes$;
+        // Get the payment-methods
+        this.paymentMethods$ = this._paymentMethodService.paymentMethods$;
 
         // Subscribe to search input field value changes
         this.searchInputControl.valueChanges
@@ -155,10 +155,10 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
                 switchMap((query) => {
                     this.closeDetails();
                     this.isLoading = true;
-                    return this._addressTypeService.getAddressTypes(
+                    return this._paymentMethodService.getPaymentMethods(
                         0,
                         10,
-                        'addressTypeName',
+                        'paymentMethodName',
                         'asc',
                         query
                     );
@@ -177,7 +177,7 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
         if (this._sort && this._paginator) {
             // Set the initial sort
             this._sort.sort({
-                id: 'addressTypeName',
+                id: 'paymentMethodName',
                 start: 'asc',
                 disableClear: true,
             });
@@ -196,13 +196,13 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
                     this.closeDetails();
                 });
 
-            // Get address-types if sort or page changes
+            // Get payment-methods if sort or page changes
             merge(this._sort.sortChange, this._paginator.page)
                 .pipe(
                     switchMap(() => {
                         this.closeDetails();
                         this.isLoading = true;
-                        return this._addressTypeService.getAddressTypes(
+                        return this._paymentMethodService.getPaymentMethods(
                             this._paginator.pageIndex,
                             this._paginator.pageSize,
                             this._sort.active,
@@ -231,27 +231,27 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Toggle addressType details
+     * Toggle paymentMethod details
      *
-     * @param addressTypeId
+     * @param paymentMethodId
      */
-    toggleDetails(addressTypeId: string): void {
-        // If the addressType is already selected...
-        if (this.selectedAddressType && this.selectedAddressType.id === addressTypeId) {
+    toggleDetails(paymentMethodId: string): void {
+        // If the paymentMethod is already selected...
+        if (this.selectedPaymentMethod && this.selectedPaymentMethod.id === paymentMethodId) {
             // Close the details
             this.closeDetails();
             return;
         }
 
-        // Get the addressType by id
-        this._addressTypeService
-            .getAddressTypeById(addressTypeId)
-            .subscribe((addressType) => {
-                // Set the selected addressType
-                this.selectedAddressType = addressType;
+        // Get the paymentMethod by id
+        this._paymentMethodService
+            .getPaymentMethodById(paymentMethodId)
+            .subscribe((paymentMethod) => {
+                // Set the selected paymentMethod
+                this.selectedPaymentMethod = paymentMethod;
 
                 // Fill the form
-                this.selectedAddressTypeForm.patchValue(addressType);
+                this.selectedPaymentMethodForm.patchValue(paymentMethod);
 
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
@@ -262,17 +262,17 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
      * Close the details
      */
     closeDetails(): void {
-        this.selectedAddressType = null;
+        this.selectedPaymentMethod = null;
     }
 
     /**
-     * Cycle through images of selected addressType
+     * Cycle through images of selected paymentMethod
      */
     cycleImages(forward: boolean = true): void {
         // Get the image count and current image index
-        const count = this.selectedAddressTypeForm.get('images').value.length;
+        const count = this.selectedPaymentMethodForm.get('images').value.length;
         const currentIndex =
-            this.selectedAddressTypeForm.get('currentImageIndex').value;
+            this.selectedPaymentMethodForm.get('currentImageIndex').value;
 
         // Calculate the next and previous index
         const nextIndex = currentIndex + 1 === count ? 0 : currentIndex + 1;
@@ -280,31 +280,31 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
 
         // If cycling forward...
         if (forward) {
-            this.selectedAddressTypeForm
+            this.selectedPaymentMethodForm
                 .get('currentImageIndex')
                 .setValue(nextIndex);
         }
         // If cycling backwards...
         else {
-            this.selectedAddressTypeForm
+            this.selectedPaymentMethodForm
                 .get('currentImageIndex')
                 .setValue(prevIndex);
         }
     }
 
     /**
-     * Create addressType
+     * Create paymentMethod
      */
-    createAddressType(): void {
+    createPaymentMethod(): void {
         console.log('here');
 
-        // Create the addressType
-        this._addressTypeService.createAddressType().subscribe((newAddressType) => {
-            // Go to new addressType
-            this.selectedAddressType = newAddressType;
+        // Create the paymentMethod
+        this._paymentMethodService.createPaymentMethod().subscribe((newPaymentMethod) => {
+            // Go to new paymentMethod
+            this.selectedPaymentMethod = newPaymentMethod;
 
             // Fill the form
-            this.selectedAddressTypeForm.patchValue(newAddressType);
+            this.selectedPaymentMethodForm.patchValue(newPaymentMethod);
 
             // Mark for check
             this._changeDetectorRef.markForCheck();
@@ -312,18 +312,18 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     /**
-     * Update the selected addressType using the form data
+     * Update the selected paymentMethod using the form data
      */
-    updateSelectedAddressType(): void {
-        // Get the addressType object
-        const addressType = this.selectedAddressTypeForm.getRawValue();
+    updateSelectedPaymentMethod(): void {
+        // Get the paymentMethod object
+        const paymentMethod = this.selectedPaymentMethodForm.getRawValue();
 
         // Remove the currentImageIndex field
-        delete addressType.currentImageIndex;
+        delete paymentMethod.currentImageIndex;
 
-        // Update the addressType on the server
-        this._addressTypeService
-            .updateAddressType(addressType.id, addressType)
+        // Update the paymentMethod on the server
+        this._paymentMethodService
+            .updatePaymentMethod(paymentMethod.id, paymentMethod)
             .subscribe(() => {
                 // Show a success message
                 this.showFlashMessage('success');
@@ -331,14 +331,14 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     /**
-     * Delete the selected addressType using the form data
+     * Delete the selected paymentMethod using the form data
      */
-    deleteSelectedAddressType(): void {
+    deleteSelectedPaymentMethod(): void {
         // Open the confirmation dialog
         const confirmation = this._fuseConfirmationService.open({
-            title: 'Delete address-type',
+            title: 'Delete payment-method',
             message:
-                'Are you sure you want to remove this address-type? This action cannot be undone!',
+                'Are you sure you want to remove this payment-method? This action cannot be undone!',
             actions: {
                 confirm: {
                     label: 'Delete',
@@ -350,12 +350,12 @@ export class AddressTypeListComponent implements OnInit, AfterViewInit, OnDestro
         confirmation.afterClosed().subscribe((result) => {
             // If the confirm button pressed...
             if (result === 'confirmed') {
-                // Get the addressType object
-                const addressType = this.selectedAddressTypeForm.getRawValue();
+                // Get the paymentMethod object
+                const paymentMethod = this.selectedPaymentMethodForm.getRawValue();
 
-                // Delete the addressType on the server
-                this._addressTypeService
-                    .deleteAddressType(addressType.id)
+                // Delete the paymentMethod on the server
+                this._paymentMethodService
+                    .deletePaymentMethod(paymentMethod.id)
                     .subscribe(() => {
                         // Close the details
                         this.closeDetails();
