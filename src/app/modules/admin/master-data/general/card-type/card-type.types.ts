@@ -1,9 +1,10 @@
+import { DateTime } from "luxon";
+
 export interface CardType {
     id: string;
-    cardTypeName: string;
-    issuerID: string;
-    lasteditedBy: string;
-    lasteditedOn: string;
+    name: string;
+    issuerId: string;
+    modifiedDate: string;
 }
 
 export interface CardTypePagination {

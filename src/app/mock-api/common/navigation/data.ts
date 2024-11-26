@@ -60,7 +60,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                     },
                     {
                         id: 'master-data.general.card-type',
-                        title: 'CardType',
+                        title: 'Card Type',
                         type: 'basic',
                         link: '/master-data/general/card-type',
                     },

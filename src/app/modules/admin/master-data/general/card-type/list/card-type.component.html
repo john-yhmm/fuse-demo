@@ -29,7 +29,7 @@
                     matInput
                     [formControl]="searchInputControl"
                     [autocomplete]="'off'"
-                    [placeholder]="'Search Card Types'"
+                    [placeholder]="'Search cardTypes'"
                 />
             </mat-form-field>
             <!-- Add cardType button -->
@@ -56,13 +56,12 @@
                     <div class="grid">
                         <!-- Header -->
                         <div
-                            class="cardType-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                            class="cardType-grid sticky top-0 z-10 flex items-center space-x-2 bg-gray-50 px-6 py-4 text-md font-semibold text-secondary shadow dark:bg-black dark:bg-opacity-5 md:px-8"
                             matSort
-                            matSortDisableClear
-                        >
-                            <div [mat-sort-header]="'name'" style="flex: 2">Name</div>
-                            <div [mat-sort-header]="'name'" style="flex: 3">IssuerID</div>
-                            <div class="hidden sm:block" style="flex: 1">Details</div>
+                            matSortDisableClear>
+                            <div class="flex-1" [mat-sort-header]="'name'">Name</div>
+                            <div class="flex-1" [mat-sort-header]="'issuerId'">Issuer ID</div>
+                            <div class="hidden flex-1 sm:block">Details</div>
                         </div>
                         <!-- Rows -->
                         @if (cardTypes$ | async; as cardTypes) {
@@ -71,37 +70,37 @@
                                 track trackByFn($index, cardType)
                             ) {
                                 <div
-                                    class="cardType-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
-                                >
-                                    <!-- Card Type Name -->
-                                    <div class="truncate">
-                                        {{ cardType.cardTypeName }}
-                                    </div>
-
-                                    <!-- IssuerID -->
-                                    <div class="truncate">
-                                        {{ cardType.issuerID }}
-                                    </div>
-
-                                    <!-- Details button -->
-                                    <div>
-                                        <button
-                                            class="h-7 min-h-7 min-w-10 px-2 leading-6"
-                                            mat-stroked-button
-                                            (click)="toggleDetails(cardType.id)"
-                                        >
-                                            <mat-icon
-                                                class="icon-size-5"
-                                                [svgIcon]="
-                                                    selectedCardType?.id ===
-                                                    cardType.id
-                                                        ? 'heroicons_solid:chevron-up'
-                                                        : 'heroicons_solid:chevron-down'
-                                                "
-                                            ></mat-icon>
-                                        </button>
-                                    </div>
+                                class="cardType-grid grid grid-cols-3 items-center border-b px-6 py-3 md:px-8"
+                            >
+                                <!-- Name -->
+                                <div class="truncate">
+                                    {{ cardType.name }}
                                 </div>
+
+                                <!-- Issuer ID -->
+                                <div class="truncate">
+                                    {{ cardType.issuerId }}
+                                </div>
+
+                                <!-- Details button -->
+                                <div class="h-7 min-h-7 min-w-10 px-2 leading-6">
+                                    <button
+                                        class="h-7 min-h-7 min-w-10 px-2 leading-6"
+                                        mat-stroked-button
+                                        (click)="toggleDetails(cardType.id)"
+                                    >
+                                        <mat-icon
+                                            class="icon-size-5"
+                                            [svgIcon]="
+                                                selectedCardType?.id === cardType.id
+                                                    ? 'heroicons_solid:chevron-up'
+                                                    : 'heroicons_solid:chevron-down'
+                                            "
+                                        ></mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
                                 <div class="grid">
                                     @if (selectedCardType?.id === cardType.id) {
                                         <ng-container
@@ -129,7 +128,7 @@
                     <div
                         class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
                     >
-                        There are no card-types!
+                        There are no cardTypes!
                     </div>
                 }
             }
@@ -148,43 +147,33 @@
                                     <div
                                         class="flex w-full flex-col sm:pl-8 lg:w-2/4"
                                     >
-                                        <!-- Card Type Name -->
+                                        <!-- Name -->
                                         <mat-form-field class="w-full">
                                             <mat-label
-                                                >Card Type Name</mat-label
+                                                >Name</mat-label
                                             >
                                             <input
                                                 matInput
                                                 [formControlName]="
-                                                    'cardTypeName'
+                                                    'name'
                                                 "
                                             />
                                         </mat-form-field>
-                                        <!-- IssuerID -->
+                                        <!-- Issuer ID -->
                                         <mat-form-field class="w-full">
-                                            <mat-label>IssuerID</mat-label>
+                                            <mat-label>Issuer ID</mat-label>
                                             <input
                                                 matInput
-                                                [formControlName]="'issuerID'"
+                                                [formControlName]="'issuerId'"
                                             />
                                         </mat-form-field>
-                                        <!-- Last Edited By -->
+                                        <!-- Modified Date -->
                                         <mat-form-field class="w-full">
-                                            <mat-label>Last Edited By</mat-label>
+                                            <mat-label>Modified Date</mat-label>
                                             <input
                                                 matInput
                                                 [formControlName]="
-                                                    'lastEditedBy'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Last Editded On -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Last Edited On</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'lastEditedOn'
+                                                    'modifiedDate'
                                                 "
                                             />
                                         </mat-form-field>
@@ -214,7 +203,7 @@
                                                     "
                                                 ></mat-icon>
                                                 <span class="ml-2"
-                                                    >Card Type updated</span
+                                                    >CardType updated</span
                                                 >
                                             }
                                             @if (flashMessage === 'error') {

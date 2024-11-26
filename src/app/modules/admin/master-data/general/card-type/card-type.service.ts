@@ -62,8 +62,7 @@ export class CardTypeService {
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Get cardTypes
-     *
+     * Get card types
      *
      * @param page
      * @param size
@@ -74,7 +73,7 @@ export class CardTypeService {
     getCardTypes(
         page: number = 0,
         size: number = 10,
-        sort: string = 'cardTypeName',
+        sort: string = 'name',
         order: 'asc' | 'desc' | '' = 'asc',
         search: string = ''
     ): Observable<{
@@ -85,7 +84,7 @@ export class CardTypeService {
             .get<{
                 pagination: CardTypePagination;
                 cardTypes: CardType[];
-            }>('api/master-data/general/cardTypes', {
+            }>('api/master-data/general/card-types', {
                 params: {
                     page: '' + page,
                     size: '' + size,
@@ -103,26 +102,26 @@ export class CardTypeService {
     }
 
     /**
-     * Get cardType by id
+     * Get card type by id
      */
     getCardTypeById(id: string): Observable<CardType> {
         return this._cardTypes.pipe(
             take(1),
             map((cardTypes) => {
-                // Find the cardType
+                // Find the card type
                 const cardType =
                     cardTypes.find((item) => item.id === id) || null;
 
-                // Update the cardType
+                // Update the card type
                 this._cardType.next(cardType);
 
-                // Return the cardType
+                // Return the card type
                 return cardType;
             }),
             switchMap((cardType) => {
                 if (!cardType) {
                     return throwError(
-                        'Could not found cardType with id of ' + id + '!'
+                        'Could not found card type with id of ' + id + '!'
                     );
                 }
 
@@ -132,100 +131,77 @@ export class CardTypeService {
     }
 
     /**
-     * Create cardType
+     * Create card type
      */
     createCardType(): Observable<CardType> {
-        return this.cardTypes$.pipe(
-            take(1),
-            switchMap((cardTypes) =>
-                this._httpClient
-                    .post<CardType>('api/master-data/general/cardType', {})
-                    .pipe(
-                        map((newCardType) => {
-                            // Update the cardTypes with the new cardType
-                            this._cardTypes.next([newCardType, ...cardTypes]);
-
-                            // Return the new cardType
-                            return newCardType;
-                        })
-                    )
-            )
-        );
+        return this._httpClient
+            .post<CardType>('api/master-data/general/card-type', {})
+            .pipe(
+                tap((newCardType) => {
+                    // Ensure newCardType.id is defined
+                    if (!newCardType.id) {
+                        console.error('Newly created card type lacks an ID');
+                        return;
+                    }
+                    const currentCardTypes = this._cardTypes.getValue();
+                    this._cardTypes.next([newCardType, ...currentCardTypes]);
+                })
+            );
     }
 
     /**
-     * Update cardType
+     * Update card type
      *
      * @param id
      * @param cardType
      */
     updateCardType(id: string, cardType: CardType): Observable<CardType> {
-        return this.cardTypes$.pipe(
-            take(1),
-            switchMap((cardTypes) =>
-                this._httpClient
-                    .patch<CardType>('api/master-data/general/cardType', {
-                        id,
-                        cardType,
-                    })
-                    .pipe(
-                        map((updatedCardType) => {
-                            // Find the index of the updated cardType
-                            const index = cardTypes.findIndex(
-                                (item) => item.id === id
-                            );
+        console.log('Sending PATCH request:', { id, cardType });
 
-                            // Update the cardType
-                            cardTypes[index] = updatedCardType;
+        return this._httpClient.patch<CardType>(
+          'api/master-data/general/card-type',
+          { id, cardType }
+        ).pipe(
+          tap((updatedCardType) => {
+            console.log('PATCH response received:', updatedCardType);
 
-                            // Update the cardTypes
-                            this._cardTypes.next(cardTypes);
+            // Update the _cardTypes BehaviorSubject with the updated card type
+            const currentCardTypes = this._cardTypes.getValue(); // Get the current card types
+            const index = currentCardTypes.findIndex((ct) => ct.id === id); // Find the index of the updated card type
 
-                            // Return the updated cardType
-                            return updatedCardType;
-                        }),
-                        switchMap((updatedCardType) =>
-                            this.cardType$.pipe(
-                                take(1),
-                                filter((item) => item && item.id === id),
-                                tap(() => {
-                                    // Update the cardType if it's selected
-                                    this._cardType.next(updatedCardType);
-
-                                    // Return the updated cardType
-                                    return updatedCardType;
-                                })
-                            )
-                        )
-                    )
-            )
+            if (index !== -1) {
+              currentCardTypes[index] = updatedCardType; // Update the card type in the list
+              this._cardTypes.next(currentCardTypes); // Emit the updated list
+            }
+          })
         );
-    }
+      }
 
     /**
-     * Delete the cardType
+     * Delete the card type
      *
      * @param id
      */
     deleteCardType(id: string): Observable<boolean> {
+        console.log('Attempting to delete card type with ID:', id);
         return this.cardTypes$.pipe(
             take(1),
             switchMap((cardTypes) =>
                 this._httpClient
-                    .delete('api/master-data/general/cardType', {
+                    .delete('api/master-data/general/card-type', {
                         params: { id },
                     })
                     .pipe(
                         map((isDeleted: boolean) => {
-                            // Find the index of the deleted cardType
+                            // Find the index of the deleted card type
                             const index = cardTypes.findIndex(
                                 (item) => item.id === id
                             );
 
-                            // Delete the cardType
+                            // Delete the card type
                             cardTypes.splice(index, 1);
 
-                            // Update the cardTypes
+                            // Update the card types
                             this._cardTypes.next(cardTypes);
 
                             // Return the deleted status

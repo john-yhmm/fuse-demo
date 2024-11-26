@@ -30,11 +30,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { CardTypeService } from 'app/modules/admin/master-data/general/card-type/card-type.service';
+import { CardTypeService } from 'app/modules/admin/master-data/general/card-type/card-type.service'; // Modify import path accordingly
 import {
     CardType,
     CardTypePagination,
-} from 'app/modules/admin/master-data/general/card-type/card-type.types';
+} from 'app/modules/admin/master-data/general/card-type/card-type.types'; // Modify import path accordingly
 import {
     Observable,
     Subject,
@@ -46,24 +46,24 @@ import {
 } from 'rxjs';
 
 @Component({
-    selector: 'card-type-list',
-    templateUrl: './card-type.component.html',
+    selector: 'card-type-list', // Update the selector to reflect card-type
+    templateUrl: './card-type.component.html', // Modify the template path if needed
     styles: [
         /* language=SCSS */
         `
-            .cardType-grid {
-                grid-template-columns: 100px auto 40px;
+            .card-type-grid {
+                grid-template-columns: 48px auto 40px;
 
                 @screen sm {
-                    grid-template-columns: 100px auto 72px;
+                    grid-template-columns: 48px auto 112px 72px;
                 }
 
                 @screen md {
-                    grid-template-columns: 150px auto 72px;
+                    grid-template-columns: 48px 112px auto 112px 72px;
                 }
 
                 @screen lg {
-                    grid-template-columns: 150px auto 72px;
+                    grid-template-columns: 48px 112px auto 112px 96px 96px 72px;
                 }
             }
         `,
@@ -96,13 +96,13 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
-    cardTypes$: Observable<CardType[]>;
+    cardTypes$: Observable<CardType[]>; // Updated to CardType
 
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
-    pagination: CardTypePagination;
+    pagination: CardTypePagination; // Updated to CardTypePagination
     searchInputControl: UntypedFormControl = new UntypedFormControl();
-    selectedCardType: CardType | null = null;
+    selectedCardType: CardType | null = null; // Updated to CardType
     selectedCardTypeForm: UntypedFormGroup;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -113,7 +113,7 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: UntypedFormBuilder,
-        private _cardTypeService: CardTypeService
+        private _cardTypeService: CardTypeService // Updated to CardTypeService
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -127,16 +127,15 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
         // Create the selected card-type form
         this.selectedCardTypeForm = this._formBuilder.group({
             id: [''],
-            cardTypeName: [''],
-            issuerID: ['', [Validators.required]],
-            lastEditedBy: [''],
-            lastEditedOn: [''],
+            name: ['', [Validators.required]],
+            issuerId: [''],
+            modifiedDate: [''],
         });
 
         // Get the pagination
         this._cardTypeService.pagination$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((pagination: CardTypePagination) => {
+            .subscribe((pagination: CardTypePagination) => { // Updated to CardTypePagination
                 // Update the pagination
                 this.pagination = pagination;
 
@@ -144,8 +143,8 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._changeDetectorRef.markForCheck();
             });
 
-        // Get the card-types
-        this.cardTypes$ = this._cardTypeService.cardTypes$;
+        // Get the card types
+        this.cardTypes$ = this._cardTypeService.cardTypes$; // Updated to cardTypes$
 
         // Subscribe to search input field value changes
         this.searchInputControl.valueChanges
@@ -155,10 +154,10 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
                 switchMap((query) => {
                     this.closeDetails();
                     this.isLoading = true;
-                    return this._cardTypeService.getCardTypes(
+                    return this._cardTypeService.getCardTypes( // Updated to CardTypeService methods
                         0,
                         10,
-                        'cardTypeName',
+                        'name',
                         'asc',
                         query
                     );
@@ -177,7 +176,7 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this._sort && this._paginator) {
             // Set the initial sort
             this._sort.sort({
-                id: 'cardTypeName',
+                id: 'name',
                 start: 'asc',
                 disableClear: true,
             });
@@ -196,13 +195,13 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.closeDetails();
                 });
 
-            // Get card-types if sort or page changes
+            // Get card types if sort or page changes
             merge(this._sort.sortChange, this._paginator.page)
                 .pipe(
                     switchMap(() => {
                         this.closeDetails();
                         this.isLoading = true;
-                        return this._cardTypeService.getCardTypes(
+                        return this._cardTypeService.getCardTypes( // Updated to CardTypeService methods
                             this._paginator.pageIndex,
                             this._paginator.pageSize,
                             this._sort.active,
@@ -231,23 +230,23 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Toggle cardType details
+     * Toggle card-type details
      *
      * @param cardTypeId
      */
     toggleDetails(cardTypeId: string): void {
-        // If the cardType is already selected...
+        // If the card-type is already selected...
         if (this.selectedCardType && this.selectedCardType.id === cardTypeId) {
             // Close the details
             this.closeDetails();
             return;
         }
 
-        // Get the cardType by id
+        // Get the card-type by id
         this._cardTypeService
             .getCardTypeById(cardTypeId)
             .subscribe((cardType) => {
-                // Set the selected cardType
+                // Set the selected card-type
                 this.selectedCardType = cardType;
 
                 // Fill the form
@@ -266,41 +265,12 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     /**
-     * Cycle through images of selected cardType
-     */
-    cycleImages(forward: boolean = true): void {
-        // Get the image count and current image index
-        const count = this.selectedCardTypeForm.get('images').value.length;
-        const currentIndex =
-            this.selectedCardTypeForm.get('currentImageIndex').value;
-
-        // Calculate the next and previous index
-        const nextIndex = currentIndex + 1 === count ? 0 : currentIndex + 1;
-        const prevIndex = currentIndex - 1 < 0 ? count - 1 : currentIndex - 1;
-
-        // If cycling forward...
-        if (forward) {
-            this.selectedCardTypeForm
-                .get('currentImageIndex')
-                .setValue(nextIndex);
-        }
-        // If cycling backwards...
-        else {
-            this.selectedCardTypeForm
-                .get('currentImageIndex')
-                .setValue(prevIndex);
-        }
-    }
-
-    /**
-     * Create cardType
+     * Create card-type
      */
     createCardType(): void {
-        console.log('here');
-
-        // Create the cardType
+        // Create the card-type
         this._cardTypeService.createCardType().subscribe((newCardType) => {
-            // Go to new cardType
+            // Go to new card-type
             this.selectedCardType = newCardType;
 
             // Fill the form
@@ -312,33 +282,46 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     /**
-     * Update the selected cardType using the form data
+     * Update the selected card-type using the form data
      */
     updateSelectedCardType(): void {
-        // Get the cardType object
+        // Get the card-type object
         const cardType = this.selectedCardTypeForm.getRawValue();
 
-        // Remove the currentImageIndex field
-        delete cardType.currentImageIndex;
+        // Ensure the ID is included
+        const id = this.selectedCardType?.id; // Extract ID from the selected object
 
-        // Update the cardType on the server
-        this._cardTypeService
-            .updateCardType(cardType.id, cardType)
-            .subscribe(() => {
+        if (!id) {
+            console.error('Update failed: No ID found for the selected card type.');
+            return;
+        }
+
+        // Remove unnecessary fields
+        delete cardType.currentImageIndex;
+        console.log('Updating card type:', { id, ...cardType });
+
+        // Update the card-type on the server
+        this._cardTypeService.updateCardType(id, cardType).subscribe({
+            next: (response) => {
+                console.log('Update successful:', response);
                 // Show a success message
                 this.showFlashMessage('success');
-            });
+            },
+            error: (err) => {
+                console.error('Update failed:', err);
+                this.showFlashMessage('error');
+            },
+        });
     }
 
     /**
-     * Delete the selected cardType using the form data
+     * Delete the selected card-type using the form data
      */
     deleteSelectedCardType(): void {
         // Open the confirmation dialog
         const confirmation = this._fuseConfirmationService.open({
             title: 'Delete card-type',
-            message:
-                'Are you sure you want to remove this card-type? This action cannot be undone!',
+            message: 'Are you sure you want to remove this card-type? This action cannot be undone!',
             actions: {
                 confirm: {
                     label: 'Delete',
@@ -350,16 +333,29 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
         confirmation.afterClosed().subscribe((result) => {
             // If the confirm button pressed...
             if (result === 'confirmed') {
-                // Get the cardType object
-                const cardType = this.selectedCardTypeForm.getRawValue();
+                // Use the selectedCardType's ID directly
+                const id = this.selectedCardType?.id;
 
-                // Delete the cardType on the server
-                this._cardTypeService
-                    .deleteCardType(cardType.id)
-                    .subscribe(() => {
+                if (!id) {
+                    console.error('Delete failed: No ID found for the selected card type.');
+                    return;
+                }
+
+                console.log('Attempting to delete card type with ID:', id);
+
+                // Delete the card-type on the server
+                this._cardTypeService.deleteCardType(id).subscribe({
+                    next: () => {
                         // Close the details
                         this.closeDetails();
-                    });
+
+                        // Optionally reload or refresh the list
+                        this._cardTypeService.getCardTypes().subscribe();
+                    },
+                    error: (err) => {
+                        console.error('Delete failed:', err);
+                    },
+                });
             }
         });
     }
@@ -389,7 +385,7 @@ export class CardTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
      * @param index
      * @param item
      */
-    trackByFn(index: number, item: any): any {
-        return item.id || index;
+    trackByFn(index: number, item: CardType): string {
+        return item.id || index.toString(); // Use index as fallback if id is undefined
     }
 }
