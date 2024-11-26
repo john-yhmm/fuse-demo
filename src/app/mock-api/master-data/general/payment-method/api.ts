@@ -42,9 +42,9 @@ export class GeneralPaymentMethodMockApi {
                 // Sort the paymentMethods
                 if (
                     sort === 'paymentMethodName' ||
-                    sort === 'rowguid' ||
                     sort === 'lastEditedBy' ||
-                    sort === 'lastEditedOn'
+                    sort === 'validFrom' ||
+                    sort === 'validTo'
                 ) {
                     paymentMethods.sort((a, b) => {
                         const fieldA = a[sort].toString().toUpperCase();
@@ -145,9 +145,9 @@ export class GeneralPaymentMethodMockApi {
                 const newPaymentMethod = {
                     id: FuseMockApiUtils.guid(),
                     paymentMethodName: 'A New Payment Method',
-                    rowguid: '',
                     lastEditedBy: '',
-                    lastEditedOn: '',
+                    validFrom: '',
+                    validTo: '',
                 };
 
                 // Unshift the new paymentMethod
