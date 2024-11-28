@@ -30,12 +30,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { creditcardtypes } from 'app/mock-api/master-data/general/creditcardtype/data';
-import { CreditCardTypeService } from 'app/modules/admin/master-data/general/ccardtype/creditcardtype.service';
+import { creditcardtypes } from 'app/mock-api/master-data/general/credit-card-type/data';
+import { CreditCardTypeService } from 'app/modules/admin/master-data/general/credit-card-type/credit-card-type.service';
 import {
     CreditCardType,
     CreditCardTypePagination,
-} from 'app/modules/admin/master-data/general/ccardtype/creditcardtype.types';
+} from 'app/modules/admin/master-data/general/credit-card-type/credit-card-type.types';
 import {
     Observable,
     Subject,
@@ -45,11 +45,11 @@ import {
     switchMap,
     takeUntil,
 } from 'rxjs';
-import { CreditCardTypeComponent } from '../creditcardtype.component';
+import { CreditCardTypeComponent } from '../credit-card-type.component';
 
 @Component({
-    selector: 'creditcardtype-list',
-    templateUrl: './creditcardtype.component.html',
+    selector: 'credit-card-type-list',
+    templateUrl: './credit-card-type.component.html',
     styles: [
         /* language=SCSS */
         `

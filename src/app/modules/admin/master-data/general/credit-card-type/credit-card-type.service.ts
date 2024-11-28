@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {
     CreditCardType,
     CreditCardTypePagination,
-} from 'app/modules/admin/master-data/general/ccardtype/creditcardtype.types';
+} from 'app/modules/admin/master-data/general/credit-card-type/credit-card-type.types';
 import {
     BehaviorSubject,
     Observable,
@@ -85,7 +85,7 @@ export class CreditCardTypeService {
             .get<{
                 pagination: CreditCardTypePagination;
                 creditcardtypes: CreditCardType[];
-            }>('api/master-data/general/creditcardtypes', {
+            }>('api/master-data/general/credit-card-types', {
                 params: {
                     page: '' + page,
                     size: '' + size,
@@ -139,7 +139,7 @@ export class CreditCardTypeService {
             take(1),
             switchMap((creditcardtypes) =>
                 this._httpClient
-                    .post<CreditCardType>('api/master-data/general/creditcardtype', {})
+                    .post<CreditCardType>('api/master-data/general/credit-card-type', {})
                     .pipe(
                         map((newCreditCardType) => {
                             // Update the languages with the new language
@@ -164,7 +164,7 @@ export class CreditCardTypeService {
             take(1),
             switchMap((creditcardtypes) =>
                 this._httpClient
-                    .patch<CreditCardType>('api/master-data/general/creditcardtype', {
+                    .patch<CreditCardType>('api/master-data/general/credit-card-type', {
                         id,
                         creditcardtype,
                     })
@@ -213,7 +213,7 @@ export class CreditCardTypeService {
             take(1),
             switchMap((creditcardtypes) =>
                 this._httpClient
-                    .delete('api/master-data/general/creditcardtype', {
+                    .delete('api/master-data/general/credit-card-type', {
                         params: { id },
                     })
                     .pipe(

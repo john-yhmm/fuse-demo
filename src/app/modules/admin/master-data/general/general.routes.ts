@@ -3,9 +3,9 @@ import { Routes } from '@angular/router';
 import { LanguageComponent } from './language/language.component';
 import { LanguageService } from './language/language.service';
 import { LanguageListComponent } from './language/list/language.component';
-import { CreditCardTypeComponent } from './ccardtype/creditcardtype.component';
-import { CreditCardTypeListComponent } from './ccardtype/list/creditcardtype.component';
-import { CreditCardTypeService } from './ccardtype/creditcardtype.service';
+import { CreditCardTypeComponent } from './credit-card-type/credit-card-type.component';
+import { CreditCardTypeListComponent } from './credit-card-type/list/credit-card-type.component';
+import { CreditCardTypeService } from './credit-card-type/credit-card-type.service';
 
 export default [
     {
@@ -27,7 +27,7 @@ export default [
         ],
     },
     {
-        path: 'creditcardtype',
+        path: 'credit-card-type',
         component: CreditCardTypeComponent,
         children:[
             {

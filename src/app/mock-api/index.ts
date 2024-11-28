@@ -22,7 +22,7 @@ import { ProjectMockApi } from 'app/mock-api/dashboards/project/api';
 import { ActivitiesMockApi } from 'app/mock-api/pages/activities/api';
 import { IconsMockApi } from 'app/mock-api/ui/icons/api';
 import { GeneralLanguageMockApi } from './master-data/general/language/api';
-import { GeneralCreditCardTypeMockApi } from './master-data/general/creditcardtype/api';
+import { GeneralCreditCardTypeMockApi } from './master-data/general/credit-card-type/api';
 
 export const mockApiServices = [
     AcademyMockApi,

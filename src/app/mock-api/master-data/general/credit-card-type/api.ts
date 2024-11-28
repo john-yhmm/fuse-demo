@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FuseMockApiService, FuseMockApiUtils } from '@fuse/lib/mock-api';
-import { creditcardtypes as creditcardtypesData } from 'app/mock-api/master-data/general/creditcardtype/data';
+import { creditcardtypes as creditcardtypesData } from 'app/mock-api/master-data/general/credit-card-type/data';
 import { assign, cloneDeep } from 'lodash-es';
 
 @Injectable({ providedIn: 'root' })
@@ -27,7 +27,7 @@ export class GeneralCreditCardTypeMockApi {
         // @ Languages - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/creditcardtypes', 300)
+            .onGet('api/master-data/general/credit-card-types', 300)
             .reply(({ request }) => {
                 // Get available queries
                 const search = request.params.get('search');
@@ -118,7 +118,7 @@ export class GeneralCreditCardTypeMockApi {
         // @ Language - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/creditcardtype')
+            .onGet('api/master-data/general/credit-card-type')
             .reply(({ request }) => {
                 // Get the id from the params
                 const id = request.params.get('id');
@@ -137,7 +137,7 @@ export class GeneralCreditCardTypeMockApi {
         // @ Language - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPost('api/master-data/general/creditcardtype')
+            .onPost('api/master-data/general/credit-card-type')
             .reply(() => {
                 // Generate a new language
                 const newCreditCardType = {
@@ -157,7 +157,7 @@ export class GeneralCreditCardTypeMockApi {
         // @ Language - PATCH
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPatch('api/master-data/general/creditcardtype')
+            .onPatch('api/master-data/general/credit-card-type')
             .reply(({ request }) => {
                 // Get the id and language
                 const id = request.body.id;
@@ -189,7 +189,7 @@ export class GeneralCreditCardTypeMockApi {
         // @ Language - DELETE
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onDelete('api/master-data/general/creditcardtype')
+            .onDelete('api/master-data/general/credit-card-type')
             .reply(({ request }) => {
                 // Get the id
                 const id = request.params.get('id');

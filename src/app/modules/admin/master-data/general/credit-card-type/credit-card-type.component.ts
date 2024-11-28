@@ -6,8 +6,8 @@ import {
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'creditcardtype',
-    templateUrl: './creditcardtype.component.html',
+    selector: 'credit-card-type',
+    templateUrl: './credit-card-type.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
