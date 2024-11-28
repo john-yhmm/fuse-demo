@@ -21,6 +21,9 @@ import { PhnoTypeListComponent } from './phno-type/list/phno-type.component'
 import { CardTypeComponent } from './card-type/card-type.component';
 import { CardTypeService } from './card-type/card-type.service';
 import { CardTypeListComponent } from './card-type/list/card-type.component';
+import { CreditCardTypeComponent } from './credit-card-type/credit-card-type.component';
+import { CreditCardTypeListComponent } from './credit-card-type/list/credit-card-type.component';
+import { CreditCardTypeService } from './credit-card-type/credit-card-type.service';
 
 export default [
     {
@@ -118,5 +121,17 @@ export default [
             },
         ],
     },
-
+    {
+        path: 'credit-card-type',
+        component: CreditCardTypeComponent,
+        children:[
+            {
+                path: '',
+                component: CreditCardTypeListComponent,
+                resolve: {
+                    creditcardtypes: () => inject(CreditCardTypeService).getCreditCardTypes(),
+                }
+            }
+        ]
+    }
 ] as Routes;
