@@ -21,6 +21,10 @@ import { PhnoTypeListComponent } from './phno-type/list/phno-type.component'
 import { CardTypeComponent } from './card-type/card-type.component';
 import { CardTypeService } from './card-type/card-type.service';
 import { CardTypeListComponent } from './card-type/list/card-type.component';
+import { GeoLocationComponent } from './geo-location/geo-location.component';
+import { GeoLocationService } from './geo-location/geo-location.service';
+import { GeoLocationListComponent } from './geo-location/list/geo-location.component';
+
 
 export default [
     {
@@ -118,5 +122,21 @@ export default [
             },
         ],
     },
+    {
+        path: 'geo-location',
+        component: GeoLocationComponent,
+        children: [
+            {
+                path: '',
+                component: GeoLocationListComponent,
+                resolve: {
+                    geoLocations: () => inject(GeoLocationService).getGeoLocations(),
+                },
+            },
+        ],
+    },
+
+
+    
 
 ] as Routes;

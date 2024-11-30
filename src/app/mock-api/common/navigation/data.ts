@@ -94,6 +94,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/card-type',
                     },
+                    {
+                        id: 'master-data.general.geo-location',
+                        title: 'Geo Location',
+                        type: 'basic',
+                        link: '/master-data/general/geo-location',
+                    },
                 ],
             },
         ],
