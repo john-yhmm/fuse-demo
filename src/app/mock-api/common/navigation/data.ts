@@ -100,6 +100,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: 'master-data/general/credit-card-type'
                     },
+                    {
+                        id:'master-data.general.unit-measure',
+                        title: 'Unit Measure',
+                        type: 'basic',
+                        link: '/master-data/general/unit-measure'
+                    }
                 ],
             },
         ],
