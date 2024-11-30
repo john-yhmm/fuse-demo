@@ -24,6 +24,9 @@ import { CardTypeListComponent } from './card-type/list/card-type.component';
 import { CreditCardTypeComponent } from './credit-card-type/credit-card-type.component';
 import { CreditCardTypeListComponent } from './credit-card-type/list/credit-card-type.component';
 import { CreditCardTypeService } from './credit-card-type/credit-card-type.service';
+import { UnitMeasureComponent } from './unit-measure/unit-measure.component';
+import { UnitMeasureListComponent } from './unit-measure/list/unit-measure.component';
+import { UnitMeasureService } from './unit-measure/unit-measure.service';
 
 export default [
     {
@@ -130,6 +133,19 @@ export default [
                 component: CreditCardTypeListComponent,
                 resolve: {
                     creditcardtypes: () => inject(CreditCardTypeService).getCreditCardTypes(),
+                }
+            }
+        ]
+    },
+    {
+        path: 'unit-measure',
+        component: UnitMeasureComponent,
+        children:[
+            {
+                path: '',
+                component: UnitMeasureListComponent,
+                resolve: {
+                    creditcardtypes: () => inject(UnitMeasureService).getUnitMeasures(),
                 }
             }
         ]
