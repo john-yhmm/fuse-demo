@@ -140,7 +140,7 @@ export class GeneralGeoLocationMockApi {
                 // Generate a new country type
                 const newGeoLocation = {
                     id: FuseMockApiUtils.guid(), // Generates a unique ID (UUID)
-                    countryTypeName: 'A New Geo Location',
+                    geoLocationValue : 'New Geo Location',
                     description : '',
                     lastEditedBy: 'Admin',
                     lastEditedOn: '',
