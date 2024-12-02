@@ -27,6 +27,9 @@ import { CreditCardTypeService } from './credit-card-type/credit-card-type.servi
 import { UnitMeasureComponent } from './unit-measure/unit-measure.component';
 import { UnitMeasureListComponent } from './unit-measure/list/unit-measure.component';
 import { UnitMeasureService } from './unit-measure/unit-measure.service';
+import { GeoLocationComponent } from './geo-location/geo-location.component';
+import { GeoLocationService } from './geo-location/geo-location.service';
+import { GeoLocationListComponent } from './geo-location/list/geo-location.component';
 
 export default [
     {
@@ -149,5 +152,18 @@ export default [
                 }
             }
         ]
-    }
+    },
+    {
+        path: 'geo-location',
+        component: GeoLocationComponent,
+        children: [
+            {
+                path: '',
+                component: GeoLocationListComponent,
+                resolve: {
+                    geoLocations: () => inject(GeoLocationService).getGeoLocations(),
+                },
+            },
+        ],
+    },
 ] as Routes;

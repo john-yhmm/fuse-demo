@@ -105,7 +105,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         title: 'Unit Measure',
                         type: 'basic',
                         link: '/master-data/general/unit-measure'
-                    }
+                    },
+                    {
+                        id: 'master-data.general.geo-location',
+                        title: 'Geo Location',
+                        type: 'basic',
+                        link: '/master-data/general/geo-location',
+                    },
                 ],
             },
         ],
