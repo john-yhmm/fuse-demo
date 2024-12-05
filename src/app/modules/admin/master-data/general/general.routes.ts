@@ -36,6 +36,9 @@ import { PaymentAvenueListComponent } from './payment-avenue/list/payment-avenue
 import { BankAccountComponent } from './bank-account/bank-account.component';
 import { BankAccountService } from './bank-account/bank-account.service';
 import { BankAccountListComponent } from './bank-account/list/bank-account.component';
+import { CultureComponent } from './culture/culture.component';
+import { CultureListComponent } from './culture/list/culture.component';
+import { CultureService } from './culture/culture.services';
 
 export default [
     {
@@ -195,6 +198,19 @@ export default [
                 component: BankAccountListComponent,
                 resolve: {
                     bankAccounts: () => inject(BankAccountService).getBankAccounts(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'culture',
+        component: CultureComponent,
+        children: [
+            {
+                path: '',
+                component: CultureListComponent,
+                resolve: {
+                    cultures: () => inject(CultureService).getCultures(),
                 },
             },
         ],

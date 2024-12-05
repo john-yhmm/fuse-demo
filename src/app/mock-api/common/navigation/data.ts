@@ -124,6 +124,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/bank-account',
                     },
+                    {
+                        id: 'master-data.general.culture',
+                        title: 'Culture',
+                        type: 'basic',
+                        link: '/master-data/general/culture',
+                    },
                 ],
             },
         ],
