@@ -94,6 +94,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/card-type',
                     },
+                    {
+                        id: 'master-data.general.bank-account',
+                        title: 'Bank Account',
+                        type: 'basic',
+                        link: '/master-data/general/bank-account',
+                    },
                 ],
             },
         ],
