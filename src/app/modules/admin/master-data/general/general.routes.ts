@@ -33,6 +33,9 @@ import { GeoLocationListComponent } from './geo-location/list/geo-location.compo
 import { PaymentAvenueComponent } from './payment-avenue/payment-avenue.component';
 import { PaymentAvenueService } from './payment-avenue/payment-avenue.service';
 import { PaymentAvenueListComponent } from './payment-avenue/list/payment-avenue.component';
+import { BankAccountComponent } from './bank-account/bank-account.component';
+import { BankAccountService } from './bank-account/bank-account.service';
+import { BankAccountListComponent } from './bank-account/list/bank-account.component';
 
 export default [
     {
@@ -179,6 +182,19 @@ export default [
                 resolve: {
                     paymentAvenues: () =>
                         inject(PaymentAvenueService).getPaymentAvenues(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'bank-account',
+        component: BankAccountComponent,
+        children: [
+            {
+                path: '',
+                component: BankAccountListComponent,
+                resolve: {
+                    bankAccounts: () => inject(BankAccountService).getBankAccounts(),
                 },
             },
         ],
