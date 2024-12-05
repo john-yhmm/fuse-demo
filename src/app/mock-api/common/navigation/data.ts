@@ -112,6 +112,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/geo-location',
                     },
+                    {
+                        id: 'master-data.general.payment-avenue',
+                        title: 'payment-avenue',
+                        type: 'basic',
+                        link: '/master-data/general/payment-avenue',
+                    },
                 ],
             },
         ],

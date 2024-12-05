@@ -30,6 +30,9 @@ import { UnitMeasureService } from './unit-measure/unit-measure.service';
 import { GeoLocationComponent } from './geo-location/geo-location.component';
 import { GeoLocationService } from './geo-location/geo-location.service';
 import { GeoLocationListComponent } from './geo-location/list/geo-location.component';
+import { PaymentAvenueComponent } from './payment-avenue/payment-avenue.component';
+import { PaymentAvenueService } from './payment-avenue/payment-avenue.service';
+import { PaymentAvenueListComponent } from './payment-avenue/list/payment-avenue.component';
 
 export default [
     {
@@ -162,6 +165,20 @@ export default [
                 component: GeoLocationListComponent,
                 resolve: {
                     geoLocations: () => inject(GeoLocationService).getGeoLocations(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'payment-avenue',
+        component: PaymentAvenueComponent,
+        children: [
+            {
+                path: '',
+                component: PaymentAvenueListComponent,
+                resolve: {
+                    paymentAvenues: () =>
+                        inject(PaymentAvenueService).getPaymentAvenues(),
                 },
             },
         ],

@@ -31,6 +31,7 @@ import { GeneralCardTypeMockApi } from './master-data/general/card-type/api';
 import { GeneralCreditCardTypeMockApi } from './master-data/general/credit-card-type/api';
 import { GeneralUnitMeasureMockApi } from './master-data/general/unit-measure/api';
 import { GeneralGeoLocationMockApi } from './master-data/general/geo-location/api';
+import { PaymentAvenueMockApi } from './master-data/general/paymentAvenue/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -66,4 +67,5 @@ export const mockApiServices = [
     GeneralCreditCardTypeMockApi,
     GeneralUnitMeasureMockApi,
     GeneralGeoLocationMockApi,
+    PaymentAvenueMockApi, 
 ];
