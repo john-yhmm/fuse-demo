@@ -28,6 +28,7 @@ import { GeneralPaymentMethodMockApi } from './master-data/general/payment-metho
 import { GeneralDeliveryMethodMockApi } from './master-data/general/delivery-method/api';
 import { GeneralPhnoTypeMockApi } from './master-data/general/phno-type/api';
 import { GeneralCardTypeMockApi } from './master-data/general/card-type/api';
+import { GeneralCultureMockApi } from './master-data/general/culture/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -60,4 +61,5 @@ export const mockApiServices = [
     GeneralDeliveryMethodMockApi,
     GeneralPhnoTypeMockApi,
     GeneralCardTypeMockApi,
+    GeneralCultureMockApi
 ];

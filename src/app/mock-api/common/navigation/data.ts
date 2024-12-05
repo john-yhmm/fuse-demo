@@ -94,6 +94,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/card-type',
                     },
+                    {
+                        id: 'master-data.general.culture',
+                        title: 'Culture',
+                        type: 'basic',
+                        link: '/master-data/general/culture',
+                    },
                 ],
             },
         ],

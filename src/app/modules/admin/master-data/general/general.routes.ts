@@ -21,6 +21,9 @@ import { PhnoTypeListComponent } from './phno-type/list/phno-type.component'
 import { CardTypeComponent } from './card-type/card-type.component';
 import { CardTypeService } from './card-type/card-type.service';
 import { CardTypeListComponent } from './card-type/list/card-type.component';
+import { CultureComponent } from './culture/culture.component';
+import { CultureListComponent } from './culture/list/culture.component';
+import { CultureService } from './culture/culture.services';
 
 export default [
     {
@@ -114,6 +117,19 @@ export default [
                 component: CardTypeListComponent,
                 resolve: {
                     cardTypes: () => inject(CardTypeService).getCardTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'culture',
+        component: CultureComponent,
+        children: [
+            {
+                path: '',
+                component: CultureListComponent,
+                resolve: {
+                    cultures: () => inject(CultureService).getCultures(),
                 },
             },
         ],
