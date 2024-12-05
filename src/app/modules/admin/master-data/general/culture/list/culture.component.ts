@@ -129,7 +129,7 @@ export class CultureListComponent implements OnInit, AfterViewInit, OnDestroy {
             id: [''],
             cultureCode: [''],
             name: ['', [Validators.required]],
-            status: [''],
+            status: [false],
             modifiedDate: [''],
         });
 

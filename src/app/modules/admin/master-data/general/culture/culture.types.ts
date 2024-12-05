@@ -2,7 +2,7 @@ export interface Culture {
     id: string;
     cultureCode: string;
     name: string;
-    status: string;
+    status: boolean;
     modifiedDate: string;
 }
 

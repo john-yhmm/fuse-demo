@@ -85,8 +85,23 @@
                                     </div>
 
                                     <!-- Status -->
-                                    <div class="truncate">
-                                        {{ culture.status }}
+                                    <div class="lg:block">
+                                        @if (culture.status) {
+                                            <mat-icon
+                                                class="text-green-400 icon-size-5"
+                                                [svgIcon]="
+                                                    'heroicons_solid:check'
+                                                "
+                                            ></mat-icon>
+                                        }
+                                        @if (!culture.status) {
+                                            <mat-icon
+                                                class="text-gray-400 icon-size-5"
+                                                [svgIcon]="
+                                                    'heroicons_solid:x-mark'
+                                                "
+                                            ></mat-icon>
+                                        }
                                     </div>
 
                                     <!-- Details button -->
@@ -175,13 +190,23 @@
                                             />
                                         </mat-form-field>
                                         <!-- Status -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Status</mat-label>
-                                            <input
-                                                matInput
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Status</span
+                                            >
+                                            <mat-slide-toggle
                                                 [formControlName]="'status'"
-                                            />
-                                        </mat-form-field>
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedCultureForm.get(
+                                                        'status'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
                                         <!-- Modified Date -->
                                         <mat-form-field class="w-full">
                                             <mat-label>Modified Date</mat-label>

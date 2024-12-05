@@ -146,6 +146,7 @@ export class GeneralCultureMockApi {
                     id: FuseMockApiUtils.guid(),
                     cultureCode: '',
                     name: 'A New Culture',
+                    status: false,
                     modifiedDate: '',
                 };
 
