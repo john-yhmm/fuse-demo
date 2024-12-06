@@ -118,6 +118,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/payment-avenue',
                     },
+                    {
+                        id: 'master-data.general.transaction-type',
+                        title: 'transaction-type',
+                        type: 'basic',
+                        link: '/master-data/general/transaction-type',
+                    },
                 ],
             },
         ],

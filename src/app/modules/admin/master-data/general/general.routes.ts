@@ -33,6 +33,9 @@ import { GeoLocationListComponent } from './geo-location/list/geo-location.compo
 import { PaymentAvenueComponent } from './payment-avenue/payment-avenue.component';
 import { PaymentAvenueService } from './payment-avenue/payment-avenue.service';
 import { PaymentAvenueListComponent } from './payment-avenue/list/payment-avenue.component';
+import { TransactionTypeComponent } from './transaction-type/transaction-type.component';
+import { TransactionTypeService } from './transaction-type/transaction-type.service';
+import { TransactionTypeListComponent } from './transaction-type/list/transaction-type.component';
 
 export default [
     {
@@ -183,4 +186,18 @@ export default [
             },
         ],
     },
+    {
+        path: 'transaction-type',
+        component: TransactionTypeComponent,
+        children: [
+            {
+                path: '',
+                component: TransactionTypeListComponent,
+                resolve: {
+                    transactionTypes: () => inject(TransactionTypeService).getTransactionTypes(),
+                },
+            },
+        ],
+    },
+    
 ] as Routes;
