@@ -22,6 +22,18 @@ import { ProjectMockApi } from 'app/mock-api/dashboards/project/api';
 import { ActivitiesMockApi } from 'app/mock-api/pages/activities/api';
 import { IconsMockApi } from 'app/mock-api/ui/icons/api';
 import { GeneralLanguageMockApi } from './master-data/general/language/api';
+import { GeneralAddressTypeMockApi } from './master-data/general/address-type/api';
+import { GeneralCountryTypeMockApi } from './master-data/general/country-type/api';
+import { GeneralPaymentMethodMockApi } from './master-data/general/payment-method/api';
+import { GeneralDeliveryMethodMockApi } from './master-data/general/delivery-method/api';
+import { GeneralPhnoTypeMockApi } from './master-data/general/phno-type/api';
+import { GeneralCardTypeMockApi } from './master-data/general/card-type/api';
+import { GeneralCreditCardTypeMockApi } from './master-data/general/credit-card-type/api';
+import { GeneralUnitMeasureMockApi } from './master-data/general/unit-measure/api';
+import { GeneralGeoLocationMockApi } from './master-data/general/geo-location/api';
+import { PaymentAvenueMockApi } from './master-data/general/paymentAvenue/api';
+import { GeneralBankAccountMockApi } from './master-data/general/bank-account/api';
+import { GeneralCultureMockApi } from './master-data/general/culture/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -48,4 +60,16 @@ export const mockApiServices = [
     TasksMockApi,
     UserMockApi,
     GeneralLanguageMockApi,
+    GeneralAddressTypeMockApi,
+    GeneralCountryTypeMockApi,
+    GeneralPaymentMethodMockApi,
+    GeneralDeliveryMethodMockApi,
+    GeneralPhnoTypeMockApi,
+    GeneralCardTypeMockApi,
+    GeneralCreditCardTypeMockApi,
+    GeneralUnitMeasureMockApi,
+    GeneralGeoLocationMockApi,
+    PaymentAvenueMockApi, 
+    GeneralBankAccountMockApi,
+    GeneralCultureMockApi,
 ];

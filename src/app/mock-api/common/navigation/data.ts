@@ -58,6 +58,78 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/language',
                     },
+                    {
+                        id: 'master-data.general.address-type',
+                        title: 'Address Type',
+                        type: 'basic',
+                        link: '/master-data/general/address-type',
+                    },
+                    {
+                        id: 'master-data.general.country-type',
+                        title: 'Country Type',
+                        type: 'basic',
+                        link: '/master-data/general/country-type',
+                    },
+                    {
+                        id: 'master-data.general.payment-method',
+                        title: 'Payment Method',
+                        type: 'basic',
+                        link: '/master-data/general/payment-method',
+                    },
+                    {
+                        id: 'master-data.general.delivery-method',
+                        title: 'Delivery Method',
+                        type: 'basic',
+                        link: '/master-data/general/delivery-method',
+                    },
+                    {
+                        id: 'master-data.general.phNoType',
+                        title: 'Phone Number Type',
+                        type: 'basic',
+                        link: '/master-data/general/phno-type',
+                    },
+                    {
+                        id: 'master-data.general.card-type',
+                        title: 'Card Type',
+                        type: 'basic',
+                        link: '/master-data/general/card-type',
+                    },
+                    {
+                        id: 'master-data.general.credit-card-type',
+                        title: 'Credit Card Type',
+                        type: 'basic',
+                        link: 'master-data/general/credit-card-type'
+                    },
+                    {
+                        id:'master-data.general.unit-measure',
+                        title: 'Unit Measure',
+                        type: 'basic',
+                        link: '/master-data/general/unit-measure'
+                    },
+                    {
+                        id: 'master-data.general.geo-location',
+                        title: 'Geo Location',
+                        type: 'basic',
+                        link: '/master-data/general/geo-location',
+                    },
+                    {
+                        id: 'master-data.general.payment-avenue',
+                        title: 'payment-avenue',
+                        type: 'basic',
+                        link: '/master-data/general/payment-avenue',
+                    },
+                    {
+                        id: 'master-data.general.bank-account',
+                        title: 'Bank Account',
+                        type: 'basic',
+                        link: '/master-data/general/bank-account',
+                    },
+                    {
+                        id: 'master-data.general.culture',
+                        title: 'Culture',
+                        type: 'basic',
+                        link: '/master-data/general/culture',
+                    },
                 ],
             },
         ],
