@@ -39,6 +39,9 @@ import { BankAccountListComponent } from './bank-account/list/bank-account.compo
 import { CultureComponent } from './culture/culture.component';
 import { CultureListComponent } from './culture/list/culture.component';
 import { CultureService } from './culture/culture.services';
+import { ContactTypeComponent } from './contact-type/contact-type.component';
+import { ContactTypeListComponent } from './contact-type/list/contact-type.component';
+import { ContactTypeService } from './contact-type/contact-type.service';
 
 export default [
     {
@@ -211,6 +214,20 @@ export default [
                 component: CultureListComponent,
                 resolve: {
                     cultures: () => inject(CultureService).getCultures(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'contact-type',
+        component: ContactTypeComponent,
+        children: [
+            {
+                path: '',
+                component: ContactTypeListComponent,
+                resolve: {
+                    contactTypes: () =>
+                        inject(ContactTypeService).getContactTypes(),
                 },
             },
         ],
