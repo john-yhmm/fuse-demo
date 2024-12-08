@@ -130,6 +130,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/culture',
                     },
+                    {
+                        id: 'master-data.general.contact-type',
+                        title: 'Contact Type',
+                        type: 'basic',
+                        link: '/master-data/general/contact-type',
+                    },
                 ],
             },
         ],

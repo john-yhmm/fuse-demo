@@ -34,6 +34,7 @@ import { GeneralGeoLocationMockApi } from './master-data/general/geo-location/ap
 import { PaymentAvenueMockApi } from './master-data/general/paymentAvenue/api';
 import { GeneralBankAccountMockApi } from './master-data/general/bank-account/api';
 import { GeneralCultureMockApi } from './master-data/general/culture/api';
+import { ContactTypeMockApi } from './master-data/general/contact-type/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -72,4 +73,5 @@ export const mockApiServices = [
     PaymentAvenueMockApi, 
     GeneralBankAccountMockApi,
     GeneralCultureMockApi,
+    ContactTypeMockApi,
 ];
