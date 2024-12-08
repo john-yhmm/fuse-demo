@@ -41,18 +41,18 @@ import { Observable, Subject, debounceTime, map, merge, switchMap, takeUntil } f
         /* language=SCSS */
         `
             .contact-type-grid {
-                grid-template-columns: 48px auto 40px;
+                grid-template-columns: 80px auto;
 
                 @screen sm {
-                    grid-template-columns: 48px auto 112px 72px;
+                    grid-template-columns: 80px auto;
                 }
 
                 @screen md {
-                    grid-template-columns: 48px 112px auto 112px 72px;
+                    grid-template-columns: 120px auto;
                 }
 
                 @screen lg {
-                    grid-template-columns: 48px 112px auto 112px 96px 96px 72px;
+                    grid-template-columns: 120px auto;
                 }
             }
         `,

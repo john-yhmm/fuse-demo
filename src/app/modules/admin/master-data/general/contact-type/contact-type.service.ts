@@ -83,7 +83,7 @@ export class ContactTypeService {
             .get<{
                 pagination: ContactTypePagination;
                 contactTypes: ContactType[];
-            }>('api/master-data/general/contact-type', {
+            }>('api/master-data/general/contact-types', {
                 params: {
                     page: '' + page,
                     size: '' + size,
