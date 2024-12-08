@@ -42,6 +42,9 @@ import { CultureService } from './culture/culture.services';
 import { ContactTypeComponent } from './contact-type/contact-type.component';
 import { ContactTypeListComponent } from './contact-type/list/contact-type.component';
 import { ContactTypeService } from './contact-type/contact-type.service';
+import { CardComponent } from './card/card.component';
+import { CardListComponent } from './card/list/card.component';
+import { CardService } from './card/card.service';
 
 export default [
     {
@@ -228,6 +231,19 @@ export default [
                 resolve: {
                     contactTypes: () =>
                         inject(ContactTypeService).getContactTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'card',
+        component: CardComponent,
+        children: [
+            {
+                path: '',
+                component: CardListComponent,
+                resolve: {
+                    cards: () => inject(CardService).getCards(),
                 },
             },
         ],
