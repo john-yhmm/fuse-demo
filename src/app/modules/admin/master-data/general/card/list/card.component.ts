@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet, CommonModule } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -43,7 +43,13 @@ import {
     merge,
     switchMap,
     takeUntil,
+    tap,
 } from 'rxjs';
+import { CardTypeService } from 'app/modules/admin/master-data/general/card-type/card-type.service'; 
+import { query } from 'express';
+import { CardType } from '../../card-type/card-type.types';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
     selector: 'card-list', 
@@ -87,9 +93,13 @@ import {
         MatCheckboxModule,
         MatRippleModule,
         AsyncPipe,
+        CommonModule,
     ],
 })
 export class CardListComponent implements OnInit, AfterViewInit, OnDestroy {
+    cardTypes$: Observable<CardType[]>;
+    CardTypes = [];
+    selectedCardType: string = '';
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
@@ -102,19 +112,29 @@ export class CardListComponent implements OnInit, AfterViewInit, OnDestroy {
     selectedCardForm: UntypedFormGroup;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    activatedRoute: any;
+    cardTypes: any;
 
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: UntypedFormBuilder,
-        private _cardService: CardService 
+        private _cardService: CardService,
+        private _cardTypeService: CardTypeService,
     ) {}
 
     ngOnInit(): void {
         this.selectedCardForm = this._formBuilder.group({
             cardNumber: ['', Validators.required],
-            cardTypeID: [''],
+            cardTypeID: ['', Validators.required],
             modifiedDate: [''],
+        });
+
+        this.cardTypes$ = this._cardTypeService.getCardTypes(0, 10, 'cardNumber', 'asc', '');
+
+        this._cardTypeService.getCardTypes(0, 10, 'cardNumber', 'asc', '').subscribe((cardTypes) => {
+            this.CardTypes = cardTypes; // Assign directly since it's already an array
+            this._changeDetectorRef.markForCheck();
         });
 
         this._cardService.pagination$

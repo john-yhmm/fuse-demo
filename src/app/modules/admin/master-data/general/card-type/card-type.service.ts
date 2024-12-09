@@ -7,6 +7,7 @@ import {
 import {
     BehaviorSubject,
     Observable,
+    catchError,
     filter,
     map,
     of,
@@ -76,10 +77,7 @@ export class CardTypeService {
         sort: string = 'name',
         order: 'asc' | 'desc' | '' = 'asc',
         search: string = ''
-    ): Observable<{
-        pagination: CardTypePagination;
-        cardTypes: CardType[];
-    }> {
+    ): Observable<CardType[]> { // Change the return type to CardType[]
         return this._httpClient
             .get<{
                 pagination: CardTypePagination;
@@ -97,9 +95,15 @@ export class CardTypeService {
                 tap((response) => {
                     this._pagination.next(response.pagination);
                     this._cardTypes.next(response.cardTypes);
+                }),
+                map((response) => response.cardTypes), // Extract only the cardTypes array
+                catchError((error) => {
+                    console.error('Error fetching card types:', error);
+                    return of([]); // Fallback to an empty array
                 })
             );
     }
+    
 
     /**
      * Get card type by id
