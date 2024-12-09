@@ -130,12 +130,16 @@ export class CardListComponent implements OnInit, AfterViewInit, OnDestroy {
             modifiedDate: [''],
         });
 
-        this.cardTypes$ = this._cardTypeService.getCardTypes(0, 10, 'cardNumber', 'asc', '');
+        this.cardTypes$ = this._cardTypeService
+        .getCardTypes(0, 10, 'cardNumber', 'asc', '')
+        .pipe(map((response) => response.cardTypes));
 
-        this._cardTypeService.getCardTypes(0, 10, 'cardNumber', 'asc', '').subscribe((cardTypes) => {
-            this.CardTypes = cardTypes; // Assign directly since it's already an array
-            this._changeDetectorRef.markForCheck();
-        });
+        this._cardTypeService.cardTypes$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((cardTypes) => {
+                this.CardTypes = cardTypes; 
+                this._changeDetectorRef.markForCheck();
+            })
 
         this._cardService.pagination$
             .pipe(takeUntil(this._unsubscribeAll))

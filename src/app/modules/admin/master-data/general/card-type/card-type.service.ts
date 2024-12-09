@@ -7,7 +7,6 @@ import {
 import {
     BehaviorSubject,
     Observable,
-    catchError,
     filter,
     map,
     of,
@@ -16,7 +15,6 @@ import {
     tap,
     throwError,
 } from 'rxjs';
-
 @Injectable({ providedIn: 'root' })
 export class CardTypeService {
     // Private
@@ -27,41 +25,34 @@ export class CardTypeService {
     );
     private _cardTypes: BehaviorSubject<CardType[] | null> =
         new BehaviorSubject(null);
-
     /**
      * Constructor
      */
     constructor(private _httpClient: HttpClient) {}
-
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
     // -----------------------------------------------------------------------------------------------------
-
     /**
      * Getter for pagination
      */
     get pagination$(): Observable<CardTypePagination> {
         return this._pagination.asObservable();
     }
-
     /**
      * Getter for cardType
      */
     get cardType$(): Observable<CardType> {
         return this._cardType.asObservable();
     }
-
     /**
      * Getter for cardTypes
      */
     get cardTypes$(): Observable<CardType[]> {
         return this._cardTypes.asObservable();
     }
-
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
-
     /**
      * Get card types
      *
@@ -77,7 +68,10 @@ export class CardTypeService {
         sort: string = 'name',
         order: 'asc' | 'desc' | '' = 'asc',
         search: string = ''
-    ): Observable<CardType[]> { // Change the return type to CardType[]
+    ): Observable<{
+        pagination: CardTypePagination;
+        cardTypes: CardType[];
+    }> {
         return this._httpClient
             .get<{
                 pagination: CardTypePagination;
@@ -95,16 +89,9 @@ export class CardTypeService {
                 tap((response) => {
                     this._pagination.next(response.pagination);
                     this._cardTypes.next(response.cardTypes);
-                }),
-                map((response) => response.cardTypes), // Extract only the cardTypes array
-                catchError((error) => {
-                    console.error('Error fetching card types:', error);
-                    return of([]); // Fallback to an empty array
                 })
             );
     }
-    
-
     /**
      * Get card type by id
      */
@@ -115,10 +102,8 @@ export class CardTypeService {
                 // Find the card type
                 const cardType =
                     cardTypes.find((item) => item.id === id) || null;
-
                 // Update the card type
                 this._cardType.next(cardType);
-
                 // Return the card type
                 return cardType;
             }),
@@ -128,12 +113,10 @@ export class CardTypeService {
                         'Could not found card type with id of ' + id + '!'
                     );
                 }
-
                 return of(cardType);
             })
         );
     }
-
     /**
      * Create card type
      */
@@ -152,7 +135,6 @@ export class CardTypeService {
                 })
             );
     }
-
     /**
      * Update card type
      *
@@ -161,18 +143,15 @@ export class CardTypeService {
      */
     updateCardType(id: string, cardType: CardType): Observable<CardType> {
         console.log('Sending PATCH request:', { id, cardType });
-
         return this._httpClient.patch<CardType>(
           'api/master-data/general/card-type',
           { id, cardType }
         ).pipe(
           tap((updatedCardType) => {
             console.log('PATCH response received:', updatedCardType);
-
             // Update the _cardTypes BehaviorSubject with the updated card type
             const currentCardTypes = this._cardTypes.getValue(); // Get the current card types
             const index = currentCardTypes.findIndex((ct) => ct.id === id); // Find the index of the updated card type
-
             if (index !== -1) {
               currentCardTypes[index] = updatedCardType; // Update the card type in the list
               this._cardTypes.next(currentCardTypes); // Emit the updated list
@@ -180,7 +159,6 @@ export class CardTypeService {
           })
         );
       }
-
     /**
      * Delete the card type
      *
@@ -201,13 +179,10 @@ export class CardTypeService {
                             const index = cardTypes.findIndex(
                                 (item) => item.id === id
                             );
-
                             // Delete the card type
                             cardTypes.splice(index, 1);
-
                             // Update the card types
                             this._cardTypes.next(cardTypes);
-
                             // Return the deleted status
                             return isDeleted;
                         })

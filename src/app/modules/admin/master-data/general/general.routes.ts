@@ -244,6 +244,7 @@ export default [
                 component: CardListComponent,
                 resolve: {
                     cards: () => inject(CardService).getCards(),
+                    cardTypes: () => inject(CardTypeService).getCardTypes(),
                 },
             },
         ],
