@@ -42,6 +42,9 @@ import { CultureService } from './culture/culture.services';
 import { ContactTypeComponent } from './contact-type/contact-type.component';
 import { ContactTypeListComponent } from './contact-type/list/contact-type.component';
 import { ContactTypeService } from './contact-type/contact-type.service';
+import { TransactionTypeComponent } from './transaction-type/transaction-type.component';
+import { TransactionTypeService } from './transaction-type/transaction-type.service';
+import { TransactionTypeListComponent } from './transaction-type/list/transaction-type.component';
 
 export default [
     {
@@ -228,6 +231,19 @@ export default [
                 resolve: {
                     contactTypes: () =>
                         inject(ContactTypeService).getContactTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'transaction-type',
+        component: TransactionTypeComponent,
+        children: [
+            {
+                path: '',
+                component: TransactionTypeListComponent,
+                resolve: {
+                    transactionTypes: () => inject(TransactionTypeService).getTransactionTypes(),
                 },
             },
         ],
