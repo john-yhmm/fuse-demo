@@ -42,6 +42,10 @@ import { CultureService } from './culture/culture.services';
 import { ContactTypeComponent } from './contact-type/contact-type.component';
 import { ContactTypeListComponent } from './contact-type/list/contact-type.component';
 import { ContactTypeService } from './contact-type/contact-type.service';
+import { CountryComponent } from './country/country.component';
+import { CountryListComponent } from './country/list/country.component';
+import { CountryService } from './country/country.service';
+
 
 export default [
     {
@@ -228,6 +232,20 @@ export default [
                 resolve: {
                     contactTypes: () =>
                         inject(ContactTypeService).getContactTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'country',
+        component: CountryComponent,
+        children: [
+            {
+                path: '',
+                component: CountryListComponent,
+                resolve: {
+                    countrys: () => inject(CountryService).getCountrys(),
+                    countryTypes: () => inject(CountryTypeService).getCountryTypes(0, 1000),
                 },
             },
         ],
