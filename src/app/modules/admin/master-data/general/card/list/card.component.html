@@ -142,10 +142,24 @@
                                         </mat-form-field>
                                         <!-- Card Type ID -->
                                         <mat-form-field>
-                                            <mat-select [formControlName]="'cardTypeID'" id="cardTypeID" name="cardTypeID">
-                                                <mat-option *ngFor="let cardType of cardTypes$ | async" [value]="cardType.id">
-                                                    {{ cardType.name }}
-                                                </mat-option>
+                                            <mat-label>Select Card Type</mat-label>
+                                            <mat-select
+                                                [formControlName]="
+                                                    'cardType'
+                                                "
+                                            >
+                                                @for (
+                                                    cardType of cardTypes;
+                                                    track cardType
+                                                ) {
+                                                    <mat-option
+                                                        [value]="
+                                                            cardType.id
+                                                        "
+                                                    >
+                                                        {{ cardType.name }}
+                                                    </mat-option>
+                                                }
                                             </mat-select>
                                         </mat-form-field>
                                         <!-- Modified Date -->

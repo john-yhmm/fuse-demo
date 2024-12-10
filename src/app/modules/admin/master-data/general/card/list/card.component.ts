@@ -97,13 +97,11 @@ import { ActivatedRoute } from '@angular/router';
     ],
 })
 export class CardListComponent implements OnInit, AfterViewInit, OnDestroy {
-    cardTypes$: Observable<CardType[]>;
-    CardTypes = [];
-    selectedCardType: string = '';
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
     cards$: Observable<Card[]>;
+    cardTypes: CardType[];
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
     pagination: CardPagination;
@@ -112,8 +110,6 @@ export class CardListComponent implements OnInit, AfterViewInit, OnDestroy {
     selectedCardForm: UntypedFormGroup;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-    activatedRoute: any;
-    cardTypes: any;
 
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
@@ -125,19 +121,16 @@ export class CardListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnInit(): void {
         this.selectedCardForm = this._formBuilder.group({
+            cardType: [''], //declare cardType form control here
             cardNumber: ['', Validators.required],
             cardTypeID: ['', Validators.required],
             modifiedDate: [''],
         });
 
-        this.cardTypes$ = this._cardTypeService
-        .getCardTypes(0, 10, 'cardNumber', 'asc', '')
-        .pipe(map((response) => response.cardTypes));
-
         this._cardTypeService.cardTypes$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((cardTypes) => {
-                this.CardTypes = cardTypes; 
+            .subscribe((cardTypes:CardType[]) => {
+                this.cardTypes = cardTypes; 
                 this._changeDetectorRef.markForCheck();
             })
 
