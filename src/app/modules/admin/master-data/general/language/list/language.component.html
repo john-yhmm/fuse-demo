@@ -60,7 +60,7 @@
                             matSort
                             matSortDisableClear
                         >
-                            <div [mat-sort-header]="'name'">Code</div>
+                            <div [mat-sort-header]="'languageCode'">Code</div>
                             <div [mat-sort-header]="'name'">Name</div>
                             <div class="hidden sm:block">Details</div>
                         </div>
@@ -169,15 +169,64 @@
                                             />
                                         </mat-form-field>
                                         <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'modifiedDate'
-                                                "
-                                            />
-                                        </mat-form-field>
+                                        <div>
+                                            <div class="font-medium">Modified date</div>
+                                            <div
+                                                class="relative mt-1.5 flex cursor-pointer items-center rounded-full px-4 leading-9"
+                                                [ngClass]="{
+                                                    'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-300':
+                                                        !selectedLanguageForm.get('modifiedDate')?.value,
+                                                    'bg-green-200 text-green-800 dark:bg-green-500 dark:text-green-100':
+                                                        selectedLanguageForm.get('modifiedDate')?.value
+                                                }"
+                                                (click)="modifiedDatePicker.open()"
+                                            >
+                                                <mat-icon
+                                                    class="text-current icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:calendar'"
+                                                ></mat-icon>
+                                                <span class="ml-2 text-md font-medium">
+                                                    <!-- Display formatted date or placeholder -->
+                                                    {{
+                                                        selectedLanguageForm.get('modifiedDate')?.value
+                                                            ? (selectedLanguageForm.get('modifiedDate').value | date: 'longDate')
+                                                            : 'Not set'
+                                                    }}
+                                                </span>
+                                                <!-- Hidden Date Input -->
+                                                <mat-form-field
+                                                    class="fuse-mat-dense pointer-events-none invisible absolute inset-0 -mt-2.5 opacity-0"
+                                                    [subscriptSizing]="'dynamic'"
+                                                >
+                                                    <input
+                                                        matInput
+                                                        [formControlName]="'modifiedDate'"
+                                                        [matDatepicker]="modifiedDatePicker"
+                                                    />
+                                                    <mat-datepicker #modifiedDatePicker>
+                                                        <mat-datepicker-actions>
+                                                            <!-- Clear button -->
+                                                            <button
+                                                                mat-button
+                                                                (click)="selectedLanguageForm.get('modifiedDate').setValue(null)"
+                                                                matDatepickerCancel
+                                                            >
+                                                                Clear
+                                                            </button>
+                                                            <!-- Select button -->
+                                                            <button
+                                                                mat-flat-button
+                                                                [color]="'primary'"
+                                                                matDatepickerApply
+                                                            >
+                                                                Select
+                                                            </button>
+                                                        </mat-datepicker-actions>
+                                                    </mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
