@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -28,7 +28,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { LanguageService } from 'app/modules/admin/master-data/general/language/language.service';
@@ -45,7 +44,6 @@ import {
     switchMap,
     takeUntil,
 } from 'rxjs';
-import { DateTime } from 'luxon';
 
 @Component({
     selector: 'language-list',
@@ -91,9 +89,7 @@ import { DateTime } from 'luxon';
         MatOptionModule,
         MatCheckboxModule,
         MatRippleModule,
-        MatDatepickerModule,
         AsyncPipe,
-        DatePipe,
     ],
 })
 export class LanguageListComponent implements OnInit, AfterViewInit, OnDestroy {
