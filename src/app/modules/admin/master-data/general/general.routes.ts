@@ -48,6 +48,10 @@ import { TransactionTypeListComponent } from './transaction-type/list/transactio
 import { CountryComponent } from './country/country.component';
 import { CountryListComponent } from './country/list/country.component';
 import { CountryService } from './country/country.service';
+import { CountryRegionComponent } from './country-region/country-region.component';
+import { CountryRegionService } from './country-region/country-region.service';
+import { CountryRegionListComponent } from './country-region/list/country-region.component';
+
 
 
 export default [
@@ -62,7 +66,7 @@ export default [
         children: [
             {
                 path: '',
-                component: LanguageListComponent, 
+                component: LanguageListComponent,
                 resolve: {
                     languages: () => inject(LanguageService).getLanguages(),
                 },
@@ -262,6 +266,19 @@ export default [
                 resolve: {
                     countrys: () => inject(CountryService).getCountrys(),
                     countryTypes: () => inject(CountryTypeService).getCountryTypes(0, 1000),
+                },
+            },
+        ],
+    },
+    {
+        path: 'country-region',
+        component: CountryRegionComponent,
+        children: [
+            {
+                path: '',
+                component: CountryRegionListComponent,
+                resolve: {
+                    countryRegions: () => inject(CountryRegionService).getCountryRegions(),
                 },
             },
         ],
