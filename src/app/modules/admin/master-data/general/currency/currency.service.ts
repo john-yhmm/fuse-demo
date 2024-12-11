@@ -127,7 +127,7 @@ export class CurrencyService {
                 this._httpClient
                     .post<Currency>('api/master-data/general/currency', {})
                     .pipe(
-                        map((newCurrencyType) => {
+                        map((newCurrency) => {
                             // Update the currencies with the new currency
                             this._currencies.next([newCurrency, ...currencies]);
                             // Return the new currency
@@ -212,3 +212,6 @@ export class CurrencyService {
         );
     }
 }
+
+
+

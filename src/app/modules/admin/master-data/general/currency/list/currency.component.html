@@ -29,7 +29,7 @@
                     matInput
                     [formControl]="searchInputControl"
                     [autocomplete]="'off'"
-                    [placeholder]="'Search currency'"
+                    [placeholder]="'Search currencies'"
                 />
             </mat-form-field>
             <!-- Add currency button -->
@@ -44,23 +44,27 @@
             </button>
         </div>
     </div>
+
     <!-- Main -->
     <div class="flex flex-auto overflow-hidden">
-        <!-- Currency list -->
+        <!-- Currencies list -->
         <div
-            class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto">
+            class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto"
+        >
             @if (currencies$ | async; as currencies) {
                 @if (currencies.length > 0) {
                     <div class="grid">
                         <!-- Header -->
                         <div
-                        class="currency-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
-                        matSort
-                        matSortDisableClear
-                        style="grid-template-columns: 200px 1fr 100px;" >
-                        <div [mat-sort-header]="'currencyName'">Name</div>
-                        <div class="hidden sm:block">Details</div>
-                    </div>
+                            class="currency-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                            matSort
+                            matSortDisableClear
+                        >
+                            <div [mat-sort-header]="'currencyName'">Code</div>
+                            <div [mat-sort-header]="'currencyName'">Currency Name</div>
+                            <div [mat-sort-header]="'symbol'">Symbol</div>
+                            <div class="hidden sm:block">Details</div>
+                        </div>
                         <!-- Rows -->
                         @if (currencies$ | async; as currencies) {
                             @for (
@@ -68,25 +72,38 @@
                                 track trackByFn($index, currency)
                             ) {
                                 <div
-                                class="currency-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
-                                style="grid-template-columns: 200px 1fr;">
-                                    <!-- Name -->
+                                    class="currency-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
+                                >
+                                    <!-- Currency Code -->
+                                    <div class="truncate">
+                                        {{ currency.currencyCode }}
+                                    </div>
+
+                                    <!-- Currency Name -->
                                     <div class="truncate">
                                         {{ currency.currencyName }}
                                     </div>
+
+                                    <!-- Symbol -->
+                                    <div class="truncate">
+                                        {{ currency.symbol }}
+                                    </div>
+
                                     <!-- Details button -->
                                     <div>
                                         <button
                                             class="h-7 min-h-7 min-w-10 px-2 leading-6"
                                             mat-stroked-button
-                                            (click)="toggleDetails(currency.id)">
+                                            (click)="toggleDetails(currency.id)"
+                                        >
                                             <mat-icon
                                                 class="icon-size-5"
                                                 [svgIcon]="
                                                     selectedCurrency?.id ===
                                                     currency.id
                                                         ? 'heroicons_solid:chevron-up'
-                                                        : 'heroicons_solid:chevron-down'"
+                                                        : 'heroicons_solid:chevron-down'
+                                                "
                                             ></mat-icon>
                                         </button>
                                     </div>
@@ -96,13 +113,15 @@
                                         <ng-container
                                             *ngTemplateOutlet="
                                                 rowDetailsTemplate;
-                                                context: { $implicit: currency }">
-                                    </ng-container>
+                                                context: { $implicit: currency }
+                                            "
+                                        ></ng-container>
                                     }
                                 </div>
                             }
                         }
                     </div>
+
                     <mat-paginator
                         class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
                         [ngClass]="{ 'pointer-events-none': isLoading }"
@@ -120,6 +139,7 @@
                     </div>
                 }
             }
+
             <ng-template #rowDetailsTemplate let-currency>
                 <div class="overflow-hidden shadow-lg">
                     <div class="flex border-b">
@@ -130,10 +150,22 @@
                         >
                             <div class="flex flex-col p-8 sm:flex-row">
                                 <div class="flex flex-auto flex-wrap">
-                                    <!-- Currency Code -->
+                                    <!-- Currency Name, SKU & etc. -->
                                     <div
                                         class="flex w-full flex-col sm:pl-8 lg:w-2/4"
                                     >
+                                        <!-- Currency Code -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Lannguage Code</mat-label
+                                            >
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'currencyCode'
+                                                "
+                                            />
+                                        </mat-form-field>
                                         <!-- Currency Name -->
                                         <mat-form-field class="w-full">
                                             <mat-label>Currency Name</mat-label>
@@ -142,25 +174,30 @@
                                                 [formControlName]="'currencyName'"
                                             />
                                         </mat-form-field>
-                                        <!-- Edited By -->
+
+                                        <!-- Symbol -->
                                         <mat-form-field class="w-full">
-                                            <mat-label>Edited By</mat-label>
+                                            <mat-label>Symbol</mat-label>
                                             <input
                                                 matInput
-                                                [formControlName]="'lastEditedBy'"
+                                                [formControlName]="'symbol'"
                                             />
                                         </mat-form-field>
+                                        
                                         <!-- Modified Date -->
                                         <mat-form-field class="w-full">
-                                            <mat-label>Edited On</mat-label>
+                                            <mat-label>Modified Date</mat-label>
                                             <input
                                                 matInput
-                                                [formControlName]="'lastEditedOn'"
+                                                [formControlName]="
+                                                    'modifiedDate'
+                                                "
                                             />
                                         </mat-form-field>
                                     </div>
                                 </div>
                             </div>
+
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
                             >

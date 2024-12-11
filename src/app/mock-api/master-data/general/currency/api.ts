@@ -32,8 +32,7 @@ export class GeneralCurrencyMockApi {
                 // Sort the currencies
                 if (
                     sort === 'currencyName' ||
-                    sort === 'lastEditedBy' ||
-                    sort === 'lastEditedOn'
+                    sort === 'modifiedDate' 
                 ) {
                     currencies.sort((a, b) => {
                         const fieldA = a[sort].toString().toUpperCase();
@@ -122,8 +121,7 @@ export class GeneralCurrencyMockApi {
                 const newCurrency = {
                     id: FuseMockApiUtils.guid(), // Generates a unique ID (UUID)
                     currencyName: 'A New Currency',
-                    lastEditedBy: 'Admin',
-                    lastEditedOn: '',
+                    modifiedDate: '',
                 };
                 // Unshift the new currency
                 this._currencies.unshift(newCurrency);
@@ -176,3 +174,6 @@ export class GeneralCurrencyMockApi {
             });
     }
 }
+
+
+

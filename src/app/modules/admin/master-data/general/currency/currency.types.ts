@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
 export interface Currency {
     id: string;
+    currencyCode: string;
     currencyName: string;
-    lastEditedBy: string;
-    lastEditedOn: string;
+    symbol: string;
+    modifiedDate: string;
 }
 export interface CurrencyPagination {
     length: number;
@@ -13,3 +14,8 @@ export interface CurrencyPagination {
     startIndex: number;
     endIndex: number;
 }
+
+
+
+
+

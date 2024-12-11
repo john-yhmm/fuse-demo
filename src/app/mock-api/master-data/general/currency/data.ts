@@ -1,20 +1,26 @@
 export const currencies = [
     {
         id: '1',
-        currencyName: 'Developed Country',
-        lastEditedBy: 'Admin',
+        currencyCode: 'MMK',
+        currencyName: 'Myanmar(MMK)',
+        symbol: 'Ks',
         lastEditedOn: 'April 24, 2018',
     },
     {
         id: '2',
-        currencyName: 'Developing Country',
-        lastEditedBy: 'Admin',
+        currencyCode: 'THB',
+        currencyName: 'Thailand(THB)',
+        symbol: 'B',
         lastEditedOn: 'April 24, 2018',
     },
     {
         id: '3',
-        currencyName: 'Underdeveloped Country',
-        lastEditedBy: 'Editor',
+        currencyCode: 'USD',
+        currencyName: 'American Dollar(USD)',
+        symbol: '$',
         lastEditedOn: 'April 24, 2018',
     },
 ];
+
+
+
