@@ -136,58 +136,44 @@
                             class="flex w-full flex-col"
                             [formGroup]="selectedPaymentMethodForm"
                         >
-                            <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Payment Method Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label
-                                                >Payment Method Name</mat-label
-                                            >
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'paymentMethodName'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Last Edited By -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Last Edited By</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'lastEditedBy'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Valid From -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Valid From</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'validFrom'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Valid To -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Valid To</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'validTo'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                    </div>
+                            <div class="flex flex-col p-8">
+                                <!-- Two-column grid layout -->
+                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                    <!-- Payment Method Name -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Payment Method Name</mat-label>
+                                        <input
+                                            matInput
+                                            [formControlName]="'paymentMethodName'"
+                                        />
+                                    </mat-form-field>
+                                    <!-- Last Edited By -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Last Edited By</mat-label>
+                                        <input
+                                            matInput
+                                            [formControlName]="'lastEditedBy'"
+                                        />
+                                    </mat-form-field>
+                                    <!-- Valid From -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Valid From</mat-label>
+                                        <input
+                                            matInput
+                                            [formControlName]="'validFrom'"
+                                        />
+                                    </mat-form-field>
+                                    <!-- Valid To -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Valid To</mat-label>
+                                        <input
+                                            matInput
+                                            [formControlName]="'validTo'"
+                                        />
+                                    </mat-form-field>
                                 </div>
                             </div>
-
+            
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
                             >
@@ -221,8 +207,7 @@
                                                     "
                                                 ></mat-icon>
                                                 <span class="ml-2"
-                                                    >An error occurred, try
-                                                    again!</span
+                                                    >An error occurred, try again!</span
                                                 >
                                             }
                                         </div>
@@ -240,6 +225,7 @@
                     </div>
                 </div>
             </ng-template>
+            
         </div>
     </div>
 </div>
