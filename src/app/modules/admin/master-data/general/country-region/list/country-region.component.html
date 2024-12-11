@@ -142,45 +142,28 @@
                             class="flex w-full flex-col"
                             [formGroup]="selectedCountryRegionForm"
                         >
-                            <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- countryRegion Code -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label
-                                                >Lannguage Code</mat-label
-                                            >
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'countryRegionCode'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Name</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'name'"
-                                            />
-                                        </mat-form-field>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'modifiedDate'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                    </div>
+                        <div class="flex flex-col p-8 sm:flex-row">
+                            <div class="flex flex-auto flex-wrap">
+                                <div class="flex w-full flex-row space-x-4">
+                                    <!-- Country Region Code -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Country Region Code</mat-label>
+                                        <input matInput [formControlName]="'countryRegionCode'" />
+                                    </mat-form-field>
+                                    <!-- Name -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput [formControlName]="'name'" />
+                                    </mat-form-field>
+                                    <!-- Modified Date -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Modified Date</mat-label>
+                                        <input matInput [formControlName]="'modifiedDate'" />
+                                    </mat-form-field>
                                 </div>
                             </div>
+                        </div>
+
 
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
