@@ -123,7 +123,7 @@
                         [showFirstLastButtons]="true"
                     ></mat-paginator>
 
-                   
+
                 } @else {
                     <div
                         class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
@@ -141,31 +141,23 @@
                             class="flex w-full flex-col"
                             [formGroup]="selectedPhnoTypeForm"
                         >
-                            <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, Code, etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Name</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'name'"
-                                            />
-                                        </mat-form-field>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'modifiedDate'"
-                                            />
-                                        </mat-form-field>
-                                    </div>
+                        <div class="flex flex-col p-8 sm:flex-row">
+                            <div class="flex flex-auto flex-wrap">
+                                <div class="flex w-full flex-row space-x-4">
+                                    <!-- Name -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput [formControlName]="'name'" />
+                                    </mat-form-field>
+                                    <!-- Modified Date -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Modified Date</mat-label>
+                                        <input matInput [formControlName]="'modifiedDate'" />
+                                    </mat-form-field>
                                 </div>
                             </div>
+                        </div>
+
 
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
