@@ -137,7 +137,7 @@ export class CountryListComponent implements OnInit, AfterViewInit, OnDestroy {
             formalName: ['', [Validators.required]], 
             isoAlpha3Code: ['', [Validators.required]], 
             isoNumericCode: ['', [Validators.required]], 
-            countryTypeID: ['', [Validators.required]], 
+            countryTypeID: [''], 
             latestRecordedPopulation: ['', [Validators.required]], 
             continent: ['', [Validators.required]], 
             region: ['', [Validators.required]], 

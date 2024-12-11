@@ -173,10 +173,17 @@
 
                                         <mat-form-field class="min-w-[200px] flex-1">
                                             <mat-label>Country Type ID</mat-label>
-                                            <input
-                                                matInput
+                                            <mat-select
                                                 [formControlName]="'countryTypeID'"
-                                            />
+                                            >
+                                            @for (countryType of countryTypes;
+                                                track countryType
+                                                ){
+                                                <mat-option [value]="countryType.id">
+                                                    {{ countryType.countryTypeName }}
+                                                </mat-option>
+                                            }
+                                            </mat-select>
                                         </mat-form-field>
 
                                         <mat-form-field class="min-w-[200px] flex-1">

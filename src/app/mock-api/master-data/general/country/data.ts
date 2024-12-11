@@ -56,7 +56,7 @@ export const countrys = [
         formalName: 'Republic of India',
         isoAlpha3Code: 'IND',
         isoNumericCode: '356',
-        countryTypeID: '1',
+        countryTypeID: '2',
         latestRecordedPopulation: '1380004385',
         continent: 'Asia',
         region: 'Asia',

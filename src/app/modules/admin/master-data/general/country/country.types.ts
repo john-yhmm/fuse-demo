@@ -6,7 +6,7 @@ export interface Country {
     formalName: string;
     isoAlpha3Code: string;
     isoNumericCode: number;
-    countryTypeID: number;
+    countryTypeID: string;
     latestRecordedPopulation: number;
     continent: string;
     region: string;
