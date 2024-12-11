@@ -123,5 +123,18 @@ export default [
             },
         ],
     },
+    {
+        path: 'country-region',
+        component: CountryRegionComponent,
+        children: [
+            {
+                path: '',
+                component: CountryRegionListComponent,
+                resolve: {
+                    countryRegions: () => inject(CountryRegionService).getCountryRegions(),
+                },
+            },
+        ],
+    },
 
 ] as Routes;
