@@ -60,7 +60,7 @@
                             matSort
                             matSortDisableClear
                         >
-                            <div [mat-sort-header]="'name'">Code</div>
+                            <div [mat-sort-header]="'languageCode'">Code</div>
                             <div [mat-sort-header]="'name'">Name</div>
                             <div class="hidden sm:block">Details</div>
                         </div>
@@ -143,45 +143,34 @@
                             [formGroup]="selectedLanguageForm"
                         >
                             <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Language Code -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label
-                                                >Lannguage Code</mat-label
-                                            >
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'languageCode'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Name</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'name'"
-                                            />
-                                        </mat-form-field>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'modifiedDate'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                    </div>
+                                <div class="flex w-full flex-wrap gap-4 sm:pl-8">
+                                    <!-- Language Code -->
+                                    <mat-form-field class="min-w-[200px] flex-1">
+                                        <mat-label>Language Code</mat-label>
+                                        <input
+                                            matInput
+                                            [formControlName]="'languageCode'"
+                                        />
+                                    </mat-form-field>
+                                    <!-- Name -->
+                                    <mat-form-field class="min-w-[200px] flex-1">
+                                        <mat-label>Name</mat-label>
+                                        <input
+                                            matInput
+                                            [formControlName]="'name'"
+                                        />
+                                    </mat-form-field>
+                                    <!-- Modified Date -->
+                                    <mat-form-field class="min-w-[200px] flex-1">
+                                        <mat-label>Modified Date</mat-label>
+                                        <input
+                                            matInput
+                                            [formControlName]="'modifiedDate'"
+                                        />
+                                    </mat-form-field>
                                 </div>
                             </div>
-
+                        
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
                             >
