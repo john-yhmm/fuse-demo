@@ -24,7 +24,7 @@ export class GeneralCountryRegionMockApi {
      */
     registerHandlers(): void {
         // -----------------------------------------------------------------------------------------------------
-        // @ CountryRegions - GET
+        // @ countryRegions - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
             .onGet('api/master-data/general/countryRegions', 300)
@@ -119,7 +119,7 @@ export class GeneralCountryRegionMockApi {
         // @ countryRegion - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/country-region')
+            .onGet('api/master-data/general/countryRegion')
             .reply(({ request }) => {
                 // Get the id from the params
                 const id = request.params.get('id');
@@ -138,13 +138,13 @@ export class GeneralCountryRegionMockApi {
         // @ countryRegion - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPost('api/master-data/general/country-region')
+            .onPost('api/master-data/general/countryRegion')
             .reply(() => {
                 // Generate a new countryRegion
                 const newCountryRegion = {
                     id: FuseMockApiUtils.guid(),
                     countryRegionCode: '',
-                    name: 'A New Region',
+                    name: 'A New Country Region',
                     modifiedDate: '',
                 };
 
@@ -159,7 +159,7 @@ export class GeneralCountryRegionMockApi {
         // @ countryRegion - PATCH
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPatch('api/master-data/general/country-region')
+            .onPatch('api/master-data/general/countryRegion')
             .reply(({ request }) => {
                 // Get the id and countryRegion
                 const id = request.body.id;
@@ -191,7 +191,7 @@ export class GeneralCountryRegionMockApi {
         // @ countryRegion - DELETE
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onDelete('api/master-data/general/country-region')
+            .onDelete('api/master-data/general/countryRegion')
             .reply(({ request }) => {
                 // Get the id
                 const id = request.params.get('id');
