@@ -142,6 +142,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/transaction-type',
                     },
+                    {
+                        id: 'master-data.general.country',
+                        title: 'Country',
+                        type: 'basic',
+                        link: '/master-data/general/country',
+                    },
                 ],
             },
         ],

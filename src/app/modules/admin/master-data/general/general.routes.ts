@@ -45,6 +45,10 @@ import { ContactTypeService } from './contact-type/contact-type.service';
 import { TransactionTypeComponent } from './transaction-type/transaction-type.component';
 import { TransactionTypeService } from './transaction-type/transaction-type.service';
 import { TransactionTypeListComponent } from './transaction-type/list/transaction-type.component';
+import { CountryComponent } from './country/country.component';
+import { CountryListComponent } from './country/list/country.component';
+import { CountryService } from './country/country.service';
+
 
 export default [
     {
@@ -244,6 +248,20 @@ export default [
                 component: TransactionTypeListComponent,
                 resolve: {
                     transactionTypes: () => inject(TransactionTypeService).getTransactionTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'country',
+        component: CountryComponent,
+        children: [
+            {
+                path: '',
+                component: CountryListComponent,
+                resolve: {
+                    countrys: () => inject(CountryService).getCountrys(),
+                    countryTypes: () => inject(CountryTypeService).getCountryTypes(0, 1000),
                 },
             },
         ],

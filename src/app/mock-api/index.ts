@@ -36,6 +36,7 @@ import { GeneralBankAccountMockApi } from './master-data/general/bank-account/ap
 import { GeneralCultureMockApi } from './master-data/general/culture/api';
 import { ContactTypeMockApi } from './master-data/general/contact-type/api';
 import { GeneralTransactionTypeMockApi } from './master-data/general/transaction-type/api';
+import { GeneralCountryMockApi } from './master-data/general/country/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -76,4 +77,5 @@ export const mockApiServices = [
     GeneralCultureMockApi,
     ContactTypeMockApi,
     GeneralTransactionTypeMockApi,
+    GeneralCountryMockApi,
 ];

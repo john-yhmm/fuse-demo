@@ -1,0 +1,318 @@
+<div
+    class="bg-card flex min-w-0 flex-auto flex-col dark:bg-transparent sm:absolute sm:inset-0 sm:overflow-hidden"
+>
+    <!-- Header -->
+    <div
+        class="relative flex flex-0 flex-col border-b px-6 py-8 sm:flex-row sm:items-center sm:justify-between md:px-8"
+    >
+        <!-- Loader -->
+        @if (isLoading) {
+            <div class="absolute inset-x-0 bottom-0">
+                <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+            </div>
+        }
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Country</div>
+        <!-- Actions -->
+        <div class="mt-6 flex shrink-0 items-center sm:ml-4 sm:mt-0">
+            <!-- Search -->
+            <mat-form-field
+                class="fuse-mat-dense fuse-mat-rounded min-w-64"
+                [subscriptSizing]="'dynamic'"
+            >
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:magnifying-glass'"
+                ></mat-icon>
+                <input
+                    matInput
+                    [formControl]="searchInputControl"
+                    [autocomplete]="'off'"
+                    [placeholder]="'Search countrys'"
+                />
+            </mat-form-field>
+            <!-- Add country button -->
+            <button
+                class="ml-4"
+                mat-flat-button
+                [color]="'primary'"
+                (click)="createCountry()"
+            >
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">Add</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+        <!-- Country Types list -->
+        <div
+            class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto">
+            @if (countrys$ | async; as countrys) {
+                @if (countrys.length > 0) {
+                    <div class="grid">
+                        <!-- Header -->
+                        <div
+                        class="country-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                        matSort
+                        matSortDisableClear
+                        style="grid-template-columns: 200px 1fr 100px;" >
+                        <div [mat-sort-header]="'countryName'">Name</div>
+                        <div class="hidden sm:block">Details</div>
+                    </div>
+                        <!-- Rows -->
+                        @if (countrys$ | async; as countrys) {
+                            @for (
+                                country of countrys;
+                                track trackByFn($index, country)
+                            ) {
+                                <div
+                                class="country-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
+                                style="grid-template-columns: 200px 1fr;">
+                                    <!-- Name -->
+                                    <div class="truncate">
+                                        {{ country.countryName }}
+                                    </div>
+
+                                    <!-- Details button -->
+                                    <div>
+                                        <button
+                                            class="h-7 min-h-7 min-w-10 px-2 leading-6"
+                                            mat-stroked-button
+                                            (click)="toggleDetails(country.id)">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="
+                                                    selectedCountry?.id ===
+                                                    country.id
+                                                        ? 'heroicons_solid:chevron-up'
+                                                        : 'heroicons_solid:chevron-down'"
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="grid">
+                                    @if (selectedCountry?.id === country.id) {
+                                        <ng-container
+                                            *ngTemplateOutlet="
+                                                rowDetailsTemplate;
+                                                context: { $implicit: country }">
+                                    </ng-container>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <mat-paginator
+                        class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
+                        [ngClass]="{ 'pointer-events-none': isLoading }"
+                        [length]="pagination.length"
+                        [pageIndex]="pagination.page"
+                        [pageSize]="pagination.size"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [showFirstLastButtons]="true"
+                    ></mat-paginator>
+                } @else {
+                    <div
+                        class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
+                    >
+                        There are no countrys!
+                    </div>
+                }
+            }
+
+            <ng-template #rowDetailsTemplate let-country>
+                <div class="overflow-hidden shadow-lg">
+                    <div class="flex border-b">
+                        <!-- Selected country form -->
+                        <form
+                            class="flex w-full flex-col"
+                            [formGroup]="selectedCountryForm"
+                        >
+                            <div class="flex flex-col p-8 sm:flex-row">
+                                <div class="flex flex-auto flex-wrap">
+                                    <!-- Country Code -->
+                                    <div
+                                        class="flex w-full flex-wrap gap-4 sm:pl-8"
+                                    >
+                                        <!-- Country  Name -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Country Name</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'countryName'"
+                                            />
+                                        </mat-form-field>
+                                        <!-- Edited By -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Formal Name</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'formalName'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>ISO Alpha3 Code</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'isoAlpha3Code'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>ISO Numeric Code</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'isoNumericCode'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Country Type ID</mat-label>
+                                            <mat-select
+                                                [formControlName]="'countryTypeID'"
+                                            >
+                                            @for (countryType of countryTypes;
+                                                track countryType
+                                                ){
+                                                <mat-option [value]="countryType.id">
+                                                    {{ countryType.countryTypeName }}
+                                                </mat-option>
+                                            }
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Population</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'latestRecordedPopulation'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Continent</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'continent'"
+                                            />
+                                        </mat-form-field>
+                                        <!-- Modified Date -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Region</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'region'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Subregion</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'subregion'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Border</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'border'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Edited By</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'lastEditedBy'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Edited On</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'lastEditedOn'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Valid From</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'validFrom'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Valid To</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'validTo'"
+                                            />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex w-full items-center justify-between border-t px-8 py-4"
+                            >
+                                <button
+                                    class="-ml-4"
+                                    mat-button
+                                    [color]="'warn'"
+                                    (click)="deleteSelectedCountry()"
+                                >
+                                    Delete
+                                </button>
+                                <div class="flex items-center">
+                                    @if (flashMessage) {
+                                        <div class="mr-4 flex items-center">
+                                            @if (flashMessage === 'success') {
+                                                <mat-icon
+                                                    class="text-green-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:check'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >Country updated</span
+                                                >
+                                            }
+                                            @if (flashMessage === 'error') {
+                                                <mat-icon
+                                                    class="text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:x-mark'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >An error occurred, try
+                                                    again!</span
+                                                >
+                                            }
+                                        </div>
+                                    }
+                                    <button
+                                        mat-flat-button
+                                        [color]="'primary'"
+                                        (click)="updateSelectedCountry()"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
