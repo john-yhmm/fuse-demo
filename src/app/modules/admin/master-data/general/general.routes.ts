@@ -21,6 +21,11 @@ import { PhnoTypeListComponent } from './phno-type/list/phno-type.component'
 import { CardTypeComponent } from './card-type/card-type.component';
 import { CardTypeService } from './card-type/card-type.service';
 import { CardTypeListComponent } from './card-type/list/card-type.component';
+import { CountryRegionComponent } from './country-region/country-region.component';
+import { CountryRegionService } from './country-region/country-region.service';
+import { CountryRegionListComponent } from './country-region/list/country-region.component';
+
+
 
 export default [
     {
@@ -34,7 +39,7 @@ export default [
         children: [
             {
                 path: '',
-                component: LanguageListComponent, 
+                component: LanguageListComponent,
                 resolve: {
                     languages: () => inject(LanguageService).getLanguages(),
                 },
