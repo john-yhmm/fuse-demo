@@ -57,6 +57,9 @@ import { CardService } from './card/card.service';
 import { StateProvinceComponent } from './state-province/state-province.component';
 import { StateProvinceListComponent } from './state-province/list/state-province.component';
 import { StateProvinceService } from './state-province/state-province.service';
+import { CityComponent } from './city/city.component';
+import { CityListComponent } from './city/list/city.component';
+import { CityService } from './city/city.service';
 
 export default [
     {
@@ -311,6 +314,20 @@ export default [
                 resolve: {
                     stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
                     countrys: () => inject(CountryService).getCountrys(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'city',
+        component: CityComponent,
+        children: [
+            {
+                path: '',
+                component: CityListComponent,
+                resolve: {
+                    stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
+                    cities: () => inject(CityService).getCities(),
                 },
             },
         ],
