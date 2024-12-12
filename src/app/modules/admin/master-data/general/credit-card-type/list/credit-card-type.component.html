@@ -58,6 +58,7 @@
                         <!-- Header -->
                         <div
                             class="creditcardtype-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                            style="grid-template-columns: 120px 80px;"
                             matSort
                             matSortDisableClear
                         >
@@ -72,6 +73,7 @@
                             ) {
                                 <div
                                     class="creditcardtype-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
+                                    style="grid-template-columns: 120px 80px;"
                                 >
 
                                     <!-- Name -->
@@ -138,33 +140,23 @@
                             class="flex w-full flex-col"
                             [formGroup]="selectedCreditCardTypeForm"
                         >
-                            <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Name</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'name'"
-                                            />
-                                        </mat-form-field>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'modifiedDate'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                    </div>
+                        <div class="flex flex-col p-8 sm:flex-row">
+                            <div class="flex flex-auto flex-wrap">
+                                <div class="flex w-full flex-row space-x-4">
+                                    <!-- Name -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput [formControlName]="'name'" />
+                                    </mat-form-field>
+                                    <!-- Modified Date -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Modified Date</mat-label>
+                                        <input matInput [formControlName]="'modifiedDate'" />
+                                    </mat-form-field>
                                 </div>
                             </div>
+                        </div>
+
 
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
