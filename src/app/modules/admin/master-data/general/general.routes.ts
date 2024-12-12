@@ -57,6 +57,9 @@ import { CardService } from './card/card.service';
 import { StateProvinceComponent } from './state-province/state-province.component';
 import { StateProvinceListComponent } from './state-province/list/state-province.component';
 import { StateProvinceService } from './state-province/state-province.service';
+import { CardTypeCreditCardComponent } from './card-type-credit-card/card-type-credit-card.component';
+import { CardTypeCreditCardListComponent } from './card-type-credit-card/list/card-type-credit-card.component';
+import { CardTypeCreditCardService } from './card-type-credit-card/card-type-credit-card.service';
 
 export default [
     {
@@ -311,6 +314,20 @@ export default [
                 resolve: {
                     stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
                     countrys: () => inject(CountryService).getCountrys(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'card-type-credit-card',
+        component: CardTypeCreditCardComponent,
+        children: [
+            {
+                path: '',
+                component: CardTypeCreditCardListComponent,
+                resolve: {
+                    countrys: () => inject(CardTypeCreditCardService).getCardTypeCreditCards(),
+                    countryTypes: () => inject(CardTypeService).getCardTypes(0, 1000),
                 },
             },
         ],
