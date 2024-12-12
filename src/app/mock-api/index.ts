@@ -37,6 +37,7 @@ import { GeneralCultureMockApi } from './master-data/general/culture/api';
 import { ContactTypeMockApi } from './master-data/general/contact-type/api';
 import { GeneralTransactionTypeMockApi } from './master-data/general/transaction-type/api';
 import { GeneralCountryMockApi } from './master-data/general/country/api';
+import { GeneralStateProvinceMockApi } from './master-data/general/state-province/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -78,4 +79,5 @@ export const mockApiServices = [
     ContactTypeMockApi,
     GeneralTransactionTypeMockApi,
     GeneralCountryMockApi,
+    GeneralStateProvinceMockApi,
 ];

@@ -48,6 +48,9 @@ import { TransactionTypeListComponent } from './transaction-type/list/transactio
 import { CountryComponent } from './country/country.component';
 import { CountryListComponent } from './country/list/country.component';
 import { CountryService } from './country/country.service';
+import { StateProvinceComponent } from './state-province/state-province.component';
+import { StateProvinceListComponent } from './state-province/list/state-province.component';
+import { StateProvinceService } from './state-province/state-province.service';
 
 
 export default [
@@ -266,4 +269,19 @@ export default [
             },
         ],
     },
+    {
+        path: 'state-province',
+        component: StateProvinceComponent,
+        children: [
+            {
+                path: '',
+                component: StateProvinceListComponent,
+                resolve: {
+                    stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
+                    countrys: () => inject(CountryService).getCountrys(),
+                },
+            },
+        ],
+    },
+    
 ] as Routes;

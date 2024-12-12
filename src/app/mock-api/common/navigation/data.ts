@@ -148,6 +148,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/country',
                     },
+                    {
+                        id: 'master-data.general.state-province',
+                        title: 'State Province',
+                        type: 'basic',
+                        link: '/master-data/general/state-province',
+                    },
                 ],
             },
         ],
