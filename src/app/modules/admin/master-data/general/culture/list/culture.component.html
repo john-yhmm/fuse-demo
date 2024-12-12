@@ -73,7 +73,7 @@
                             ) {
                                 <div
                                     class="culture-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
-                                >
+                                    style="grid-template-columns: 200px 1fr;">
                                     <!-- Culture Code -->
                                     <div class="truncate">
                                         {{ culture.cultureCode }}
@@ -165,23 +165,18 @@
                         >
                             <div class="flex flex-col p-8 sm:flex-row">
                                 <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Culture Code -->
+                                    <!-- Details in three columns -->
+                                    <div class="w-full grid grid-cols-3 gap-4">
+                                        <!-- Culture Code Column -->
                                         <mat-form-field class="w-full">
-                                            <mat-label
-                                                >Culture Code</mat-label
-                                            >
+                                            <mat-label>Culture Code</mat-label>
                                             <input
                                                 matInput
-                                                [formControlName]="
-                                                    'cultureCode'
-                                                "
+                                                [formControlName]="'cultureCode'"
                                             />
                                         </mat-form-field>
-                                        <!-- Name -->
+
+                                        <!-- Name Column -->
                                         <mat-form-field class="w-full">
                                             <mat-label>Name</mat-label>
                                             <input
@@ -189,11 +184,21 @@
                                                 [formControlName]="'name'"
                                             />
                                         </mat-form-field>
-                                        <!-- Status -->
+
+                                        <!-- Modified Date Column -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Modified Date</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'modifiedDate'"
+                                            />
+                                        </mat-form-field>
+                                    </div>
+
+                                    <!-- Status Row -->
+                                    <div class="w-full mt-4">
                                         <div class="mb-8 flex flex-col">
-                                            <span class="mb-2 font-semibold"
-                                                >Status</span
-                                            >
+                                            <span class="mb-2 font-semibold">Status</span>
                                             <mat-slide-toggle
                                                 [formControlName]="'status'"
                                                 [color]="'primary'"
@@ -207,16 +212,6 @@
                                                 }}
                                             </mat-slide-toggle>
                                         </div>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'modifiedDate'
-                                                "
-                                            />
-                                        </mat-form-field>
                                     </div>
                                 </div>
                             </div>
