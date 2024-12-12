@@ -125,12 +125,10 @@ export class CardService {
             .post<Card>('api/master-data/general/card', {})
             .pipe(
                 tap((newCard) => {
-                    console.log('API Response for createCard:', newCard);
                     if (!newCard.id) {
                         console.error('Newly created card lacks an ID');
                         return;
                     }
-                    newCard.cardTypeID = '';//overwriting the default 'Admin' value
                     const currentCards = this._cards.getValue();
                     this._cards.next([newCard, ...currentCards]);
                 })
