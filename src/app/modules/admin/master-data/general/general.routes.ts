@@ -48,6 +48,9 @@ import { TransactionTypeListComponent } from './transaction-type/list/transactio
 import { CountryComponent } from './country/country.component';
 import { CountryListComponent } from './country/list/country.component';
 import { CountryService } from './country/country.service';
+import { CardTypeCreditCardComponent } from './card-type-credit-card/card-type-credit-card.component';
+import { CardTypeCreditCardListComponent } from './card-type-credit-card/list/card-type-credit-card.component';
+import { CardTypeCreditCardService } from './card-type-credit-card/card-type-credit-card.service';
 
 
 export default [
@@ -262,6 +265,20 @@ export default [
                 resolve: {
                     countrys: () => inject(CountryService).getCountrys(),
                     countryTypes: () => inject(CountryTypeService).getCountryTypes(0, 1000),
+                },
+            },
+        ],
+    },
+    {
+        path: 'card-type-credit-card',
+        component: CardTypeCreditCardComponent,
+        children: [
+            {
+                path: '',
+                component: CardTypeCreditCardListComponent,
+                resolve: {
+                    countrys: () => inject(CardTypeCreditCardService).getCardTypeCreditCards(),
+                    countryTypes: () => inject(CardTypeService).getCardTypes(0, 1000),
                 },
             },
         ],
