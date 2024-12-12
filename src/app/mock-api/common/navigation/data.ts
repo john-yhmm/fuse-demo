@@ -154,6 +154,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/country-region',
                     },
+                    {
+                        id: 'master-data.general.card',
+                        title: 'Card',
+                        type: 'basic',
+                        link: '/master-data/general/card',
+                    },
                 ],
             },
         ],

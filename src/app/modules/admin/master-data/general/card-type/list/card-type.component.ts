@@ -36,6 +36,8 @@ import {
     CardTypePagination,
 } from 'app/modules/admin/master-data/general/card-type/card-type.types'; // Modify import path accordingly
 import {
+    catchError,
+    of,
     Observable,
     Subject,
     debounceTime,

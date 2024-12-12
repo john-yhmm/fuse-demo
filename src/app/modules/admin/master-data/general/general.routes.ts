@@ -51,8 +51,9 @@ import { CountryService } from './country/country.service';
 import { CountryRegionComponent } from './country-region/country-region.component';
 import { CountryRegionService } from './country-region/country-region.service';
 import { CountryRegionListComponent } from './country-region/list/country-region.component';
-
-
+import { CardComponent } from './card/card.component';
+import { CardListComponent } from './card/list/card.component';
+import { CardService } from './card/card.service';
 
 export default [
     {
@@ -279,6 +280,20 @@ export default [
                 component: CountryRegionListComponent,
                 resolve: {
                     countryRegions: () => inject(CountryRegionService).getCountryRegions(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'card',
+        component: CardComponent,
+        children: [
+            {
+                path: '',
+                component: CardListComponent,
+                resolve: {
+                    cards: () => inject(CardService).getCards(),
+                    cardTypes: () => inject(CardTypeService).getCardTypes(0, 1000),
                 },
             },
         ],

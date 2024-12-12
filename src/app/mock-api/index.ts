@@ -38,6 +38,7 @@ import { ContactTypeMockApi } from './master-data/general/contact-type/api';
 import { GeneralTransactionTypeMockApi } from './master-data/general/transaction-type/api';
 import { GeneralCountryMockApi } from './master-data/general/country/api';
 import { GeneralCountryRegionMockApi } from './master-data/general/country-region/api';
+import { GeneralCardMockApi } from './master-data/general/card/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -80,4 +81,5 @@ export const mockApiServices = [
     GeneralTransactionTypeMockApi,
     GeneralCountryMockApi,
     GeneralCountryRegionMockApi,
+    GeneralCardMockApi,
 ];
