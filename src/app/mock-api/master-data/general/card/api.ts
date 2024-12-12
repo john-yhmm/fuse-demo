@@ -110,7 +110,7 @@ export class GeneralCardMockApi {
                 const newCard = {
                     id: FuseMockApiUtils.guid(),
                     cardNumber: 'A New Card', 
-                    cardTypeID: 'Admin',
+                    cardTypeID: '',
                     modifiedDate: '',
                 };
                 this._cards.unshift(newCard);
