@@ -12,7 +12,7 @@
             </div>
         }
         <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">Country</div>
+        <div class="text-4xl font-extrabold tracking-tight">State Province</div>
         <!-- Actions -->
         <div class="mt-6 flex shrink-0 items-center sm:ml-4 sm:mt-0">
             <!-- Search -->
@@ -29,7 +29,7 @@
                     matInput
                     [formControl]="searchInputControl"
                     [autocomplete]="'off'"
-                    [placeholder]="'Search countrys'"
+                    [placeholder]="'Search state provinces'"
                 />
             </mat-form-field>
             <!-- Add country button -->
@@ -197,14 +197,6 @@
                                             <input
                                                 matInput
                                                 [formControlName]="'latestRecordedPopulation'"
-                                            />
-                                        </mat-form-field>
-
-                                        <mat-form-field class="min-w-[200px] flex-1">
-                                            <mat-label>Rowguid</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'rowguid'"
                                             />
                                         </mat-form-field>
                                         <!-- Modified Date -->

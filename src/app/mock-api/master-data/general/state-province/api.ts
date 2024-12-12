@@ -147,7 +147,7 @@ export class GeneralStateProvinceMockApi {
                 // Generate a new country 
                 const newStateProvince = {
                     id: FuseMockApiUtils.guid(), // Generates a unique ID (UUID)
-                    stateProvinceCode: 'A New Country',
+                    stateProvinceCode: 'A New State Province',
                     stateProvinceName: '',
                     countryId: '',
                     salesTerritoryId: '',
