@@ -142,13 +142,12 @@
                             [formGroup]="selectedCardTypeForm"
                         >
                             <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
+                                <div class="flex flex-auto flex-wrap gap-4">
                                     <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
+                                        class="flex w-full flex-wrap sm:pl-8 gap-4"
                                     >
                                         <!-- Name -->
-                                        <mat-form-field class="w-full">
+                                        <mat-form-field class="min-w-[200px] flex-1">
                                             <mat-label
                                                 >Name</mat-label
                                             >
@@ -160,7 +159,7 @@
                                             />
                                         </mat-form-field>
                                         <!-- Issuer ID -->
-                                        <mat-form-field class="w-full">
+                                        <mat-form-field class="min-w-[200px] flex-1">
                                             <mat-label>Issuer ID</mat-label>
                                             <input
                                                 matInput
@@ -168,7 +167,7 @@
                                             />
                                         </mat-form-field>
                                         <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
+                                        <mat-form-field class="min-w-[200px] flex-1">
                                             <mat-label>Modified Date</mat-label>
                                             <input
                                                 matInput
