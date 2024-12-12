@@ -142,54 +142,33 @@
                             class="flex w-full flex-col"
                             [formGroup]="selectedUnitMeasureForm"
                         >
-                            <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Unit Measure Code -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label
-                                                >Unit Measure Code</mat-label
-                                            >
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'unitMeasureCode'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Unit Measure Name</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'unitMeasureName'"
-                                            />
-                                        </mat-form-field>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Last Edited By</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'lastEditedBy'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Last Edited on</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'lastEditedOn'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                    </div>
+                        <div class="flex flex-col p-8 sm:flex-row">
+                            <div class="flex flex-auto">
+                                <!-- Grid Layout -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                                    <!-- Unit Measure Code -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Unit Measure Code</mat-label>
+                                        <input matInput [formControlName]="'unitMeasureCode'" />
+                                    </mat-form-field>
+                                    <!-- Unit Measure Name -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Unit Measure Name</mat-label>
+                                        <input matInput [formControlName]="'unitMeasureName'" />
+                                    </mat-form-field>
+                                    <!-- Last Edited By -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Last Edited By</mat-label>
+                                        <input matInput [formControlName]="'lastEditedBy'" />
+                                    </mat-form-field>
+                                    <!-- Last Edited On -->
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Last Edited On</mat-label>
+                                        <input matInput [formControlName]="'lastEditedOn'" />
+                                    </mat-form-field>
                                 </div>
                             </div>
+                        </div>
 
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
