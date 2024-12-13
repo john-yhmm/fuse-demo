@@ -60,6 +60,9 @@ import { StateProvinceService } from './state-province/state-province.service';
 import { CardTypeCreditCardComponent } from './card-type-credit-card/card-type-credit-card.component';
 import { CardTypeCreditCardListComponent } from './card-type-credit-card/list/card-type-credit-card.component';
 import { CardTypeCreditCardService } from './card-type-credit-card/card-type-credit-card.service';
+import { ContactComponent } from './contact/contact.component';
+import { ContactsService } from '../../apps/contacts/contacts.service';
+import { ContactListComponent } from './contact/list/contact.component';
 
 export default [
     {
@@ -332,4 +335,18 @@ export default [
             },
         ],
     },
+    {
+        path: 'contact',
+        component: ContactComponent,
+        children: [
+            {
+                path: '',
+                component: ContactListComponent,
+                resolve: {
+                    contacts: () => inject(ContactsService).getContacts(), // Adjust method name as needed
+                },
+            },
+        ],
+    },
+    
 ] as Routes;

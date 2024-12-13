@@ -172,6 +172,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/card-type-credit-card',
                     },
+                    {
+                        id: 'master-data.general.contact',
+                        title: 'Contact',
+                        type: 'basic',
+                        link: '/master-data/general/contact',
+                    },
                 ],
             },
         ],
