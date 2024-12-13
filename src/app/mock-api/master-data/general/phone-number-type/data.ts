@@ -1,4 +1,4 @@
-export const phnoTypes = [
+export const phoneNumberTypes = [
     {
         id: '1',
         name: 'Home',

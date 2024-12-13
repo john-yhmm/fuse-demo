@@ -30,11 +30,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { PhnoTypeService } from 'app/modules/admin/master-data/general/phno-type/phno-type.service';
+import { PhoneNumberTypeService } from 'app/modules/admin/master-data/general/phone-number-type/phone-number-type.service';
 import {
-    PhnoType,
-    PhnoTypePagination,
-} from 'app/modules/admin/master-data/general/phno-type/phno-type.types';
+    PhoneNumberType,
+    PhoneNumberTypePagination,
+} from 'app/modules/admin/master-data/general/phone-number-type/phone-number-type.types';
 import {
     Observable,
     Subject,
@@ -46,8 +46,8 @@ import {
 } from 'rxjs';
 
 @Component({
-    selector: 'phno-type-list',
-    templateUrl: './phno-type.component.html',
+    selector: 'phone-number-type-list',
+    templateUrl: './phone-number-type.component.html',
     styles: [
         /* language=SCSS */
         `
@@ -92,18 +92,18 @@ import {
         AsyncPipe,
     ],
 })
-export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PhoneNumberTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
-    phnoTypes$: Observable<PhnoType[]>;
+    phoneNumberTypes$: Observable<PhoneNumberType[]>;
 
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
-    pagination: PhnoTypePagination;
+    pagination: PhoneNumberTypePagination;
     searchInputControl: UntypedFormControl = new UntypedFormControl();
-    selectedPhnoType: PhnoType | null = null;
-    selectedPhnoTypeForm: UntypedFormGroup;
+    selectedPhoneNumberType: PhoneNumberType | null = null;
+    selectedPhoneNumberTypeForm: UntypedFormGroup;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -113,7 +113,7 @@ export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: UntypedFormBuilder,
-        private _phnoTypeService: PhnoTypeService
+        private _phoneNumberTypeService: PhoneNumberTypeService
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -125,16 +125,16 @@ export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     ngOnInit(): void {
         // Create the selected phone number type form
-        this.selectedPhnoTypeForm = this._formBuilder.group({
+        this.selectedPhoneNumberTypeForm = this._formBuilder.group({
             id: [''],
             name: ['', [Validators.required]],
             modifiedDate: [''],
         });
 
         // Get the pagination
-        this._phnoTypeService.pagination$
+        this._phoneNumberTypeService.pagination$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((pagination: PhnoTypePagination) => {
+            .subscribe((pagination: PhoneNumberTypePagination) => {
                 // Update the pagination
                 this.pagination = pagination;
 
@@ -143,7 +143,7 @@ export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
             });
 
         // Get the phone number types
-        this.phnoTypes$ = this._phnoTypeService.phnoTypes$;
+        this.phoneNumberTypes$ = this._phoneNumberTypeService.phoneNumberTypes$;
 
         // Subscribe to search input field value changes
         this.searchInputControl.valueChanges
@@ -153,7 +153,7 @@ export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
                 switchMap((query) => {
                     this.closeDetails();
                     this.isLoading = true;
-                    return this._phnoTypeService.getPhnoTypes(
+                    return this._phoneNumberTypeService.getPhoneNumberTypes(
                         0,
                         10,
                         'name',
@@ -200,7 +200,7 @@ export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
                     switchMap(() => {
                         this.closeDetails();
                         this.isLoading = true;
-                        return this._phnoTypeService.getPhnoTypes(
+                        return this._phoneNumberTypeService.getPhoneNumberTypes(
                             this._paginator.pageIndex,
                             this._paginator.pageSize,
                             this._sort.active,
@@ -230,44 +230,44 @@ export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /**
      * Toggle phone number type details
-     * @param phnoTypeId
+     * @param phoneNumberTypeId
      */
-    toggleDetails(phnoTypeId: string): void {
-        if (this.selectedPhnoType && this.selectedPhnoType.id === phnoTypeId) {
+    toggleDetails(phoneNumberTypeId: string): void {
+        if (this.selectedPhoneNumberType && this.selectedPhoneNumberType.id === phoneNumberTypeId) {
             this.closeDetails();
             return;
         }
 
-        this._phnoTypeService.getPhnoTypeById(phnoTypeId).subscribe((phnoType) => {
-            this.selectedPhnoType = phnoType;
-            this.selectedPhnoTypeForm.patchValue(phnoType);
+        this._phoneNumberTypeService.getPhoneNumberTypeById(phoneNumberTypeId).subscribe((phoneNumberType) => {
+            this.selectedPhoneNumberType = phoneNumberType;
+            this.selectedPhoneNumberTypeForm.patchValue(phoneNumberType);
             this._changeDetectorRef.markForCheck();
         });
     }
 
     closeDetails(): void {
-        this.selectedPhnoType = null;
+        this.selectedPhoneNumberType = null;
     }
 
-    createPhnoType(): void {
-        this._phnoTypeService.createPhnoType().subscribe((newPhnoType) => {
-            this.selectedPhnoType = newPhnoType;
-            this.selectedPhnoTypeForm.patchValue(newPhnoType);
+    createPhoneNumberType(): void {
+        this._phoneNumberTypeService.createPhoneNumberType().subscribe((newPhoneNumberType) => {
+            this.selectedPhoneNumberType = newPhoneNumberType;
+            this.selectedPhoneNumberTypeForm.patchValue(newPhoneNumberType);
             this._changeDetectorRef.markForCheck();
         });
     }
 
-    updateSelectedPhnoType(): void {
-        const phnoType = this.selectedPhnoTypeForm.getRawValue();
+    updateSelectedPhoneNumberType(): void {
+        const phoneNumberType = this.selectedPhoneNumberTypeForm.getRawValue();
 
-        delete phnoType.currentImageIndex;
+        delete phoneNumberType.currentImageIndex;
 
-        this._phnoTypeService.updatePhNoType(phnoType.id, phnoType).subscribe(() => {
+        this._phoneNumberTypeService.updatePhoneNumberType(phoneNumberType.id, phoneNumberType).subscribe(() => {
             this.showFlashMessage('success');
         });
     }
 
-    deleteSelectedPhnoType(): void {
+    deleteSelectedPhoneNumberType(): void {
         const confirmation = this._fuseConfirmationService.open({
             title: 'Delete Phone Number Type',
             message: 'Are you sure you want to delete this phone number type?',
@@ -276,9 +276,9 @@ export class PhnoTypeListComponent implements OnInit, AfterViewInit, OnDestroy {
 
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
-                const phnoType = this.selectedPhnoTypeForm.getRawValue();
+                const phoneNumberType = this.selectedPhoneNumberTypeForm.getRawValue();
 
-                this._phnoTypeService.deletePhnoType(phnoType.id).subscribe(() => {
+                this._phoneNumberTypeService.deletePhoneNumberType(phoneNumberType.id).subscribe(() => {
                     this.closeDetails();
                 });
             }

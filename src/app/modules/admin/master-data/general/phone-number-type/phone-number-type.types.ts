@@ -1,12 +1,12 @@
 import { DateTime } from "luxon";
 
-export interface PhnoType {
+export interface PhoneNumberType {
     id: string;
     name: string;
     modifiedDate: string;
 }
 
-export interface PhnoTypePagination {
+export interface PhoneNumberTypePagination {
     length: number;
     size: number;
     page: number;

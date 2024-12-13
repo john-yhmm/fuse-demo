@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-    PhnoType,
-    PhnoTypePagination,
-} from 'app/modules/admin/master-data/general/phno-type/phno-type.types';
+    PhoneNumberType,
+    PhoneNumberTypePagination,
+} from 'app/modules/admin/master-data/general/phone-number-type/phone-number-type.types';
 import {
     BehaviorSubject,
     Observable,
@@ -17,14 +17,14 @@ import {
 } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class PhnoTypeService {
+export class PhoneNumberTypeService {
     // Private
-    private _pagination: BehaviorSubject<PhnoTypePagination | null> =
+    private _pagination: BehaviorSubject<PhoneNumberTypePagination | null> =
         new BehaviorSubject(null);
-    private _phnoType: BehaviorSubject<PhnoType | null> = new BehaviorSubject(
+    private _phoneNumberType: BehaviorSubject<PhoneNumberType | null> = new BehaviorSubject(
         null
     );
-    private _phnoTypes: BehaviorSubject<PhnoType[] | null> =
+    private _phoneNumberTypes: BehaviorSubject<PhoneNumberType[] | null> =
         new BehaviorSubject(null);
 
     /**
@@ -39,22 +39,22 @@ export class PhnoTypeService {
     /**
      * Getter for pagination
      */
-    get pagination$(): Observable<PhnoTypePagination> {
+    get pagination$(): Observable<PhoneNumberTypePagination> {
         return this._pagination.asObservable();
     }
 
     /**
      * Getter for phone number type
      */
-    get phnoType$(): Observable<PhnoType> {
-        return this._phnoType.asObservable();
+    get phoneNumberType$(): Observable<PhoneNumberType> {
+        return this._phoneNumberType.asObservable();
     }
 
     /**
      * Getter for phone number types
      */
-    get phnoTypes$(): Observable<PhnoType[]> {
-        return this._phnoTypes.asObservable();
+    get phoneNumberTypes$(): Observable<PhoneNumberType[]> {
+        return this._phoneNumberTypes.asObservable();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -70,21 +70,21 @@ export class PhnoTypeService {
      * @param order
      * @param search
      */
-    getPhnoTypes(
+    getPhoneNumberTypes(
         page: number = 0,
         size: number = 10,
         sort: string = 'name',
         order: 'asc' | 'desc' | '' = 'asc',
         search: string = ''
     ): Observable<{
-        pagination: PhnoTypePagination;
-        phnoTypes: PhnoType[];
+        pagination: PhoneNumberTypePagination;
+        phoneNumberTypes: PhoneNumberType[];
     }> {
         return this._httpClient
             .get<{
-                pagination: PhnoTypePagination;
-                phnoTypes: PhnoType[];
-            }>('api/master-data/general/phno-types', {
+                pagination: PhoneNumberTypePagination;
+                phoneNumberTypes: PhoneNumberType[];
+            }>('api/master-data/general/phone-number-types', {
                 params: {
                     page: '' + page,
                     size: '' + size,
@@ -96,7 +96,7 @@ export class PhnoTypeService {
             .pipe(
                 tap((response) => {
                     this._pagination.next(response.pagination);
-                    this._phnoTypes.next(response.phnoTypes);
+                    this._phoneNumberTypes.next(response.phoneNumberTypes);
                 })
             );
     }
@@ -104,28 +104,28 @@ export class PhnoTypeService {
     /**
      * Get phone number type by id
      */
-    getPhnoTypeById(id: string): Observable<PhnoType> {
-        return this._phnoTypes.pipe(
+    getPhoneNumberTypeById(id: string): Observable<PhoneNumberType> {
+        return this._phoneNumberTypes.pipe(
             take(1),
-            map((phnoTypes) => {
+            map((phoneNumberTypes) => {
                 // Find the phone number type
-                const phnoType =
-                    phnoTypes.find((item) => item.id === id) || null;
+                const phoneNumberType =
+                    phoneNumberTypes.find((item) => item.id === id) || null;
 
                 // Update the selected phone number type
-                this._phnoType.next(phnoType);
+                this._phoneNumberType.next(phoneNumberType);
 
                 // Return the phone number type
-                return phnoType;
+                return phoneNumberType;
             }),
-            switchMap((phnoType) => {
-                if (!phnoType) {
+            switchMap((phoneNumberType) => {
+                if (!phoneNumberType) {
                     return throwError(
                         'Could not find phone number type with id of ' + id + '!'
                     );
                 }
 
-                return of(phnoType);
+                return of(phoneNumberType);
             })
         );
     }
@@ -133,19 +133,19 @@ export class PhnoTypeService {
     /**
      * Create phone number type
      */
-    createPhnoType(): Observable<PhnoType> {
-        return this.phnoTypes$.pipe(
+    createPhoneNumberType(): Observable<PhoneNumberType> {
+        return this.phoneNumberTypes$.pipe(
             take(1),
-            switchMap((phnoTypes) =>
+            switchMap((phoneNumberTypes) =>
                 this._httpClient
-                    .post<PhnoType>('api/master-data/general/phno-type', {})
+                    .post<PhoneNumberType>('api/master-data/general/phone-number-type', {})
                     .pipe(
-                        map((newPhnoType) => {
+                        map((newPhoneNumberType) => {
                             // Update the phone number types with the new type
-                            this._phnoTypes.next([newPhnoType, ...phnoTypes]);
+                            this._phoneNumberTypes.next([newPhoneNumberType, ...phoneNumberTypes]);
 
                             // Return the new phone number type
-                            return newPhnoType;
+                            return newPhoneNumberType;
                         })
                     )
             )
@@ -156,44 +156,44 @@ export class PhnoTypeService {
      * Update phone number type
      *
      * @param id
-     * @param phnoType
+     * @param phoneNumberType
      */
-    updatePhNoType(id: string, phnoType: PhnoType): Observable<PhnoType> {
-        return this.phnoTypes$.pipe(
+    updatePhoneNumberType(id: string, phoneNumberType: PhoneNumberType): Observable<PhoneNumberType> {
+        return this.phoneNumberTypes$.pipe(
             take(1),
-            switchMap((phnoTypes) =>
+            switchMap((phoneNumberTypes) =>
                 this._httpClient
-                    .patch<PhnoType>('api/master-data/general/phno-type', {
+                    .patch<PhoneNumberType>('api/master-data/general/phone-number-type', {
                         id,
-                        phnoType,
+                        phoneNumberType,
                     })
                     .pipe(
-                        map((updatedPhnoType) => {
-                            console.log('API Response:', updatedPhnoType)
+                        map((updatedPhoneNumberType) => {
+                            console.log('API Response:', updatedPhoneNumberType)
                             // Find the index of the updated phone number type
-                            const index = phnoTypes.findIndex(
+                            const index = phoneNumberTypes.findIndex(
                                 (item) => item.id === id
                             );
 
                             // Update the type
-                            phnoTypes[index] = updatedPhnoType;
+                            phoneNumberTypes[index] = updatedPhoneNumberType;
 
                             // Update the phone number types
-                            this._phnoTypes.next(phnoTypes);
+                            this._phoneNumberTypes.next(phoneNumberTypes);
 
                             // Return the updated type
-                            return updatedPhnoType;
+                            return updatedPhoneNumberType;
                         }),
-                        switchMap((updatedPhnoType) =>
-                            this.phnoType$.pipe(
+                        switchMap((updatedPhoneNumberType) =>
+                            this.phoneNumberType$.pipe(
                                 take(1),
                                 filter((item) => item && item.id === id),
                                 tap(() => {
                                     // Update the selected type if it's selected
-                                    this._phnoType.next(updatedPhnoType);
+                                    this._phoneNumberType.next(updatedPhoneNumberType);
 
                                     // Return the updated type
-                                    return updatedPhnoType;
+                                    return updatedPhoneNumberType;
                                 })
                             )
                         )
@@ -207,27 +207,27 @@ export class PhnoTypeService {
      *
      * @param id
      */
-    deletePhnoType(id: string): Observable<boolean> {
-        return this.phnoTypes$.pipe(
+    deletePhoneNumberType(id: string): Observable<boolean> {
+        return this.phoneNumberTypes$.pipe(
             take(1),
-            switchMap((phnoTypes) =>
+            switchMap((phoneNumberTypes) =>
                 this._httpClient
-                    .delete('api/master-data/general/phno-type', {
+                    .delete('api/master-data/general/phone-number-type', {
                         params: { id },
                     })
                     .pipe(
                         map((isDeleted: boolean) => {
                            
                             // Find the index of the deleted type
-                            const index = phnoTypes.findIndex(
+                            const index = phoneNumberTypes.findIndex(
                                 (item) => item.id === id
                             );
 
                             // Delete the type
-                            phnoTypes.splice(index, 1);
+                            phoneNumberTypes.splice(index, 1);
 
                             // Update the phone number types
-                            this._phnoTypes.next(phnoTypes);
+                            this._phoneNumberTypes.next(phoneNumberTypes);
 
                             // Return the deleted status
                             return isDeleted;

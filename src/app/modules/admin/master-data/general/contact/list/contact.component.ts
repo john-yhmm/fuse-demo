@@ -46,10 +46,10 @@ import {
 } from 'rxjs';
 import { ContactTypeService } from '../../contact-type/contact-type.service';
 import { ContactType } from '../../contact-type/contact-type.types';
-import { PhnoType } from '../../phno-type/phno-type.types';
+import { PhoneNumberType } from '../../phone-number-type/phone-number-type.types';
 import { ContactService } from '../contact.service';
 import { Contact, ContactPagination } from '../contact.types';
-import { PhnoTypeService } from '../../phno-type/phno-type.service';
+import { PhoneNumberTypeService } from '../../phone-number-type/phone-number-type.service';
 
 @Component({
     selector: 'contact-list',
@@ -105,7 +105,7 @@ export class ContactListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     contacts$: Observable<Contact[]>;
     contactTypes: ContactType[];
-    phnoTypes: PhnoType[];
+    phoneNumberTypes: PhoneNumberType[];
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
     pagination: ContactPagination;
@@ -124,7 +124,7 @@ export class ContactListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _formBuilder: UntypedFormBuilder,
         private _contactService: ContactService,
         private _contactTypeService: ContactTypeService,
-        private _phnoTypeService: PhnoTypeService,
+        private _phoneNumberTypeService: PhoneNumberTypeService,
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -156,10 +156,10 @@ export class ContactListComponent implements OnInit, AfterViewInit, OnDestroy {
                 this._changeDetectorRef.markForCheck();
             });
 
-        this._phnoTypeService.phnoTypes$
+        this._phoneNumberTypeService.phoneNumberTypes$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((phnoTypes: PhnoType[]) => {
-                this.phnoTypes = phnoTypes;
+            .subscribe((phoneNumberTypes: PhoneNumberType[]) => {
+                this.phoneNumberTypes = phoneNumberTypes;
                 this._changeDetectorRef.markForCheck();
             });
 
