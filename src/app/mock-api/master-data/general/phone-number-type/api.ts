@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FuseMockApiService, FuseMockApiUtils } from '@fuse/lib/mock-api';
-import { phnoTypes as phnoTypesData } from 'app/mock-api/master-data/general/phno-type/data';
+import { phoneNumberTypes as phoneNumberTypesData } from 'app/mock-api/master-data/general/phone-number-type/data';
 import { assign, cloneDeep } from 'lodash-es';
 
 @Injectable({ providedIn: 'root' })
-export class GeneralPhnoTypeMockApi {
-    private _phnoTypes: any[] = phnoTypesData;
+export class GeneralPhoneNumberTypeMockApi {
+    private _phoneNumberTypes: any[] = phoneNumberTypesData;
 
     /**
      * Constructor
@@ -27,7 +27,7 @@ export class GeneralPhnoTypeMockApi {
         // @ Phone Types - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/phno-types', 300)
+            .onGet('api/master-data/general/phone-number-types', 300)
             .reply(({ request }) => {
                 const search = request.params.get('search');
                 const sort = request.params.get('sort') || 'name';
@@ -35,11 +35,11 @@ export class GeneralPhnoTypeMockApi {
                 const page = parseInt(request.params.get('page') ?? '1', 10);
                 const size = parseInt(request.params.get('size') ?? '10', 10);
 
-                let phnoTypes: any[] | null = cloneDeep(this._phnoTypes);
+                let phoneNumberTypes: any[] | null = cloneDeep(this._phoneNumberTypes);
 
                 // Sort the phone types
                 if (sort === 'name' || sort === 'modifiedDate') {
-                    phnoTypes.sort((a, b) => {
+                    phoneNumberTypes.sort((a, b) => {
                         const fieldA = a[sort].toString().toUpperCase();
                         const fieldB = b[sort].toString().toUpperCase();
                         return order === 'asc'
@@ -47,35 +47,35 @@ export class GeneralPhnoTypeMockApi {
                             : fieldB.localeCompare(fieldA);
                     });
                 } else {
-                    phnoTypes.sort((a, b) =>
+                    phoneNumberTypes.sort((a, b) =>
                         order === 'asc' ? a[sort] - b[sort] : b[sort] - a[sort]
                     );
                 }
 
                 // If search exists, filter the results
                 if (search) {
-                    phnoTypes = phnoTypes.filter(
-                        (phnoType) =>
-                            phnoType.name &&
-                            phnoType.name.toLowerCase().includes(search.toLowerCase())
+                    phoneNumberTypes = phoneNumberTypes.filter(
+                        (phoneNumberType) =>
+                            phoneNumberType.name &&
+                            phoneNumberType.name.toLowerCase().includes(search.toLowerCase())
                     );
                 }
 
                 // Paginate - Start
-                const phnoTypesLength = phnoTypes.length;
+                const phoneNumberTypesLength = phoneNumberTypes.length;
                 const begin = page * size;
-                const end = Math.min(size * (page + 1), phnoTypesLength);
-                const lastPage = Math.max(Math.ceil(phnoTypesLength / size), 1);
+                const end = Math.min(size * (page + 1), phoneNumberTypesLength);
+                const lastPage = Math.max(Math.ceil(phoneNumberTypesLength / size), 1);
 
                 let pagination = {};
 
                 if (page > lastPage) {
-                    phnoTypes = null;
+                    phoneNumberTypes = null;
                     pagination = { lastPage };
                 } else {
-                    phnoTypes = phnoTypes.slice(begin, end);
+                    phoneNumberTypes = phoneNumberTypes.slice(begin, end);
                     pagination = {
-                        length: phnoTypesLength,
+                        length: phoneNumberTypesLength,
                         size: size,
                         page: page,
                         lastPage: lastPage,
@@ -87,7 +87,7 @@ export class GeneralPhnoTypeMockApi {
                 return [
                     200,
                     {
-                        phnoTypes,
+                        phoneNumberTypes,
                         pagination,
                     },
                 ];
@@ -97,19 +97,19 @@ export class GeneralPhnoTypeMockApi {
         // @ Phone Type - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/master-data/general/phno-type')
+            .onGet('api/master-data/general/phone-number-type')
             .reply(({ request }) => {
                 const id = request.params.get('id');
-                const phnoTypes = cloneDeep(this._phnoTypes);
-                const phnoType = phnoTypes.find((item) => item.id === id);
-                return [200, phnoType];
+                const phoneNumberTypes = cloneDeep(this._phoneNumberTypes);
+                const phoneNumberType = phoneNumberTypes.find((item) => item.id === id);
+                return [200, phoneNumberType];
             });
 
         // -----------------------------------------------------------------------------------------------------
         // @ Phone Type - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPost('api/master-data/general/phno-type')
+            .onPost('api/master-data/general/phone-number-type')
             .reply(() => {
                 const newPhnoType = {
                     id: FuseMockApiUtils.guid(),
@@ -117,7 +117,7 @@ export class GeneralPhnoTypeMockApi {
                     modifiedDate: '',
                 };
 
-                this._phnoTypes.unshift(newPhnoType);
+                this._phoneNumberTypes.unshift(newPhnoType);
                 return [200, newPhnoType];
             });
 
@@ -125,35 +125,35 @@ export class GeneralPhnoTypeMockApi {
         // @ Phone Type - PATCH
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onPatch('api/master-data/general/phno-type')
+            .onPatch('api/master-data/general/phone-number-type')
             .reply(({ request }) => {
                 const id = request.body.id;
-                const phnoType = cloneDeep(request.body.phnoType);
-                let updatedPhnoType = null;
+                const phoneNumberType = cloneDeep(request.body.phoneNumberType);
+                let updatedPhoneNumberType = null;
 
-                this._phnoTypes.forEach((item, index, phnoTypes) => {
+                this._phoneNumberTypes.forEach((item, index, phoneNumberTypes) => {
                     if (item.id === id) {
-                        phnoTypes[index] = assign({}, phnoTypes[index], phnoType);
-                        updatedPhnoType = phnoTypes[index];
+                        phoneNumberTypes[index] = assign({}, phoneNumberTypes[index], phoneNumberType);
+                        updatedPhoneNumberType = phoneNumberTypes[index];
                     }
                 });
 
-                return [200, updatedPhnoType];
+                return [200, updatedPhoneNumberType];
             });
 
         // -----------------------------------------------------------------------------------------------------
         // @ Phone Type - DELETE
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-        .onDelete('api/master-data/general/phno-type')
+        .onDelete('api/master-data/general/phone-number-type')
         .reply(({ request }) => {
             // Get the id
             const id = request.params.get('id');
 
             // Find the language and delete it
-            this._phnoTypes.forEach((item, index) => {
+            this._phoneNumberTypes.forEach((item, index) => {
                 if (item.id === id) {
-                    this._phnoTypes.splice(index, 1);
+                    this._phoneNumberTypes.splice(index, 1);
                 }
             });
 

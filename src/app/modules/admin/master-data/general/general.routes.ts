@@ -15,9 +15,9 @@ import { PaymentMethodService } from './payment-method/payment-method.service';
 import { DeliveryMethodComponent } from './delivery-method/delivery-method.component';
 import { DeliveryMethodService } from './delivery-method/delivery-method.service';
 import { DeliveryMethodListComponent } from './delivery-method/list/delivery-method.component';
-import { PhnoTypeComponent } from './phno-type/phno-type.component'
-import { PhnoTypeService } from './phno-type/phno-type.service';
-import { PhnoTypeListComponent } from './phno-type/list/phno-type.component'
+import { PhoneNumberTypeComponent } from './phone-number-type/phone-number-type.component'
+import { PhoneNumberTypeService } from './phone-number-type/phone-number-type.service';
+import { PhoneNumberTypeListComponent } from './phone-number-type/list/phone-number-type.component'
 import { CardTypeComponent } from './card-type/card-type.component';
 import { CardTypeService } from './card-type/card-type.service';
 import { CardTypeListComponent } from './card-type/list/card-type.component';
@@ -139,13 +139,13 @@ export default [
     },
     {
         path: 'phno-type',
-        component: PhnoTypeComponent,
+        component: PhoneNumberTypeComponent,
         children: [
             {
                 path: '',
-                component: PhnoTypeListComponent,
+                component: PhoneNumberTypeListComponent,
                 resolve: {
-                    countryTypes: () => inject(PhnoTypeService).getPhnoTypes(),
+                    countryTypes: () => inject(PhoneNumberTypeService).getPhoneNumberTypes(),
                 },
             },
         ],
@@ -362,7 +362,7 @@ export default [
                 resolve: {
                     contacts: () => inject(ContactService).getContacts(),
                     contactTypes: ()=> inject(ContactTypeService).getContactTypes(),
-                    phnoTypes: ()=> inject(PhnoTypeService).getPhnoTypes(),
+                    phoneNumberTypes: ()=> inject(PhoneNumberTypeService).getPhoneNumberTypes(),
                 },
             },
         ],

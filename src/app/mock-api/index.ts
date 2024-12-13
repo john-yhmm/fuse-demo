@@ -26,7 +26,7 @@ import { GeneralAddressTypeMockApi } from './master-data/general/address-type/ap
 import { GeneralCountryTypeMockApi } from './master-data/general/country-type/api';
 import { GeneralPaymentMethodMockApi } from './master-data/general/payment-method/api';
 import { GeneralDeliveryMethodMockApi } from './master-data/general/delivery-method/api';
-import { GeneralPhnoTypeMockApi } from './master-data/general/phno-type/api';
+import { GeneralPhoneNumberTypeMockApi } from './master-data/general/phone-number-type/api';
 import { GeneralCardTypeMockApi } from './master-data/general/card-type/api';
 import { GeneralCreditCardTypeMockApi } from './master-data/general/credit-card-type/api';
 import { GeneralUnitMeasureMockApi } from './master-data/general/unit-measure/api';
@@ -73,7 +73,7 @@ export const mockApiServices = [
     GeneralCountryTypeMockApi,
     GeneralPaymentMethodMockApi,
     GeneralDeliveryMethodMockApi,
-    GeneralPhnoTypeMockApi,
+    GeneralPhoneNumberTypeMockApi,
     GeneralCardTypeMockApi,
     GeneralCreditCardTypeMockApi,
     GeneralUnitMeasureMockApi,

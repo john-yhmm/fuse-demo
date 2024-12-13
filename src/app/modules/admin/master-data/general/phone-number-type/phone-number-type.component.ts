@@ -6,14 +6,14 @@ import {
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'phno-type',
-    templateUrl: './phno-type.component.html',
+    selector: 'phone-number-type',
+    templateUrl: './phone-number-type.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [RouterOutlet],
 })
-export class PhnoTypeComponent {
+export class PhoneNumberTypeComponent {
     /**
      * Constructor
      */
