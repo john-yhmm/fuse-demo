@@ -138,31 +138,20 @@
                             class="flex w-full flex-col"
                             [formGroup]="selectedContactTypeForm"
                         >
-                            <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Fields -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Name</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'name'"
-                                            />
-                                        </mat-form-field>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'modifiedDate'"
-                                            />
-                                        </mat-form-field>
-                                    </div>
-                                </div>
+                        <div class="flex flex-col p-8 sm:flex-row">
+                            <div class="flex flex-auto flex-wrap sm:flex-row">
+                                <!-- Name -->
+                                <mat-form-field class="flex-1 sm:mr-4">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput [formControlName]="'name'" />
+                                </mat-form-field>
+                                <!-- Modified Date -->
+                                <mat-form-field class="flex-1 sm:ml-4">
+                                    <mat-label>Modified Date</mat-label>
+                                    <input matInput [formControlName]="'modifiedDate'" />
+                                </mat-form-field>
                             </div>
+                        </div>
 
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
