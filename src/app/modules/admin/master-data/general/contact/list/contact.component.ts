@@ -46,8 +46,10 @@ import {
 } from 'rxjs';
 import { ContactTypeService } from '../../contact-type/contact-type.service';
 import { ContactType } from '../../contact-type/contact-type.types';
+import { PhnoType } from '../../phno-type/phno-type.types';
 import { ContactService } from '../contact.service';
 import { Contact, ContactPagination } from '../contact.types';
+import { PhnoTypeService } from '../../phno-type/phno-type.service';
 
 @Component({
     selector: 'contact-list',
@@ -103,6 +105,7 @@ export class ContactListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     contacts$: Observable<Contact[]>;
     contactTypes: ContactType[];
+    phnoTypes: PhnoType[];
     flashMessage: 'success' | 'error' | null = null;
     isLoading: boolean = false;
     pagination: ContactPagination;
@@ -120,7 +123,8 @@ export class ContactListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: UntypedFormBuilder,
         private _contactService: ContactService,
-        private _contactTypeService: ContactTypeService
+        private _contactTypeService: ContactTypeService,
+        private _phnoTypeService: PhnoTypeService,
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -149,6 +153,13 @@ export class ContactListComponent implements OnInit, AfterViewInit, OnDestroy {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((contactTypes: ContactType[]) => {
                 this.contactTypes = contactTypes;
+                this._changeDetectorRef.markForCheck();
+            });
+
+        this._phnoTypeService.phnoTypes$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((phnoTypes: PhnoType[]) => {
+                this.phnoTypes = phnoTypes;
                 this._changeDetectorRef.markForCheck();
             });
 

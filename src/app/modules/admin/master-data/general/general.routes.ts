@@ -64,6 +64,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ContactService } from './contact/contact.service';
 import { ContactListComponent } from './contact/list/contact.component';
 import { contactTypes } from 'app/mock-api/master-data/general/contact-type/data';
+import { phnoTypes } from 'app/mock-api/master-data/general/phno-type/data';
 
 export default [
     {
@@ -345,7 +346,8 @@ export default [
                 component: ContactListComponent,
                 resolve: {
                     contacts: () => inject(ContactService).getContacts(),
-                    contactTypes: ()=> inject(ContactTypeService).getContactTypes() // Adjust method name as needed
+                    contactTypes: ()=> inject(ContactTypeService).getContactTypes(),
+                    phnoTypes: ()=> inject(PhnoTypeService).getPhnoTypes(),
                 },
             },
         ],
