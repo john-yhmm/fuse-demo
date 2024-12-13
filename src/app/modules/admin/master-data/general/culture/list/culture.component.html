@@ -44,7 +44,6 @@
             </button>
         </div>
     </div>
-
     <!-- Main -->
     <div class="flex flex-auto overflow-hidden">
         <!-- Cultures list -->
@@ -78,12 +77,10 @@
                                     <div class="truncate">
                                         {{ culture.cultureCode }}
                                     </div>
-
                                     <!-- Name -->
                                     <div class="truncate">
                                         {{ culture.name }}
                                     </div>
-
                                     <!-- Status -->
                                     <div class="lg:block">
                                         @if (culture.status) {
@@ -103,7 +100,6 @@
                                             ></mat-icon>
                                         }
                                     </div>
-
                                     <!-- Details button -->
                                     <div>
                                         <button
@@ -136,7 +132,6 @@
                             }
                         }
                     </div>
-
                     <mat-paginator
                         class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
                         [ngClass]="{ 'pointer-events-none': isLoading }"
@@ -159,120 +154,98 @@
                 <div class="overflow-hidden shadow-lg">
                     <div class="flex border-b">
                         <!-- Selected culture form -->
-                        <form
-                            class="flex w-full flex-col"
+                        <form 
+                            class="flex w-full flex-col" 
                             [formGroup]="selectedCultureForm"
                         >
                             <div class="flex flex-col p-8 sm:flex-row">
                                 <div class="flex flex-auto flex-wrap">
-                                    <!-- Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Culture Code -->
+                                    <!-- Culture Code Column -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
                                         <mat-form-field class="w-full">
-                                            <mat-label
-                                                >Culture Code</mat-label
-                                            >
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'cultureCode'
-                                                "
+                                            <mat-label>Culture Code</mat-label>
+                                            <input 
+                                                matInput 
+                                                [formControlName]="'cultureCode'"
                                             />
                                         </mat-form-field>
-                                        <!-- Name -->
+            
+                                        <!-- Name Column -->
                                         <mat-form-field class="w-full">
                                             <mat-label>Name</mat-label>
-                                            <input
-                                                matInput
+                                            <input 
+                                                matInput 
                                                 [formControlName]="'name'"
                                             />
                                         </mat-form-field>
+            
+                                        <!-- Modified Date Column -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Modified Date</mat-label>
+                                            <input 
+                                                matInput 
+                                                [formControlName]="'modifiedDate'"
+                                            />
+                                        </mat-form-field>
+                                    </div>
+            
+                                    <div class="p-4">
                                         <!-- Status -->
-                                        <div class="mb-8 flex flex-col">
-                                            <span class="mb-2 font-semibold"
-                                                >Status</span
-                                            >
+                                        <div class="flex items-center">
+                                            <span class="mr-4 font-semibold">Status</span>
                                             <mat-slide-toggle
                                                 [formControlName]="'status'"
                                                 [color]="'primary'"
                                             >
-                                                {{
-                                                    selectedCultureForm.get(
-                                                        'status'
-                                                    ).value === true
-                                                        ? 'Active'
-                                                        : 'Disabled'
+                                                {{ 
+                                                    selectedCultureForm.get('status').value === true 
+                                                        ? 'Active' 
+                                                        : 'Disabled' 
                                                 }}
                                             </mat-slide-toggle>
                                         </div>
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'modifiedDate'
-                                                "
-                                            />
-                                        </mat-form-field>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="flex w-full items-center justify-between border-t px-8 py-4"
-                            >
-                                <button
-                                    class="-ml-4"
-                                    mat-button
-                                    [color]="'warn'"
-                                    (click)="deleteSelectedCulture()"
-                                >
-                                    Delete
-                                </button>
-                                <div class="flex items-center">
-                                    @if (flashMessage) {
-                                        <div class="mr-4 flex items-center">
-                                            @if (flashMessage === 'success') {
-                                                <mat-icon
-                                                    class="text-green-500"
-                                                    [svgIcon]="
-                                                        'heroicons_outline:check'
-                                                    "
-                                                ></mat-icon>
-                                                <span class="ml-2"
-                                                    >Culture updated</span
-                                                >
+            
+                                    <div class="flex w-full items-center justify-between border-t px-8 py-4">
+                                        <button
+                                            class="-ml-4"
+                                            mat-button
+                                            [color]="'warn'"
+                                            (click)="deleteSelectedCulture()"
+                                        >
+                                            Delete
+                                        </button>
+                                        <div class="flex items-center">
+                                            @if (flashMessage) {
+                                                <div class="mr-4 flex items-center">
+                                                    @if (flashMessage === 'success') {
+                                                        <mat-icon
+                                                            class="text-green-500"
+                                                            [svgIcon]="'heroicons_outline:check'"
+                                                        ></mat-icon>
+                                                        <span class="ml-2">Culture updated</span>
+                                                    }
+                                                    @if (flashMessage === 'error') {
+                                                        <mat-icon
+                                                            class="text-red-500"
+                                                            [svgIcon]="'heroicons_outline:x-mark'"
+                                                        ></mat-icon>
+                                                        <span class="ml-2">An error occurred, try again!</span>
+                                                    }
+                                                </div>
                                             }
-                                            @if (flashMessage === 'error') {
-                                                <mat-icon
-                                                    class="text-red-500"
-                                                    [svgIcon]="
-                                                        'heroicons_outline:x-mark'
-                                                    "
-                                                ></mat-icon>
-                                                <span class="ml-2"
-                                                    >An error occurred, try
-                                                    again!</span
-                                                >
-                                            }
+                                            <button
+                                                mat-flat-button
+                                                [color]="'primary'"
+                                                (click)="updateSelectedCulture()"
+                                            >
+                                                Update
+                                            </button>
                                         </div>
-                                    }
-                                    <button
-                                        mat-flat-button
-                                        [color]="'primary'"
-                                        (click)="updateSelectedCulture()"
-                                    >
-                                        Update
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </ng-template>
-        </div>
-    </div>
-</div>
