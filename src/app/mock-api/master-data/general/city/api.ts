@@ -152,15 +152,9 @@ export class GeneralCityMockApi {
                 const newCity = {
                     id: FuseMockApiUtils.guid(), // Generates a unique ID (UUID)
                     cityName: 'A New City',
-                    formalName: '',
-                    isoAlpa3Code: '',
-                    isoNumericCode: '',
-                    cityTypeID: '',
+                    stateProvinceId: '',
+                    location: '',
                     latestRecordedPopulation: '',
-                    continent: '',
-                    region: '',
-                    subregion: '',
-                    border: '',
                     lastEditedBy: 'Admin',
                     validFrom: '',
                     validTo: '',
