@@ -55,7 +55,7 @@ import { Contact, ContactPagination } from '../contact.types';
     styles: [
         /* language=SCSS */
         `
-            .state-province-grid {
+            .contact-grid {
                 grid-template-columns: 48px auto 40px;
 
                 @screen sm {

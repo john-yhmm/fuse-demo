@@ -61,8 +61,9 @@ import { CardTypeCreditCardComponent } from './card-type-credit-card/card-type-c
 import { CardTypeCreditCardListComponent } from './card-type-credit-card/list/card-type-credit-card.component';
 import { CardTypeCreditCardService } from './card-type-credit-card/card-type-credit-card.service';
 import { ContactComponent } from './contact/contact.component';
-import { ContactsService } from '../../apps/contacts/contacts.service';
+import { ContactService } from './contact/contact.service';
 import { ContactListComponent } from './contact/list/contact.component';
+import { contactTypes } from 'app/mock-api/master-data/general/contact-type/data';
 
 export default [
     {
@@ -343,7 +344,8 @@ export default [
                 path: '',
                 component: ContactListComponent,
                 resolve: {
-                    contacts: () => inject(ContactsService).getContacts(), // Adjust method name as needed
+                    contacts: () => inject(ContactService).getContacts(),
+                    contactTypes: ()=> inject(ContactTypeService).getContactTypes() // Adjust method name as needed
                 },
             },
         ],
