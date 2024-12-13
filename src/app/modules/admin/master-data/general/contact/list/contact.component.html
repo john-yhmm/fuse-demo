@@ -1,0 +1,336 @@
+<div
+    class="bg-card flex min-w-0 flex-auto flex-col dark:bg-transparent sm:absolute sm:inset-0 sm:overflow-hidden"
+>
+    <!-- Header -->
+    <div
+        class="relative flex flex-0 flex-col border-b px-6 py-8 sm:flex-row sm:items-center sm:justify-between md:px-8"
+    >
+        <!-- Loader -->
+        @if (isLoading) {
+            <div class="absolute inset-x-0 bottom-0">
+                <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+            </div>
+        }
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Contact</div>
+        <!-- Actions -->
+        <div class="mt-6 flex shrink-0 items-center sm:ml-4 sm:mt-0">
+            <!-- Search -->
+            <mat-form-field
+                class="fuse-mat-dense fuse-mat-rounded min-w-64"
+                [subscriptSizing]="'dynamic'"
+            >
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:magnifying-glass'"
+                ></mat-icon>
+                <input
+                    matInput
+                    [formControl]="searchInputControl"
+                    [autocomplete]="'off'"
+                    [placeholder]="'Search contact'"
+                />
+            </mat-form-field>
+            <!-- Add country button -->
+            <button
+                class="ml-4"
+                mat-flat-button
+                [color]="'primary'"
+                (click)="createContact()"
+            >
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">Add</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+        <!-- Country Types list -->
+        <div
+            class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto"
+        >
+            @if (contacts$ | async; as contacts) {
+                @if (contacts.length > 0) {
+                    <div class="grid">
+                        <div
+                            class="contact-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                            matSort
+                            matSortDisableClear
+                            style="grid-template-columns: 200px 1fr 100px"
+                        >
+                            <div [mat-sort-header]="'emailAddress'">
+                                Email Address
+                            </div>
+                            <div [mat-sort-header]="'phoneNumber'">
+                                Phone Number
+                            </div>
+                            <div class="hidden sm:block">Details</div>
+                        </div>
+                        @if (contacts$ | async; as contacts) {
+                            @for (
+                                contact of contacts;
+                                track trackByFn($index, contact)
+                            ) {
+                                <div
+                                    class="contact-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
+                                    style="
+                                        grid-template-columns: 200px 1fr 100px;
+                                    "
+                                >
+                                    <div class="truncate">
+                                        {{ contact.emailAddress }}
+                                    </div>
+                                    <div class="truncate">
+                                        {{ contact.phoneNumber }}
+                                    </div>
+
+                                    <div>
+                                        <button
+                                            class="h-7 min-h-7 min-w-10 px-2 leading-6"
+                                            mat-stroked-button
+                                            (click)="toggleDetails(contact.id)"
+                                        >
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="
+                                                    selectedContact?.id ===
+                                                    contact.id
+                                                        ? 'heroicons_solid:chevron-up'
+                                                        : 'heroicons_solid:chevron-down'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="grid">
+                                    @if (selectedContact?.id === contact.id) {
+                                        <ng-container
+                                            *ngTemplateOutlet="
+                                                rowDetailsTemplate;
+                                                context: {
+                                                    $implicit: contact,
+                                                }
+                                            "
+                                        >
+                                        </ng-container>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <mat-paginator
+                        class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
+                        [ngClass]="{ 'pointer-events-none': isLoading }"
+                        [length]="pagination.length"
+                        [pageIndex]="pagination.page"
+                        [pageSize]="pagination.size"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [showFirstLastButtons]="true"
+                    ></mat-paginator>
+                } @else {
+                    <div
+                        class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
+                    >
+                        There are no contacts!
+                    </div>
+                }
+            }
+
+            <ng-template #rowDetailsTemplate let-contact>
+                <div class="overflow-hidden shadow-lg">
+                    <div class="flex border-b">
+                        <form
+                            class="flex w-full flex-col"
+                            [formGroup]="selectedContactForm"
+                        >
+                            <div class="flex flex-col p-8 sm:flex-row">
+                                <div class="flex flex-auto flex-wrap">
+                                    <div
+                                        class="grid w-full grid-cols-1 gap-4 sm:grid-cols-3"
+                                    >
+                                        <!-- Contact Type ID -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Contact Type Name</mat-label
+                                            >
+                                            <mat-select
+                                                [formControlName]="
+                                                    'contactTypeId'
+                                                "
+                                            >
+                                                @for (
+                                                    contactType of contactTypes;
+                                                    track contactType
+                                                ) {
+                                                    <mat-option
+                                                        [value]="contactType.id"
+                                                    >
+                                                        {{ contactType.name }}
+                                                    </mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <!-- Phone Number -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Phone Number</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'phoneNumber'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <!-- Phone Number Type ID -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Phone Number Type</mat-label
+                                            >
+                                            <mat-select
+                                                [formControlName]="
+                                                    'phoneNumberTypeId'
+                                                "
+                                            >
+                                                @for (
+                                                    phnoType of phnoTypes;
+                                                    track phnoType
+                                                ) {
+                                                    <mat-option
+                                                        [value]="phnoType.id"
+                                                    >
+                                                        {{ phnoType.name }}
+                                                    </mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                        
+
+                                        <!-- Fax Number -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Fax Number</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'faxNumber'"
+                                            />
+                                        </mat-form-field>
+
+                                        <!-- Email Address -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Email Address</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'emailAddress'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <!-- Website URL -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Website URL</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'websiteUrl'"
+                                            />
+                                        </mat-form-field>
+
+                                        <!-- Custom Fields -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Custom Fields</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'customFields'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <!-- Last Edited By -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Last Edited By</mat-label
+                                            >
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'lastEditedBy'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <!-- Last Edited On -->
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Last Edited On</mat-label
+                                            >
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'lastEditedOn'
+                                                "
+                                            />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex w-full items-center justify-between border-t px-8 py-4"
+                            >
+                                <button
+                                    class="-ml-4"
+                                    mat-button
+                                    [color]="'warn'"
+                                    (click)="deleteSelectedContact()"
+                                >
+                                    Delete
+                                </button>
+
+                                <div class="flex items-center">
+                                    @if (flashMessage) {
+                                        <div class="mr-4 flex items-center">
+                                            @if (flashMessage === 'success') {
+                                                <mat-icon
+                                                    class="text-green-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:check'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >Contact updated</span
+                                                >
+                                            }
+                                            @if (flashMessage === 'error') {
+                                                <mat-icon
+                                                    class="text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:x-mark'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >An error occurred, try
+                                                    again!</span
+                                                >
+                                            }
+                                        </div>
+                                    }
+                                    <button
+                                        mat-flat-button
+                                        [color]="'primary'"
+                                        (click)="updateSelectedContact()"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

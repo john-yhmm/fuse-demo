@@ -178,6 +178,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/city',
                     },
+                    {
+                        id: 'master-data.general.contact',
+                        title: 'Contact',
+                        type: 'basic',
+                        link: '/master-data/general/contact',
+                    },
                 ],
             },
         ],

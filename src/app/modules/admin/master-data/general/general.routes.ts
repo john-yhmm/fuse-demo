@@ -63,6 +63,9 @@ import { CardTypeCreditCardService } from './card-type-credit-card/card-type-cre
 import { CityComponent } from './city/city.component';
 import { CityListComponent } from './city/list/city.component';
 import { CityService } from './city/city.service';
+import { ContactComponent } from './contact/contact.component';
+import { ContactService } from './contact/contact.service';
+import { ContactListComponent } from './contact/list/contact.component';
 
 export default [
     {
@@ -345,6 +348,21 @@ export default [
                 resolve: {
                     stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
                     cities: () => inject(CityService).getCities(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'contact',
+        component: ContactComponent,
+        children: [
+            {
+                path: '',
+                component: ContactListComponent,
+                resolve: {
+                    contacts: () => inject(ContactService).getContacts(),
+                    contactTypes: ()=> inject(ContactTypeService).getContactTypes(),
+                    phnoTypes: ()=> inject(PhnoTypeService).getPhnoTypes(),
                 },
             },
         ],
