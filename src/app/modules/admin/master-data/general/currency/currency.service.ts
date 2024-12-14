@@ -118,7 +118,7 @@ export class CurrencyService {
         );
     }
     /**
-     * Create currency type
+     * Create currency
      */
     createCurrency(): Observable<Currency> {
         return this.currencies$.pipe(
@@ -128,15 +128,27 @@ export class CurrencyService {
                     .post<Currency>('api/master-data/general/currency', {})
                     .pipe(
                         map((newCurrency) => {
-                            // Update the currencies with the new currency
+                            // Ensure no unintended default values
+                            newCurrency = {
+                                id: null,
+                                currencyCode: 'New currency code',
+                                currencyName: 'New currency name',
+                                symbol: 'New currency symbol',
+                                modifiedDate: '',
+                                ...newCurrency
+                            };
+
+                            // Update the currencies with the sanitized new currency
                             this._currencies.next([newCurrency, ...currencies]);
-                            // Return the new currency
+
+                            // Return the sanitized new currency
                             return newCurrency;
                         })
                     )
             )
         );
     }
+
     /**
      * Update currency
      *

@@ -61,8 +61,8 @@
                             matSortDisableClear
                         >
                             <div [mat-sort-header]="'currencyName'">Code</div>
-                            <div [mat-sort-header]="'currencyName'">Currency Name</div>
-                            <div [mat-sort-header]="'symbol'">Symbol</div>
+                            <div [mat-sort-header]="'currencyName'">Name</div>
+                            <div>Symbol</div>
                             <div class="hidden sm:block">Details</div>
                         </div>
                         <!-- Rows -->
@@ -145,108 +145,82 @@
                     <div class="flex border-b">
                         <!-- Selected currency form -->
                         <form
-                            class="flex w-full flex-col"
-                            [formGroup]="selectedCurrencyForm"
+                        class="flex w-full flex-col"
+                        [formGroup]="selectedCurrencyForm"
+                    >
+                        <div class="grid grid-cols-1 gap-4 p-8 sm:grid-cols-2 sm:gap-8">
+                            <!-- Column 1 -->
+                            <div>
+                                <!-- Currency Code -->
+                                <mat-form-field class="w-full">
+                                    <mat-label>Currency Code</mat-label>
+                                    <input matInput [formControlName]="'currencyCode'" />
+                                </mat-form-field>
+
+                                <!-- Currency Name -->
+                                <mat-form-field class="w-full">
+                                    <mat-label>Currency Name</mat-label>
+                                    <input matInput [formControlName]="'currencyName'" />
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Column 2 -->
+                            <div>
+                                <!-- Symbol -->
+                                <mat-form-field class="w-full">
+                                    <mat-label>Symbol</mat-label>
+                                    <input matInput [formControlName]="'symbol'" />
+                                </mat-form-field>
+
+                                <!-- Modified Date -->
+                                <mat-form-field class="w-full">
+                                    <mat-label>Modified Date</mat-label>
+                                    <input matInput [formControlName]="'modifiedDate'" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex w-full items-center justify-between border-t px-8 py-4"
                         >
-                            <div class="flex flex-col p-8 sm:flex-row">
-                                <div class="flex flex-auto flex-wrap">
-                                    <!-- Currency Name, SKU & etc. -->
-                                    <div
-                                        class="flex w-full flex-col sm:pl-8 lg:w-2/4"
-                                    >
-                                        <!-- Currency Code -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label
-                                                >Lannguage Code</mat-label
-                                            >
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'currencyCode'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                        <!-- Currency Name -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Currency Name</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'currencyName'"
-                                            />
-                                        </mat-form-field>
-
-                                        <!-- Symbol -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Symbol</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="'symbol'"
-                                            />
-                                        </mat-form-field>
-                                        
-                                        <!-- Modified Date -->
-                                        <mat-form-field class="w-full">
-                                            <mat-label>Modified Date</mat-label>
-                                            <input
-                                                matInput
-                                                [formControlName]="
-                                                    'modifiedDate'
-                                                "
-                                            />
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="flex w-full items-center justify-between border-t px-8 py-4"
+                            <button
+                                class="-ml-4"
+                                mat-button
+                                [color]="'warn'"
+                                (click)="deleteSelectedCurrency()"
                             >
+                                Delete
+                            </button>
+                            <div class="flex items-center">
+                                @if (flashMessage) {
+                                    <div class="mr-4 flex items-center">
+                                        @if (flashMessage === 'success') {
+                                            <mat-icon
+                                                class="text-green-500"
+                                                [svgIcon]="'heroicons_outline:check'"
+                                            ></mat-icon>
+                                            <span class="ml-2">Currency updated</span>
+                                        }
+                                        @if (flashMessage === 'error') {
+                                            <mat-icon
+                                                class="text-red-500"
+                                                [svgIcon]="'heroicons_outline:x-mark'"
+                                            ></mat-icon>
+                                            <span class="ml-2">An error occurred, try again!</span>
+                                        }
+                                    </div>
+                                }
                                 <button
-                                    class="-ml-4"
-                                    mat-button
-                                    [color]="'warn'"
-                                    (click)="deleteSelectedCurrency()"
+                                    mat-flat-button
+                                    [color]="'primary'"
+                                    (click)="updateSelectedCurrency()"
                                 >
-                                    Delete
+                                    Update
                                 </button>
-                                <div class="flex items-center">
-                                    @if (flashMessage) {
-                                        <div class="mr-4 flex items-center">
-                                            @if (flashMessage === 'success') {
-                                                <mat-icon
-                                                    class="text-green-500"
-                                                    [svgIcon]="
-                                                        'heroicons_outline:check'
-                                                    "
-                                                ></mat-icon>
-                                                <span class="ml-2"
-                                                    >Currency updated</span
-                                                >
-                                            }
-                                            @if (flashMessage === 'error') {
-                                                <mat-icon
-                                                    class="text-red-500"
-                                                    [svgIcon]="
-                                                        'heroicons_outline:x-mark'
-                                                    "
-                                                ></mat-icon>
-                                                <span class="ml-2"
-                                                    >An error occurred, try
-                                                    again!</span
-                                                >
-                                            }
-                                        </div>
-                                    }
-                                    <button
-                                        mat-flat-button
-                                        [color]="'primary'"
-                                        (click)="updateSelectedCurrency()"
-                                    >
-                                        Update
-                                    </button>
-                                </div>
                             </div>
-                        </form>
+                        </div>
+                    </form>
+
                     </div>
                 </div>
             </ng-template>
