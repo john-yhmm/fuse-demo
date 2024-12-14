@@ -66,6 +66,9 @@ import { CityService } from './city/city.service';
 import { ContactComponent } from './contact/contact.component';
 import { ContactService } from './contact/contact.service';
 import { ContactListComponent } from './contact/list/contact.component';
+import { AddressComponent } from './address/address.component';
+import { AddressListComponent } from './address/list/address.component';
+import { AddressService } from './address/address.service';
 
 export default [
     {
@@ -363,6 +366,22 @@ export default [
                     contacts: () => inject(ContactService).getContacts(),
                     contactTypes: ()=> inject(ContactTypeService).getContactTypes(),
                     phoneNumberTypes: ()=> inject(PhoneNumberTypeService).getPhoneNumberTypes(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'address',
+        component: AddressComponent,
+        children: [
+            {
+                path: '',
+                component: AddressListComponent,
+                resolve: {
+                    stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
+                    cities: () => inject(CityService).getCities(),
+                    addressTypes: () => inject(AddressTypeService).getAddressTypes(),
+                    addresses: () => inject(AddressService).getAddresses(),
                 },
             },
         ],
