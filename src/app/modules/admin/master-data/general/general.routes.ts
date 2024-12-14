@@ -63,6 +63,10 @@ import { CardTypeCreditCardService } from './card-type-credit-card/card-type-cre
 import { CityComponent } from './city/city.component';
 import { CityListComponent } from './city/list/city.component';
 import { CityService } from './city/city.service';
+import { addressTypes } from 'app/mock-api/master-data/general/address-type/data';
+import { AddressComponent } from './address/address.component';
+import { AddressListComponent } from './address/list/address.component';
+import { AddressService } from './address/address.service';
 
 export default [
     {
@@ -345,6 +349,22 @@ export default [
                 resolve: {
                     stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
                     cities: () => inject(CityService).getCities(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'address',
+        component: AddressComponent,
+        children: [
+            {
+                path: '',
+                component: AddressListComponent,
+                resolve: {
+                    stateProvinces: () => inject(StateProvinceService).getStateProvinces(),
+                    cities: () => inject(CityService).getCities(),
+                    addressTypes: () => inject(AddressTypeService).getAddressTypes(),
+                    addresses: () => inject(AddressService).getAddresses(),
                 },
             },
         ],
