@@ -27,7 +27,7 @@ export class GeneralAddressMockApi {
             .reply(({ request }) => {
                 // Get available queries
                 const search = request.params.get('search');
-                const sort = request.params.get('sort') || 'addresstypeId';
+                const sort = request.params.get('sort') || 'addressTypeId';
                 const order = request.params.get('order') || 'asc';
                 const page = parseInt(request.params.get('page') ?? '1', 10);
                 const size = parseInt(request.params.get('size') ?? '10', 10);
@@ -65,8 +65,8 @@ export class GeneralAddressMockApi {
                     // Filter the addresses
                     addresses = addresses.filter(
                         (address) =>
-                            address.addressTypeName &&
-                            address.addressTypeName
+                            address.addressTypeId &&
+                            address.addressTypeId
                                 .toLowerCase()
                                 .includes(search.toLowerCase())
                     );

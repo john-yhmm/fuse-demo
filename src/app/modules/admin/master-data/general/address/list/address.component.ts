@@ -200,7 +200,7 @@ export class AddressListComponent implements OnInit, AfterViewInit, OnDestroy {
                     return this._addressService.getAddresses( 
                         0,
                         10,
-                        'addressTypeName',
+                        'addressTypeId',
                         'asc',
                         query
                     );
@@ -219,7 +219,7 @@ export class AddressListComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this._sort && this._paginator) {
             // Set the initial sort
             this._sort.sort({
-                id: 'addressTypeName',
+                id: 'addressTypeId',
                 start: 'asc',
                 disableClear: true,
             });
