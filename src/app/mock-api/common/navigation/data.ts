@@ -190,6 +190,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/address',
                     },
+                    {
+                        id: 'master-data.general.currency',
+                        title: 'Currency',
+                        type: 'basic',
+                        link: '/master-data/general/currency',
+                    },
                 ],
             },
         ],

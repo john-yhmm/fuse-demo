@@ -44,6 +44,7 @@ import { GeneralCardTypeCreditCardMockApi } from './master-data/general/card-typ
 import { GeneralCityMockApi } from './master-data/general/city/api';
 import { GeneralContactMockAPi } from './master-data/general/contact/api';
 import { GeneralAddressMockApi } from './master-data/general/address/api';
+import { GeneralCurrencyMockApi } from './master-data/general/currency/api';
 
 export const mockApiServices = [
     AcademyMockApi,
@@ -92,4 +93,5 @@ export const mockApiServices = [
     GeneralCityMockApi,
     GeneralContactMockAPi,
     GeneralAddressMockApi,
+    GeneralCurrencyMockApi,
 ];
