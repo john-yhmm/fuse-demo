@@ -58,11 +58,11 @@
                         class="address-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opaaddress-5 md:px-8"
                         matSort
                         matSortDisableClear >
-                            <div [mat-sort-header]="'addressTypeId'">Address Type ID</div>
+                            <div [mat-sort-header]="'addressTypeId'">Address Type</div>
                             <div class="hidden sm:block" [mat-sort-header]="'addressLine1'">Address Line 1</div>
                             <div class="hidden sm:block" [mat-sort-header]="'addressLine2'">Address Line 2</div>
-                            <div class="hidden md:block" [mat-sort-header]="'cityId'">City ID</div>
-                            <div class="hidden md:block" [mat-sort-header]="'stateProvinceId'">StateProvince ID</div>
+                            <div class="hidden md:block" [mat-sort-header]="'cityId'">City</div>
+                            <div class="hidden md:block" [mat-sort-header]="'stateProvinceId'">StateProvince</div>
                             <div class="hidden sm:block">Details</div>
                         </div>
                         <!-- Rows -->
@@ -156,7 +156,7 @@
                                     >
                                         <!-- Address Type ID -->
                                         <mat-form-field class="min-w-[200px] flex-1">
-                                            <mat-label>Address Type ID</mat-label>
+                                            <mat-label>Address Type</mat-label>
                                             <mat-select
                                                 [formControlName]="'addressTypeId'"
                                             >
@@ -187,7 +187,7 @@
                                         </mat-form-field>
                                         <!-- City ID -->
                                         <mat-form-field class="min-w-[200px] flex-1">
-                                            <mat-label>City ID</mat-label>
+                                            <mat-label>City</mat-label>
                                             <mat-select
                                                 [formControlName]="'cityId'"
                                             >
@@ -202,7 +202,7 @@
                                         </mat-form-field>
                                         <!-- State Province ID -->
                                         <mat-form-field class="min-w-[200px] flex-1">
-                                            <mat-label>State Province ID</mat-label>
+                                            <mat-label>State Province</mat-label>
                                             <mat-select
                                                 [formControlName]="'stateProvinceId'"
                                             >

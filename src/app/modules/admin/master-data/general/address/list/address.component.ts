@@ -278,18 +278,18 @@ export class AddressListComponent implements OnInit, AfterViewInit, OnDestroy {
      * @param addressId
      */
     toggleDetails(addressId: string): void {
-        // If the state-province-type is already selected...
+        // If the address is already selected...
         if (this.selectedAddress && this.selectedAddress.id === addressId) {
             // Close the details
             this.closeDetails();
             return;
         }
 
-        // Get the state-province-type by id
+        // Get the address by id
         this._addressService
             .getAddressById(addressId)
             .subscribe((address) => {
-                // Set the selected state-province-type
+                // Set the selected address
                 this.selectedAddress = address;
 
                 // Fill the form

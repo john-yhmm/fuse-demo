@@ -145,7 +145,7 @@ export class GeneralAddressMockApi {
                 // Generate a new address 
                 const newAddress = {
                     id: FuseMockApiUtils.guid(), // Generates a unique ID (UUID)
-                    addresstypeId: '',
+                    addressTypeId: '',
                     addressLine1: 'New Address',
                     addressLine2: '',
                     cityId: '',
