@@ -1,0 +1,292 @@
+<div
+    class="bg-card flex min-w-0 flex-auto flex-col dark:bg-transparent sm:absolute sm:inset-0 sm:overflow-hidden"
+>
+    <!-- Header -->
+    <div
+        class="relative flex flex-0 flex-col border-b px-6 py-8 sm:flex-row sm:items-center sm:justify-between md:px-8"
+    >
+        <!-- Loader -->
+        @if (isLoading) {
+            <div class="absolute inset-x-0 bottom-0">
+                <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+            </div>
+        }
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Address</div>
+        <!-- Actions -->
+        <div class="mt-6 flex shrink-0 items-center sm:ml-4 sm:mt-0">
+            <!-- Search -->
+            <mat-form-field
+                class="fuse-mat-dense fuse-mat-rounded min-w-64"
+                [subscriptSizing]="'dynamic'"
+            >
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:magnifying-glass'"
+                ></mat-icon>
+                <input
+                    matInput
+                    [formControl]="searchInputControl"
+                    [autocomplete]="'off'"
+                    [placeholder]="'Search addresses'"
+                />
+            </mat-form-field>
+            <!-- Add address button -->
+            <button
+                class="ml-4"
+                mat-flat-button
+                [color]="'primary'"
+                (click)="createAddress()"
+            >
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">Add</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+        <!-- State Province Types list -->
+        <div
+            class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto">
+            @if (addresses$ | async; as addresses) {
+                @if (addresses.length > 0) {
+                    <div class="grid">
+                        <!-- Header -->
+                        <div
+                        class="address-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opaaddress-5 md:px-8"
+                        matSort
+                        matSortDisableClear >
+                            <div [mat-sort-header]="'addressTypeId'">Address Type</div>
+                            <div class="hidden sm:block" [mat-sort-header]="'addressLine1'">Address Line 1</div>
+                            <div class="hidden sm:block" [mat-sort-header]="'addressLine2'">Address Line 2</div>
+                            <div class="hidden md:block" [mat-sort-header]="'cityId'">City</div>
+                            <div class="hidden md:block" [mat-sort-header]="'stateProvinceId'">StateProvince</div>
+                            <div class="hidden sm:block">Details</div>
+                        </div>
+                        <!-- Rows -->
+                        @if (addresses$ | async; as addresses) {
+                            @for (
+                                address of addresses;
+                                track trackByFn($index, address)
+                            ) {
+                                <div
+                                class="address-grid grid items-center gap-4 border-b px-6 py-3 md:px-8">
+                                    <!-- Address Type ID -->
+                                    <div class="truncate">
+                                        {{address.addressTypeId}}
+                                    </div>
+                                    <!-- Address Line 1 -->
+                                    <div class="truncate hidden sm:block">
+                                        {{address.addressLine1}}
+                                    </div>
+                                    <!-- Address Line 2 -->
+                                    <div class="truncate hidden sm:block">
+                                        {{address.addressLine2}}
+                                    </div>
+                                    <!-- City ID -->
+                                    <div class="truncate hidden md:block">
+                                        {{address.cityId}}
+                                    </div>
+                                    <!-- StateProvince ID -->
+                                    <div class="truncate hidden md:block">
+                                        {{address.stateProvinceId}}
+                                    </div>
+                                    <!-- Details button -->
+                                    <div>
+                                        <button
+                                            class="h-7 min-h-7 min-w-10 px-2 leading-6"
+                                            mat-stroked-button
+                                            (click)="toggleDetails(address.id)">
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="
+                                                    selectedAddress?.id ===
+                                                    address.id
+                                                        ? 'heroicons_solid:chevron-up'
+                                                        : 'heroicons_solid:chevron-down'"
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="grid">
+                                    @if (selectedAddress?.id === address.id) {
+                                        <ng-container
+                                            *ngTemplateOutlet="
+                                                rowDetailsTemplate;
+                                                context: { $implicit: address }">
+                                    </ng-container>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <mat-paginator
+                        class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
+                        [ngClass]="{ 'pointer-events-none': isLoading }"
+                        [length]="pagination.length"
+                        [pageIndex]="pagination.page"
+                        [pageSize]="pagination.size"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [showFirstLastButtons]="true"
+                    ></mat-paginator>
+                } @else {
+                    <div
+                        class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
+                    >
+                        There are no addresses!
+                    </div>
+                }
+            }
+
+            <ng-template #rowDetailsTemplate let-address>
+                <div class="overflow-hidden shadow-lg">
+                    <div class="flex border-b">
+                        <!-- Selected address form -->
+                        <form
+                            class="flex w-full flex-col"
+                            [formGroup]="selectedAddressForm"
+                        >
+                            <div class="flex flex-col p-8 sm:flex-row">
+                                <div class="flex flex-auto flex-wrap">
+                                    <div
+                                        class="flex w-full flex-wrap gap-4 sm:pl-8"
+                                    >
+                                        <!-- Address Type ID -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Address Type</mat-label>
+                                            <mat-select
+                                                [formControlName]="'addressTypeId'"
+                                            >
+                                            @for (addressType of addressTypes;
+                                                track addressType
+                                                ){
+                                                <mat-option [value]="addressType.addressTypeName">
+                                                    {{ addressType.addressTypeName }}
+                                                </mat-option>
+                                            }
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <!-- Address Line 1 -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Address Line 1</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'addressLine1'"
+                                            />
+                                        </mat-form-field>
+                                        <!-- Address Line 2 -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Address Line 2</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'addressLine2'"
+                                            />
+                                        </mat-form-field>
+                                        <!-- City ID -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>City</mat-label>
+                                            <mat-select
+                                                [formControlName]="'cityId'"
+                                            >
+                                            @for (city of cities;
+                                                track city
+                                                ){
+                                                <mat-option [value]="city.cityName">
+                                                    {{ city.cityName }}
+                                                </mat-option>
+                                            }
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <!-- State Province ID -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>State Province</mat-label>
+                                            <mat-select
+                                                [formControlName]="'stateProvinceId'"
+                                            >
+                                            @for (stateProvince of stateProvinces;
+                                                track stateProvince
+                                                ){
+                                                <mat-option [value]="stateProvince.stateProvinceName">
+                                                    {{ stateProvince.stateProvinceName }}
+                                                </mat-option>
+                                            }
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <!-- Last Edited By -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Last Edited By</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'lastEditedBy'"
+                                            />
+                                        </mat-form-field>
+                                        <!-- Last Edited On -->
+                                        <mat-form-field class="min-w-[200px] flex-1">
+                                            <mat-label>Last Edited On</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'lastEditedOn'"
+                                            />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex w-full items-center justify-between border-t px-8 py-4"
+                            >
+                                <button
+                                    class="-ml-4"
+                                    mat-button
+                                    [color]="'warn'"
+                                    (click)="deleteSelectedAddress()"
+                                >
+                                    Delete
+                                </button>
+                                <div class="flex items-center">
+                                    @if (flashMessage) {
+                                        <div class="mr-4 flex items-center">
+                                            @if (flashMessage === 'success') {
+                                                <mat-icon
+                                                    class="text-green-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:check'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >Address updated</span
+                                                >
+                                            }
+                                            @if (flashMessage === 'error') {
+                                                <mat-icon
+                                                    class="text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:x-mark'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >An error occurred, try
+                                                    again!</span
+                                                >
+                                            }
+                                        </div>
+                                    }
+                                    <button
+                                        mat-flat-button
+                                        [color]="'primary'"
+                                        (click)="updateSelectedAddress()"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,30 @@ import { ProjectMockApi } from 'app/mock-api/dashboards/project/api';
 import { ActivitiesMockApi } from 'app/mock-api/pages/activities/api';
 import { IconsMockApi } from 'app/mock-api/ui/icons/api';
 import { GeneralLanguageMockApi } from './master-data/general/language/api';
+import { GeneralAddressTypeMockApi } from './master-data/general/address-type/api';
+import { GeneralCountryTypeMockApi } from './master-data/general/country-type/api';
+import { GeneralPaymentMethodMockApi } from './master-data/general/payment-method/api';
+import { GeneralDeliveryMethodMockApi } from './master-data/general/delivery-method/api';
+import { GeneralPhoneNumberTypeMockApi } from './master-data/general/phone-number-type/api';
+import { GeneralCardTypeMockApi } from './master-data/general/card-type/api';
+import { GeneralCreditCardTypeMockApi } from './master-data/general/credit-card-type/api';
+import { GeneralUnitMeasureMockApi } from './master-data/general/unit-measure/api';
+import { GeneralGeoLocationMockApi } from './master-data/general/geo-location/api';
+import { PaymentAvenueMockApi } from './master-data/general/paymentAvenue/api';
+import { GeneralBankAccountMockApi } from './master-data/general/bank-account/api';
+import { GeneralCultureMockApi } from './master-data/general/culture/api';
+import { ContactTypeMockApi } from './master-data/general/contact-type/api';
+import { GeneralTransactionTypeMockApi } from './master-data/general/transaction-type/api';
+import { GeneralCountryMockApi } from './master-data/general/country/api';
+import { GeneralCountryRegionMockApi } from './master-data/general/country-region/api';
+import { GeneralCardMockApi } from './master-data/general/card/api';
+import { GeneralStateProvinceMockApi } from './master-data/general/state-province/api';
+import { GeneralCardTypeCreditCardMockApi } from './master-data/general/card-type-credit-card/api'
+import { GeneralCityMockApi } from './master-data/general/city/api';
+import { GeneralContactMockAPi } from './master-data/general/contact/api';
+import { GeneralAddressMockApi } from './master-data/general/address/api';
 import { GeneralCurrencyMockApi } from './master-data/general/currency/api';
+import { GeneralCurrencyRateMockApi } from './master-data/general/currency-rate/api';
 export const mockApiServices = [
     AcademyMockApi,
     ActivitiesMockApi,
@@ -48,5 +71,28 @@ export const mockApiServices = [
     TasksMockApi,
     UserMockApi,
     GeneralLanguageMockApi,
+    GeneralAddressTypeMockApi,
+    GeneralCountryTypeMockApi,
+    GeneralPaymentMethodMockApi,
+    GeneralDeliveryMethodMockApi,
+    GeneralPhoneNumberTypeMockApi,
+    GeneralCardTypeMockApi,
+    GeneralCreditCardTypeMockApi,
+    GeneralUnitMeasureMockApi,
+    GeneralGeoLocationMockApi,
+    PaymentAvenueMockApi, 
+    GeneralBankAccountMockApi,
+    GeneralCultureMockApi,
+    ContactTypeMockApi,
+    GeneralTransactionTypeMockApi,
+    GeneralCountryMockApi,
+    GeneralCountryRegionMockApi,
+    GeneralCardMockApi,
+    GeneralStateProvinceMockApi,
+    GeneralCardTypeCreditCardMockApi,
+    GeneralCityMockApi,
+    GeneralContactMockAPi,
+    GeneralAddressMockApi,
     GeneralCurrencyMockApi,
+    GeneralCurrencyRateMockApi,
 ];

@@ -1,0 +1,216 @@
+<div
+    class="bg-card flex min-w-0 flex-auto flex-col dark:bg-transparent sm:absolute sm:inset-0 sm:overflow-hidden"
+>
+    <!-- Header -->
+    <div
+        class="relative flex flex-0 flex-col border-b px-6 py-8 sm:flex-row sm:items-center sm:justify-between md:px-8"
+    >
+        <!-- Loader -->
+        @if (isLoading) {
+            <div class="absolute inset-x-0 bottom-0">
+                <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+            </div>
+        }
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Credit Card Type</div>
+        <!-- Actions -->
+        <div class="mt-6 flex shrink-0 items-center sm:ml-4 sm:mt-0">
+            <!-- Search -->
+            <mat-form-field
+                class="fuse-mat-dense fuse-mat-rounded min-w-64"
+                [subscriptSizing]="'dynamic'"
+            >
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:magnifying-glass'"
+                ></mat-icon>
+                <input
+                    matInput
+                    [formControl]="searchInputControl"
+                    [autocomplete]="'off'"
+                    [placeholder]="'Search Credit Card Type'"
+                />
+            </mat-form-field>
+            <!-- Add language button -->
+            <button
+                class="ml-4"
+                mat-flat-button
+                [color]="'primary'"
+                (click)="createCreditCardType()"
+            >
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">Add</span>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+        <!-- Credit Card Types list -->
+        <div
+            class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto"
+        >
+            @if (creditcardtypes$ | async; as creditcardtypes) {
+                @if (creditcardtypes.length > 0) {
+                    <div class="grid">
+                        <!-- Header -->
+                        <div
+                            class="creditcardtype-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                            style="grid-template-columns: 120px 80px;"
+                            matSort
+                            matSortDisableClear
+                        >
+                            <div [mat-sort-header]="'name'">Name</div>
+                            <div class="hidden sm:block">Details</div>
+                        </div>
+                        <!-- Rows -->
+                        @if (creditcardtypes$ | async; as creditcardtypes) {
+                            @for (
+                                 creditcardtype of (creditcardtypes??[]);
+                                track trackByFn($index, creditcardtype)
+                            ) {
+                                <div
+                                    class="creditcardtype-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
+                                    style="grid-template-columns: 120px 80px;"
+                                >
+
+                                    <!-- Name -->
+                                    <div class="truncate">
+                                        {{ creditcardtype.name }}
+                                    </div>
+
+                                    <!-- Details button -->
+                                    <div>
+                                        <button
+                                            class="h-7 min-h-7 min-w-10 px-2 leading-6"
+                                            mat-stroked-button
+                                            (click)="toggleDetails(creditcardtype.id)"
+                                        >
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="
+                                                    selectedCreditCardType?.id ===
+                                                    creditcardtype.id
+                                                        ? 'heroicons_solid:chevron-up'
+                                                        : 'heroicons_solid:chevron-down'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="grid">
+                                    @if (selectedCreditCardType?.id === creditcardtype.id) {
+                                        <ng-container
+                                            *ngTemplateOutlet="
+                                                rowDetailsTemplate;
+                                                context: { $implicit: creditcardtype }
+                                            "
+                                        ></ng-container>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <mat-paginator
+                        class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
+                        [ngClass]="{ 'pointer-events-none': isLoading }"
+                        [length]="pagination.length"
+                        [pageIndex]="pagination.page"
+                        [pageSize]="pagination.size"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [showFirstLastButtons]="true"
+                    ></mat-paginator>
+                } @else {
+                    <div
+                        class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
+                    >
+                        There are no credit card types!
+                    </div>
+                }
+            }
+
+            <ng-template #rowDetailsTemplate let-creditcardtype>
+                <div class="overflow-hidden shadow-lg">
+                    <div class="flex border-b">
+                        <!-- Selected language form -->
+                        <form
+                            class="flex w-full flex-col"
+                            [formGroup]="selectedCreditCardTypeForm"
+                        >
+                        <div class="flex flex-col p-8 sm:flex-row">
+                            <div class="flex flex-auto flex-wrap">
+                                <div class="flex w-full flex-row space-x-4">
+                                    <!-- Name -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput [formControlName]="'name'" />
+                                    </mat-form-field>
+                                    <!-- Modified Date -->
+                                    <mat-form-field class="flex-1">
+                                        <mat-label>Modified Date</mat-label>
+                                        <input matInput [formControlName]="'modifiedDate'" />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+
+                            <div
+                                class="flex w-full items-center justify-between border-t px-8 py-4"
+                            >
+                                <button
+                                    class="-ml-4"
+                                    mat-button
+                                    [color]="'warn'"
+                                    (click)="deleteSelectedCreditCardType()"
+                                >
+                                    Delete
+                                </button>
+                                <div class="flex items-center">
+                                    @if (flashMessage) {
+                                        <div class="mr-4 flex items-center">
+                                            @if (flashMessage === 'success') {
+                                                <mat-icon
+                                                    class="text-green-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:check'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >Credit Card Type updated</span
+                                                >
+                                            }
+                                            @if (flashMessage === 'error') {
+                                                <mat-icon
+                                                    class="text-red-500"
+                                                    [svgIcon]="
+                                                        'heroicons_outline:x-mark'
+                                                    "
+                                                ></mat-icon>
+                                                <span class="ml-2"
+                                                    >An error occurred, try
+                                                    again!</span
+                                                >
+                                            }
+                                        </div>
+                                    }
+                                    <button
+                                        mat-flat-button
+                                        [color]="'primary'"
+                                        (click)="updateSelectedCreditCardType()"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
