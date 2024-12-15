@@ -191,24 +191,24 @@ export class GeneralPeopleMockAPi {
             .reply(({ request }) => {
                 // Get the id and contact data
                 const id = request.body.id;
-                const person = cloneDeep(request.body.person);
+                const people = cloneDeep(request.body.people);
 
                 // Prepare the updated contact
-                let updatedPerson = null;
+                let updatedPeople = null;
 
                 // Find the contact and update it
                 this._peoples.forEach((item, index, peoples) => {
                     if (item.id === id) {
                         // Update the contact
-                        peoples[index] = assign({}, peoples[index], person);
+                        peoples[index] = assign({}, peoples[index], people);
 
                         // Store the updated contact
-                        updatedPerson = peoples[index];
+                        updatedPeople = peoples[index];
                     }
                 });
 
                 // Return the response
-                return [200, updatedPerson];
+                return [200, updatedPeople];
             });
 
         // -----------------------------------------------------------------------------------------------------

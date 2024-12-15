@@ -51,94 +51,89 @@
         <div
             class="flex flex-auto flex-col overflow-hidden sm:mb-18 sm:overflow-y-auto"
         >
-        @if (peoples$ | async; as peoples) {
-            @if (peoples.length > 0) {
-                <div class="grid">
-                    <div
-                        class="people-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
-                        matSort
-                        matSortDisableClear
-                        style="grid-template-columns: 200px 1fr 100px"
-                    >
-                        <div [mat-sort-header]="'id'">
-                            ID
+            @if (peoples$ | async; as peoples) {
+                @if (peoples.length > 0) {
+                    <div class="grid">
+                        <div
+                            class="people-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
+                            matSort
+                            matSortDisableClear
+                            style="grid-template-columns: 200px 1fr 100px"
+                        >
+                            <div [mat-sort-header]="'id'">ID</div>
+                            <div [mat-sort-header]="'fullName'">Full Name</div>
+                            <div class="hidden sm:block">Details</div>
                         </div>
-                        <div [mat-sort-header]="'fullName'">
-                            Full Name
-                        </div>
-                        <div class="hidden sm:block">Details</div>
-                    </div>
-                    @if (peoples$ | async; as peoples) {
-                        @for (
-                            people of peoples;
-                            track trackByFn($index, people)
-                        ) {
-                            <div
-                                class="people-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
-                                style="
-                                    grid-template-columns: 200px 1fr 100px;
-                                "
-                            >
-                                <div class="truncate">
-                                    {{ people.id }}
+                        @if (peoples$ | async; as peoples) {
+                            @for (
+                                people of peoples;
+                                track trackByFn($index, people)
+                            ) {
+                                <div
+                                    class="people-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
+                                    style="
+                                        grid-template-columns: 200px 1fr 100px;
+                                    "
+                                >
+                                    <div class="truncate">
+                                        {{ people.id }}
+                                    </div>
+                                    <div class="truncate">
+                                        {{ people.fullName }}
+                                    </div>
+
+                                    <div>
+                                        <button
+                                            class="h-7 min-h-7 min-w-10 px-2 leading-6"
+                                            mat-stroked-button
+                                            (click)="toggleDetails(people.id)"
+                                        >
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                [svgIcon]="
+                                                    selectedPeople?.id ===
+                                                    people.id
+                                                        ? 'heroicons_solid:chevron-up'
+                                                        : 'heroicons_solid:chevron-down'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="truncate">
-                                    {{ people.fullName }}
-                                </div>
-        
-                                <div>
-                                    <button
-                                        class="h-7 min-h-7 min-w-10 px-2 leading-6"
-                                        mat-stroked-button
-                                        (click)="toggleDetails(people.id)"
-                                    >
-                                        <mat-icon
-                                            class="icon-size-5"
-                                            [svgIcon]="
-                                                selectedPeople?.id ===
-                                                people.id
-                                                    ? 'heroicons_solid:chevron-up'
-                                                    : 'heroicons_solid:chevron-down'
+                                <div class="grid">
+                                    @if (selectedPeople?.id === people.id) {
+                                        <ng-container
+                                            *ngTemplateOutlet="
+                                                rowDetailsTemplate;
+                                                context: {
+                                                    $implicit: people,
+                                                }
                                             "
-                                        ></mat-icon>
-                                    </button>
+                                        >
+                                        </ng-container>
+                                    }
                                 </div>
-                            </div>
-                            <div class="grid">
-                                @if (selectedPeople?.id === people.id) {
-                                    <ng-container
-                                        *ngTemplateOutlet="
-                                            rowDetailsTemplate;
-                                            context: {
-                                                $implicit: people,
-                                            }
-                                        "
-                                    >
-                                    </ng-container>
-                                }
-                            </div>
+                            }
                         }
-                    }
-                </div>
-        
-                <mat-paginator
-                    class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
-                    [ngClass]="{ 'pointer-events-none': isLoading }"
-                    [length]="pagination.length"
-                    [pageIndex]="pagination.page"
-                    [pageSize]="pagination.size"
-                    [pageSizeOptions]="[5, 10, 25, 100]"
-                    [showFirstLastButtons]="true"
-                ></mat-paginator>
-            } @else {
-                <div
-                    class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
-                >
-                    There are no people!
-                </div>
+                    </div>
+
+                    <mat-paginator
+                        class="z-10 border-b bg-gray-50 dark:bg-transparent sm:absolute sm:inset-x-0 sm:bottom-0 sm:border-b-0 sm:border-t"
+                        [ngClass]="{ 'pointer-events-none': isLoading }"
+                        [length]="pagination.length"
+                        [pageIndex]="pagination.page"
+                        [pageSize]="pagination.size"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                        [showFirstLastButtons]="true"
+                    ></mat-paginator>
+                } @else {
+                    <div
+                        class="border-t p-8 text-center text-4xl font-semibold tracking-tight sm:p-16"
+                    >
+                        There are no people!
+                    </div>
+                }
             }
-        }
-        
 
             <ng-template #rowDetailsTemplate let-contact>
                 <div class="overflow-hidden shadow-lg">
@@ -147,142 +142,249 @@
                             class="flex w-full flex-col"
                             [formGroup]="selectedPeopleForm"
                         >
-                        <div class="flex flex-col p-8 sm:flex-row">
-                            <div class="flex flex-auto flex-wrap">
-                                <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>ID</mat-label>
-                                        <input matInput [formControlName]="'id'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Full Name</mat-label>
-                                        <input matInput [formControlName]="'fullName'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Preferred Name</mat-label>
-                                        <input matInput [formControlName]="'preferredName'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Search Name</mat-label>
-                                        <input matInput [formControlName]="'searchName'" />
-                                    </mat-form-field>
-                        
-                                    <!-- <mat-form-field class="w-full">
-                                        <mat-label>Is Permitted To Logon</mat-label>
-                                        <mat-checkbox [formControlName]="'isPermittedToLogon'"></mat-checkbox>
-                                    </mat-form-field> -->
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Logon Name</mat-label>
-                                        <input matInput [formControlName]="'logonName'" />
-                                    </mat-form-field>
-                        
-                                    <!-- <mat-form-field class="w-full">
-                                        <mat-label>Is External Logon Provider</mat-label>
-                                        <mat-checkbox [formControlName]="'isExternalLogonProvider'"></mat-checkbox>
-                                    </mat-form-field> -->
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Hashed Password</mat-label>
-                                        <input matInput type="password" [formControlName]="'hashedPassword'" />
-                                    </mat-form-field>
-                        
-                                    <!-- <mat-form-field class="w-full">
-                                        <mat-label>Is System User</mat-label>
-                                        <mat-checkbox [formControlName]="'isSystemUser'"></mat-checkbox>
-                                    </mat-form-field> -->
-                        
-                                    <!-- <mat-form-field class="w-full">
-                                        <mat-label>Is Employee</mat-label>
-                                        <mat-checkbox [formControlName]="'isEmployee'"></mat-checkbox>
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Is Sales Person</mat-label>
-                                        <mat-checkbox [formControlName]="'isSalesPerson'"></mat-checkbox>
-                                    </mat-form-field> -->
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>User Preferences</mat-label>
-                                        <input matInput [formControlName]="'userPreferences'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label
-                                            >Contact Name</mat-label
-                                        >
-                                        <mat-select
-                                            [formControlName]="
-                                                'contactId'
-                                            "
-                                        >
-                                            @for (
-                                                contact of contacts;
-                                                track contact
-                                            ) {
-                                                <mat-option
-                                                    [value]="contact.id"
-                                                >
-                                                    {{ contact.emailAddress }}
-                                                </mat-option>
-                                            }
-                                        </mat-select>
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Photo</mat-label>
-                                        <input matInput [formControlName]="'photo'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Custom Fields</mat-label>
-                                        <input matInput [formControlName]="'customFields'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label
-                                            >Language Name</mat-label
-                                        >
-                                        <mat-select
-                                            [formControlName]="
-                                                'languageId'
-                                            "
-                                        >
-                                            @for (
-                                                language of languages;
-                                                track language
-                                            ) {
-                                                <mat-option
-                                                    [value]="language.id"
-                                                >
-                                                    {{ language.name }}
-                                                </mat-option>
-                                            }
-                                        </mat-select>
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Last Edited By</mat-label>
-                                        <input matInput [formControlName]="'lastEditedBy'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Valid From</mat-label>
-                                        <input matInput [formControlName]="'validFrom'" />
-                                    </mat-form-field>
-                        
-                                    <mat-form-field class="w-full">
-                                        <mat-label>Valid To</mat-label>
-                                        <input matInput [formControlName]="'validTo'" />
-                                    </mat-form-field>
+                            <div class="flex flex-col p-8 sm:flex-row">
+                                <div class="flex flex-auto flex-wrap">
+                                    <div
+                                        class="grid w-full grid-cols-1 gap-4 sm:grid-cols-3"
+                                    >
+                                        <mat-form-field class="w-full">
+                                            <mat-label>ID</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'id'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Full Name</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'fullName'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Preferred Name</mat-label
+                                            >
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'preferredName'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Search Name</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'searchName'"
+                                            />
+                                        </mat-form-field>
+
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Is Permitted To Logon</span
+                                            >
+                                            <mat-slide-toggle
+                                                [formControlName]="
+                                                    'isPermittedToLogon'
+                                                "
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get(
+                                                        'isPermittedToLogon'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Logon Name</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'logonName'"
+                                            />
+                                        </mat-form-field>
+
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Is External Logon
+                                                Provider</span
+                                            >
+                                            <mat-slide-toggle
+                                                [formControlName]="
+                                                    'isExternalLogonProvider'
+                                                "
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get(
+                                                        'isExternalLogonProvider'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Hashed Password</mat-label
+                                            >
+                                            <input
+                                                matInput
+                                                type="password"
+                                                [formControlName]="
+                                                    'hashedPassword'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold">Is System User</span>
+                                            <mat-slide-toggle
+                                                [formControlName]="'isSystemUser'"
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get('isSystemUser').value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold">Is Employee</span>
+                                            <mat-slide-toggle
+                                                [formControlName]="'isEmployee'"
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get('isEmployee').value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+                                        
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold">Is Sales Person</span>
+                                            <mat-slide-toggle
+                                                [formControlName]="'isSalesPerson'"
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get('isSalesPerson').value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >User Preferences</mat-label
+                                            >
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'userPreferences'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Contact Name</mat-label>
+                                            <mat-select
+                                                [formControlName]="'contactId'"
+                                            >
+                                                @for (
+                                                    contact of contacts;
+                                                    track contact
+                                                ) {
+                                                    <mat-option
+                                                        [value]="contact.id"
+                                                    >
+                                                        {{
+                                                            contact.emailAddress
+                                                        }}
+                                                    </mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Photo</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'photo'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Custom Fields</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'customFields'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Language Name</mat-label>
+                                            <mat-select
+                                                [formControlName]="'languageId'"
+                                            >
+                                                @for (
+                                                    language of languages;
+                                                    track language
+                                                ) {
+                                                    <mat-option
+                                                        [value]="language.id"
+                                                    >
+                                                        {{ language.name }}
+                                                    </mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label
+                                                >Last Edited By</mat-label
+                                            >
+                                            <input
+                                                matInput
+                                                [formControlName]="
+                                                    'lastEditedBy'
+                                                "
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Valid From</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'validFrom'"
+                                            />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="w-full">
+                                            <mat-label>Valid To</mat-label>
+                                            <input
+                                                matInput
+                                                [formControlName]="'validTo'"
+                                            />
+                                        </mat-form-field>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
 
                             <div
                                 class="flex w-full items-center justify-between border-t px-8 py-4"
