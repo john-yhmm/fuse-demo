@@ -196,6 +196,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/master-data/general/currency',
                     },
+                    {
+                        id: 'master-data.general.currency-rate',
+                        title: 'Currency Rate',
+                        type: 'basic',
+                        link: '/master-data/general/currency-rate',
+                    },
                 ],
             },
         ],

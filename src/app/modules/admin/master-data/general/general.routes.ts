@@ -69,10 +69,13 @@ import { ContactListComponent } from './contact/list/contact.component';
 import { AddressComponent } from './address/address.component';
 import { AddressListComponent } from './address/list/address.component';
 import { AddressService } from './address/address.service';
-
 import { CurrencyComponent } from './currency/currency.component';
 import { CurrencyService } from './currency/currency.service';
 import { CurrencyListComponent } from './currency/list/currency.component';
+import { CurrencyRateComponent } from './currency-rate/currency-rate.component';
+import { CurrencyRateService } from './currency-rate/currency-rate.service';
+import { CurrencyRateListComponent } from './currency-rate/list/currency-rate.component';
+
 export default [
     {
         path: '',
@@ -398,6 +401,20 @@ export default [
                 component: CurrencyListComponent,
                 resolve: {
                     currencies: () => inject(CurrencyService).getCurrencies(),
+                },
+            },
+        ],
+    },
+    {
+        path: 'currency-rate',
+        component: CurrencyRateComponent,
+        children: [
+            {
+                path: '',
+                component: CurrencyRateListComponent,
+                resolve: {
+                    currencyRates: () => inject(CurrencyRateService).getCurrencyRates(),
+                    currencyTypes: ()=> inject(CurrencyService).getCurrencies(),
                 },
             },
         ],
