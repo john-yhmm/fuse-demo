@@ -49,8 +49,7 @@
                         <div
                             class="currency-rate-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
                             matSort
-                            matSortDisableClear
-                            style="grid-template-columns: 200px 200px 200px 150px">
+                            matSortDisableClear>
                             <div [mat-sort-header]="'currencyRateDate'">Date</div>
                             <div [mat-sort-header]="'fromCurrencyID'">From</div>
                             <div [mat-sort-header]="'toCurrencyID'">To</div>
@@ -63,8 +62,7 @@
                                 track trackByFn($index, currencyRate)
                             ) {
                                 <div
-                                class="currency-rate-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
-                                style="grid-template-columns: 200px 200px 200px 150px">
+                                class="currency-rate-grid grid items-center gap-4 border-b px-6 py-3 md:px-8">
                                     <!-- Currency Rate Date -->
                                     <div class="truncate">
                                         {{ currencyRate.currencyRateDate }}
@@ -141,7 +139,7 @@
                                         <!-- First column -->
                                     <div class="flex flex-col">
                                             <!-- Currency Rate Date-->
-                                        <mat-form-field class="min-w-[200px] flex-1">
+                                        <mat-form-field class="w-full">
                                             <mat-label>Currency Rate Date</mat-label>
                                             <input
                                                 matInput
@@ -191,7 +189,7 @@
                                         <!-- Second Column -->
                                     <div class="flex flex-col">
                                             <!-- Average Rate-->
-                                        <mat-form-field class="min-w-[200px] flex-1">
+                                        <mat-form-field class="w-full">
                                             <mat-label>Average Rate</mat-label>
                                             <input
                                                 matInput
@@ -200,7 +198,7 @@
                                     </div>
                                             <!-- End of Day Rate -->
                                     <div class="flex flex-col">
-                                        <mat-form-field class="min-w-[200px] flex-1">
+                                        <mat-form-field class="w-full">
                                             <mat-label>End of Day Rate</mat-label>
                                             <input
                                                 matInput
@@ -209,7 +207,7 @@
                                     </div>
                                             <!-- Modified Date -->
                                     <div class="flex flex-col">
-                                        <mat-form-field class="min-w-[200px] flex-1">
+                                        <mat-form-field class="w-full">
                                             <mat-label>Modified Date</mat-label>
                                             <input
                                                 matInput
