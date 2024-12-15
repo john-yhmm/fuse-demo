@@ -66,6 +66,10 @@ import { CityService } from './city/city.service';
 import { ContactComponent } from './contact/contact.component';
 import { ContactService } from './contact/contact.service';
 import { ContactListComponent } from './contact/list/contact.component';
+import { PeopleComponent } from './people/people.component';
+import { PeopleService } from './people/people.service';
+import { PeopleListComponent } from './people/list/people.component';
+import { languages } from 'app/mock-api/master-data/general/language/data';
 
 export default [
     {
@@ -367,4 +371,21 @@ export default [
             },
         ],
     },
+
+    {
+        path: 'people',
+        component: PeopleComponent, // Replace with your actual PeopleComponent
+        children: [
+            {
+                path: '',
+                component: PeopleListComponent, // Replace with your actual PeopleListComponent
+                resolve: {
+                    peoples: () => inject(PeopleService).getPeoples(),
+                    contacts: () => inject(ContactService).getContacts(),
+                    languages: () => inject(LanguageService).getLanguages(),
+                },
+            },
+        ],
+    },
+    
 ] as Routes;
