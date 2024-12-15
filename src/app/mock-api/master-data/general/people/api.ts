@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FuseMockApiService, FuseMockApiUtils } from '@fuse/lib/mock-api';
-import { people as peopleData } from 'app/mock-api/master-data/general/poeple/data';
+import { people as peopleData } from 'app/mock-api/master-data/general/people/data';
 import { assign, cloneDeep } from 'lodash-es';
 
 @Injectable({ providedIn: 'root' })
 export class GeneralPeopleMockAPi {
-    private _people: any[] = peopleData;
+    private _peoples: any[] = peopleData;
 
     constructor(private _fuseMockApiService: FuseMockApiService) {
         this.registerHandlers();
@@ -33,7 +33,7 @@ export class GeneralPeopleMockAPi {
                 const size = parseInt(request.params.get('size') ?? '10', 10);
 
                 // Clone the people
-                let people: any[] | null = cloneDeep(this._people);
+                let peoples: any[] | null = cloneDeep(this._peoples);
 
                 // Sort the people
                 if (
@@ -57,7 +57,7 @@ export class GeneralPeopleMockAPi {
                     sort === 'validFrom' ||
                     sort === 'validTo'
                 ) {
-                    people.sort((a, b) => {
+                    peoples.sort((a, b) => {
                         const fieldA = a[sort].toString().toUpperCase();
                         const fieldB = b[sort].toString().toUpperCase();
                         return order === 'asc'
@@ -65,7 +65,7 @@ export class GeneralPeopleMockAPi {
                             : fieldB.localeCompare(fieldA);
                     });
                 } else {
-                    people.sort((a, b) =>
+                    peoples.sort((a, b) =>
                         order === 'asc' ? a[sort] - b[sort] : b[sort] - a[sort]
                     );
                 }
@@ -73,22 +73,22 @@ export class GeneralPeopleMockAPi {
                 // If search exists...
                 if (search) {
                     // Filter the people
-                    people = people.filter(
-                        (person) =>
-                            person.searchName &&
-                            person.searchName
+                    peoples = peoples.filter(
+                        (people) =>
+                            people.searchName &&
+                            people.searchName
                                 .toLowerCase()
                                 .includes(search.toLowerCase())
                     );
                 }
 
                 // Paginate - Start
-                const peopleLength = people.length;
+                const peoplesLength = peoples.length;
 
                 // Calculate pagination details
                 const begin = page * size;
-                const end = Math.min(size * (page + 1), peopleLength);
-                const lastPage = Math.max(Math.ceil(peopleLength / size), 1);
+                const end = Math.min(size * (page + 1), peoplesLength);
+                const lastPage = Math.max(Math.ceil(peoplesLength / size), 1);
 
                 // Prepare the pagination object
                 let pagination = {};
@@ -98,17 +98,17 @@ export class GeneralPeopleMockAPi {
                 // contacts but also send the last possible page so
                 // the app can navigate to there
                 if (page > lastPage) {
-                    people = null;
+                    peoples = null;
                     pagination = {
                         lastPage,
                     };
                 } else {
                     // Paginate the results by size
-                    people = people.slice(begin, end);
+                    peoples = peoples.slice(begin, end);
 
                     // Prepare the pagination mock-api
                     pagination = {
-                        length: peopleLength,
+                        length: peoplesLength,
                         size: size,
                         page: page,
                         lastPage: lastPage,
@@ -121,7 +121,7 @@ export class GeneralPeopleMockAPi {
                 return [
                     200,
                     {
-                        people,
+                        peoples,
                         pagination,
                     },
                 ];
@@ -137,13 +137,13 @@ export class GeneralPeopleMockAPi {
                 const id = request.params.get('id');
 
                 // Clone the people
-                const people = cloneDeep(this._people);
+                const peoples = cloneDeep(this._peoples);
 
                 // Find the person
-                const person = people.find((item) => item.id === id);
+                const people = peoples.find((item) => item.id === id);
 
                 // Return the response
-                return [200, person];
+                return [200, people];
             });
 
         // -----------------------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ export class GeneralPeopleMockAPi {
             .onPost('api/master-data/general/people')
             .reply(() => {
                 // Generate a new person
-                const newPerson = {
+                const newPeople = {
                     id: FuseMockApiUtils.guid(), // Generates a unique ID (UUID)
                     fullName: '',
                     preferredName: '',
@@ -177,10 +177,10 @@ export class GeneralPeopleMockAPi {
                 };
 
                 // Unshift the new contact to the contacts array
-                this._people.unshift(newPerson);
+                this._peoples.unshift(newPeople);
 
                 // Return the response
-                return [200, newPerson];
+                return [200, newPeople];
             });
 
         // -----------------------------------------------------------------------------------------------------
@@ -197,13 +197,13 @@ export class GeneralPeopleMockAPi {
                 let updatedPerson = null;
 
                 // Find the contact and update it
-                this._people.forEach((item, index, people) => {
+                this._peoples.forEach((item, index, peoples) => {
                     if (item.id === id) {
                         // Update the contact
-                        people[index] = assign({}, people[index], person);
+                        peoples[index] = assign({}, peoples[index], person);
 
                         // Store the updated contact
-                        updatedPerson = people[index];
+                        updatedPerson = peoples[index];
                     }
                 });
 
@@ -221,9 +221,9 @@ export class GeneralPeopleMockAPi {
                 const id = request.params.get('id');
 
                 // Find the person and delete it
-                this._people.forEach((item, index) => {
+                this._peoples.forEach((item, index) => {
                     if (item.id === id) {
-                        this._people.splice(index, 1);
+                        this._peoples.splice(index, 1);
                     }
                 });
 

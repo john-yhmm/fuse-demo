@@ -374,11 +374,11 @@ export default [
 
     {
         path: 'people',
-        component: PeopleComponent, // Replace with your actual PeopleComponent
+        component: PeopleComponent,
         children: [
             {
                 path: '',
-                component: PeopleListComponent, // Replace with your actual PeopleListComponent
+                component: PeopleListComponent,
                 resolve: {
                     peoples: () => inject(PeopleService).getPeoples(),
                     contacts: () => inject(ContactService).getContacts(),

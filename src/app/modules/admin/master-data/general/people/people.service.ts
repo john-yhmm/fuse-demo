@@ -93,6 +93,8 @@ export class PeopleService {
             })
             .pipe(
                 tap((response) => {
+                    console.log('response', response);
+
                     this._pagination.next(response.pagination);
                     this._peoples.next(response.peoples);
                 })
