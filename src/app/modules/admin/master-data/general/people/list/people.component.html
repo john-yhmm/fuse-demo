@@ -58,10 +58,11 @@
                             class="people-grid text-secondary sticky top-0 z-10 grid gap-4 bg-gray-50 px-6 py-4 text-md font-semibold shadow dark:bg-black dark:bg-opacity-5 md:px-8"
                             matSort
                             matSortDisableClear
-                            style="grid-template-columns: 200px 1fr 100px"
                         >
-                            <div [mat-sort-header]="'id'">ID</div>
                             <div [mat-sort-header]="'fullName'">Full Name</div>
+                            <div class="hidden sm:block" [mat-sort-header]="'preferredName'">Preferred Name</div>
+                            <div class="hidden sm:block" [mat-sort-header]="'contact'">Contact</div>
+                            <div class="hidden sm:block" [mat-sort-header]="'language'">Language</div>
                             <div class="hidden sm:block">Details</div>
                         </div>
                         @if (peoples$ | async; as peoples) {
@@ -71,15 +72,18 @@
                             ) {
                                 <div
                                     class="people-grid grid items-center gap-4 border-b px-6 py-3 md:px-8"
-                                    style="
-                                        grid-template-columns: 200px 1fr 100px;
-                                    "
                                 >
                                     <div class="truncate">
-                                        {{ people.id }}
-                                    </div>
-                                    <div class="truncate">
                                         {{ people.fullName }}
+                                    </div>
+                                    <div class="truncate hidden sm:block">
+                                        {{people.preferredName}}
+                                    </div>
+                                    <div class="truncate hidden sm:block">
+                                        {{people.contactId}}
+                                    </div>
+                                    <div class="truncate hidden sm:block">
+                                        {{people.languageId}}
                                     </div>
 
                                     <div>
@@ -183,26 +187,6 @@
                                             />
                                         </mat-form-field>
 
-                                        <div class="mb-8 flex flex-col">
-                                            <span class="mb-2 font-semibold"
-                                                >Is Permitted To Logon</span
-                                            >
-                                            <mat-slide-toggle
-                                                [formControlName]="
-                                                    'isPermittedToLogon'
-                                                "
-                                                [color]="'primary'"
-                                            >
-                                                {{
-                                                    selectedPeopleForm.get(
-                                                        'isPermittedToLogon'
-                                                    ).value === true
-                                                        ? 'Active'
-                                                        : 'Disabled'
-                                                }}
-                                            </mat-slide-toggle>
-                                        </div>
-
                                         <mat-form-field class="w-full">
                                             <mat-label>Logon Name</mat-label>
                                             <input
@@ -210,27 +194,6 @@
                                                 [formControlName]="'logonName'"
                                             />
                                         </mat-form-field>
-
-                                        <div class="mb-8 flex flex-col">
-                                            <span class="mb-2 font-semibold"
-                                                >Is External Logon
-                                                Provider</span
-                                            >
-                                            <mat-slide-toggle
-                                                [formControlName]="
-                                                    'isExternalLogonProvider'
-                                                "
-                                                [color]="'primary'"
-                                            >
-                                                {{
-                                                    selectedPeopleForm.get(
-                                                        'isExternalLogonProvider'
-                                                    ).value === true
-                                                        ? 'Active'
-                                                        : 'Disabled'
-                                                }}
-                                            </mat-slide-toggle>
-                                        </div>
 
                                         <mat-form-field class="w-full">
                                             <mat-label
@@ -244,48 +207,6 @@
                                                 "
                                             />
                                         </mat-form-field>
-
-                                        <div class="mb-8 flex flex-col">
-                                            <span class="mb-2 font-semibold">Is System User</span>
-                                            <mat-slide-toggle
-                                                [formControlName]="'isSystemUser'"
-                                                [color]="'primary'"
-                                            >
-                                                {{
-                                                    selectedPeopleForm.get('isSystemUser').value === true
-                                                        ? 'Active'
-                                                        : 'Disabled'
-                                                }}
-                                            </mat-slide-toggle>
-                                        </div>
-
-                                        <div class="mb-8 flex flex-col">
-                                            <span class="mb-2 font-semibold">Is Employee</span>
-                                            <mat-slide-toggle
-                                                [formControlName]="'isEmployee'"
-                                                [color]="'primary'"
-                                            >
-                                                {{
-                                                    selectedPeopleForm.get('isEmployee').value === true
-                                                        ? 'Active'
-                                                        : 'Disabled'
-                                                }}
-                                            </mat-slide-toggle>
-                                        </div>
-                                        
-                                        <div class="mb-8 flex flex-col">
-                                            <span class="mb-2 font-semibold">Is Sales Person</span>
-                                            <mat-slide-toggle
-                                                [formControlName]="'isSalesPerson'"
-                                                [color]="'primary'"
-                                            >
-                                                {{
-                                                    selectedPeopleForm.get('isSalesPerson').value === true
-                                                        ? 'Active'
-                                                        : 'Disabled'
-                                                }}
-                                            </mat-slide-toggle>
-                                        </div>
 
                                         <mat-form-field class="w-full">
                                             <mat-label
@@ -382,6 +303,103 @@
                                                 [formControlName]="'validTo'"
                                             />
                                         </mat-form-field>
+
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Is Permitted To Logon</span
+                                            >
+                                            <mat-slide-toggle
+                                                [formControlName]="
+                                                    'isPermittedToLogon'
+                                                "
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get(
+                                                        'isPermittedToLogon'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Is External Logon
+                                                Provider</span
+                                            >
+                                            <mat-slide-toggle
+                                                [formControlName]="
+                                                    'isExternalLogonProvider'
+                                                "
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get(
+                                                        'isExternalLogonProvider'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Is System User</span
+                                            >
+                                            <mat-slide-toggle
+                                                [formControlName]="
+                                                    'isSystemUser'
+                                                "
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get(
+                                                        'isSystemUser'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Is Employee</span
+                                            >
+                                            <mat-slide-toggle
+                                                [formControlName]="'isEmployee'"
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get(
+                                                        'isEmployee'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
+
+                                        <div class="mb-8 flex flex-col">
+                                            <span class="mb-2 font-semibold"
+                                                >Is Sales Person</span
+                                            >
+                                            <mat-slide-toggle
+                                                [formControlName]="
+                                                    'isSalesPerson'
+                                                "
+                                                [color]="'primary'"
+                                            >
+                                                {{
+                                                    selectedPeopleForm.get(
+                                                        'isSalesPerson'
+                                                    ).value === true
+                                                        ? 'Active'
+                                                        : 'Disabled'
+                                                }}
+                                            </mat-slide-toggle>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
