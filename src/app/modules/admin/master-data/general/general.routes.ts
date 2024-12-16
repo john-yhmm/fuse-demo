@@ -75,6 +75,9 @@ import { CurrencyListComponent } from './currency/list/currency.component';
 import { CurrencyRateComponent } from './currency-rate/currency-rate.component';
 import { CurrencyRateService } from './currency-rate/currency-rate.service';
 import { CurrencyRateListComponent } from './currency-rate/list/currency-rate.component';
+import { PeopleComponent } from './people/people.component';
+import { PeopleService } from './people/people.service';
+import { PeopleListComponent } from './people/list/people.component';
 
 export default [
     {
@@ -419,4 +422,21 @@ export default [
             },
         ],
     },
+
+    {
+        path: 'people',
+        component: PeopleComponent,
+        children: [
+            {
+                path: '',
+                component: PeopleListComponent,
+                resolve: {
+                    peoples: () => inject(PeopleService).getPeoples(),
+                    contacts: () => inject(ContactService).getContacts(),
+                    languages: () => inject(LanguageService).getLanguages(),
+                },
+            },
+        ],
+    },
+    
 ] as Routes;

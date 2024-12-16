@@ -46,6 +46,8 @@ import { GeneralContactMockAPi } from './master-data/general/contact/api';
 import { GeneralAddressMockApi } from './master-data/general/address/api';
 import { GeneralCurrencyMockApi } from './master-data/general/currency/api';
 import { GeneralCurrencyRateMockApi } from './master-data/general/currency-rate/api';
+import { GeneralPeopleMockAPi } from './master-data/general/people/api';
+
 export const mockApiServices = [
     AcademyMockApi,
     ActivitiesMockApi,
@@ -95,4 +97,5 @@ export const mockApiServices = [
     GeneralAddressMockApi,
     GeneralCurrencyMockApi,
     GeneralCurrencyRateMockApi,
+    GeneralPeopleMockAPi,
 ];

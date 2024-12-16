@@ -98,13 +98,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         id: 'master-data.general.credit-card-type',
                         title: 'Credit Card Type',
                         type: 'basic',
-                        link: 'master-data/general/credit-card-type'
+                        link: 'master-data/general/credit-card-type',
                     },
                     {
-                        id:'master-data.general.unit-measure',
+                        id: 'master-data.general.unit-measure',
                         title: 'Unit Measure',
                         type: 'basic',
-                        link: '/master-data/general/unit-measure'
+                        link: '/master-data/general/unit-measure',
                     },
                     {
                         id: 'master-data.general.geo-location',
@@ -201,6 +201,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         title: 'Currency Rate',
                         type: 'basic',
                         link: '/master-data/general/currency-rate',
+                    },
+                    {
+                        id: 'master-data.general.people',
+                        title: 'People',
+                        type: 'basic',
+                        link: '/master-data/general/people',
                     },
                 ],
             },
