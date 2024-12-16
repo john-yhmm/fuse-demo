@@ -60,24 +60,9 @@
                             matSortDisableClear
                         >
                             <div [mat-sort-header]="'fullName'">Full Name</div>
-                            <div
-                                class="hidden sm:block"
-                                [mat-sort-header]="'preferredName'"
-                            >
-                                Preferred Name
-                            </div>
-                            <div
-                                class="hidden sm:block"
-                                [mat-sort-header]="'contact'"
-                            >
-                                Contact
-                            </div>
-                            <div
-                                class="hidden sm:block"
-                                [mat-sort-header]="'language'"
-                            >
-                                Language
-                            </div>
+                            <div class="hidden sm:block" [mat-sort-header]="'preferredName'">Preferred Name</div>
+                            <div class="hidden sm:block" [mat-sort-header]="'contact'">Contact</div>
+                            <div class="hidden sm:block" [mat-sort-header]="'language'">Language</div>
                             <div class="hidden sm:block">Details</div>
                         </div>
                         @if (peoples$ | async; as peoples) {
@@ -91,16 +76,14 @@
                                     <div class="truncate">
                                         {{ people.fullName }}
                                     </div>
-                                    <div class="hidden truncate sm:block">
-                                        {{ people.preferredName }}
+                                    <div class="truncate hidden sm:block">
+                                        {{people.preferredName}}
                                     </div>
-                                    <div class="hidden truncate sm:block">
-                                        <!-- Display contact name -->
-                                        {{ getContactName(people.contactId) }}
+                                    <div class="truncate hidden sm:block">
+                                        {{people.contactId}}
                                     </div>
-                                    <div class="hidden truncate sm:block">
-                                        <!-- Display language name -->
-                                        {{ getLanguageName(people.languageId) }}
+                                    <div class="truncate hidden sm:block">
+                                        {{people.languageId}}
                                     </div>
 
                                     <div>

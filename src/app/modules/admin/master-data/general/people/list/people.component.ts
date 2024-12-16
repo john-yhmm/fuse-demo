@@ -45,8 +45,8 @@ import {
     takeUntil,
 } from 'rxjs';
 
-import { ContactService } from '../../contact/contact.service';
 import { Contact } from '../../contact/contact.types';
+import { ContactService } from '../../contact/contact.service';
 import { LanguageService } from '../../language/language.service';
 import { Language } from '../../language/language.types';
 import { PeopleService } from '../people.service';
@@ -59,18 +59,18 @@ import { People, PeoplePagination } from '../people.types';
         /* language=SCSS */
         `
             .people-grid {
-                grid-template-columns: 150px auto 40px;
+                grid-template-columns: 48px auto 40px;
 
                 @screen sm {
-                    grid-template-columns: 150px auto 112px 72px;
+                    grid-template-columns: 48px auto 112px 72px;
                 }
 
                 @screen md {
-                    grid-template-columns: 150px 120px auto 112px 72px;
+                    grid-template-columns: 48px 112px auto 112px 72px;
                 }
 
                 @screen lg {
-                    grid-template-columns: 150px 120px auto 112px 96px 96px 72px;
+                    grid-template-columns: 48px 112px auto 112px 96px 96px 72px;
                 }
             }
         `,
@@ -168,7 +168,7 @@ export class PeopleListComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this._contactService.contacts$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((contacts: Contact[]) => {
+            .subscribe((contacts: Contact[]) =>{
                 this.contacts = contacts;
                 this._changeDetectorRef.markForCheck();
             });
@@ -209,17 +209,7 @@ export class PeopleListComponent implements OnInit, AfterViewInit, OnDestroy {
             )
             .subscribe();
     }
-    // Helper method to get contact name by ID
-    getContactName(contactId: string): string {
-        const contact = this.contacts.find((c) => c.id === contactId);
-        return contact ? contact.emailAddress : 'Unknown';
-    }
 
-    // Helper method to get language name by ID
-    getLanguageName(languageId: string): string {
-        const language = this.languages.find((l) => l.id === languageId);
-        return language ? language.name : 'Unknown';
-    }
     /**
      * After view init
      */
